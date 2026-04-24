@@ -1,0 +1,127 @@
+{
+  "country": "USA",
+  "electionName": "Presidential Election",
+  "phases": [
+    {
+      "id": "primaries",
+      "label": "Primaries & Caucuses",
+      "icon": "🗳️",
+      "duration": "January - June",
+      "description": "Parties select their nominees for the general election.",
+      "steps": [
+        "State-by-state voting",
+        "Delegate allocation",
+        "Super Tuesday",
+        "National Conventions"
+      ],
+      "voterActions": [
+        "Register for your party (in closed states)",
+        "Check local primary dates",
+        "Participate in caucuses if applicable"
+      ],
+      "keyLinks": [
+        { "label": "Vote.gov", "url": "https://vote.gov" }
+      ]
+    },
+    {
+      "id": "registration",
+      "label": "Voter Registration",
+      "icon": "📋",
+      "duration": "Varies by state",
+      "description": "Registering to vote in the general election.",
+      "steps": [
+        "Online, mail-in, or in-person registration",
+        "Check registration status",
+        "Update address if moved"
+      ],
+      "voterActions": [
+        "Register early to avoid deadlines",
+        "Check ID requirements for your state"
+      ],
+      "keyLinks": [
+        { "label": "USA.gov Voting", "url": "https://www.usa.gov/register-to-vote" }
+      ]
+    },
+    {
+      "id": "early-voting",
+      "label": "Early Voting & Mail-in",
+      "icon": "✉️",
+      "duration": "Varies by state (often 4-6 weeks before)",
+      "description": "Many states allow voting before Election Day.",
+      "steps": [
+        "Request mail-in ballot",
+        "Drop off ballots at secure boxes",
+        "In-person early voting at designated centers"
+      ],
+      "voterActions": [
+        "Request absentee ballot early",
+        "Track your ballot online"
+      ],
+      "keyLinks": [
+        { "label": "Ballotpedia", "url": "https://ballotpedia.org" }
+      ]
+    },
+    {
+      "id": "election-day",
+      "label": "Election Day",
+      "icon": "🇺🇸",
+      "duration": "First Tuesday of November",
+      "description": "The main day for in-person voting across the country.",
+      "steps": [
+        "Polling stations open usually 7am-7pm",
+        "Identity verification",
+        "Casting ballot (paper or digital)",
+        "Sticker distribution ('I Voted')"
+      ],
+      "voterActions": [
+        "Find your polling place",
+        "Know your rights if you're in line when polls close"
+      ],
+      "keyLinks": [
+        { "label": "Can I Vote?", "url": "https://www.nass.org/can-i-vote" }
+      ]
+    },
+    {
+      "id": "electoral-college",
+      "label": "Electoral College",
+      "icon": "🏛️",
+      "duration": "December - January",
+      "description": "The formal process of electing the President.",
+      "steps": [
+        "Electors cast votes in their states",
+        "Congress certifies results (Jan 6)",
+        "Inauguration Day (Jan 20)"
+      ],
+      "voterActions": [
+        "Understand the winner-take-all system",
+        "Follow the certification process"
+      ],
+      "keyLinks": [
+        { "label": "National Archives", "url": "https://www.archives.gov/electoral-college" }
+      ]
+    }
+  ],
+  "keyDates": [
+    { "event": "Super Tuesday", "date": "Early March" },
+    { "event": "Election Day", "date": "Nov 3, 2026 (Midterms) / Nov 2028 (Pres)" },
+    { "event": "Electoral College Vote", "date": "Mid-December" },
+    { "event": "Inauguration", "date": "Jan 20" }
+  ],
+  "eligibility": {
+    "age": "18 years and above",
+    "citizenship": "U.S. Citizen",
+    "residence": "Varies by state"
+  },
+  "glossary": [
+    { "term": "Electoral College", "definition": "A body of electors chosen to elect the President and VP." },
+    { "term": "Primary", "definition": "An election to select a party's candidate." },
+    { "term": "Caucus", "definition": "A meeting of party members to select candidates." },
+    { "term": "Absentee Ballot", "definition": "A ballot completed and typically mailed in advance of an election." }
+  ],
+  "quickQuestions": [
+    "How do I register to vote?",
+    "What is the Electoral College?",
+    "Can I vote by mail?",
+    "What ID do I need to vote?"
+  ]
+}

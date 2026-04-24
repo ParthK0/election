@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0d1f3c;
+  --color-navy-light: #162a4d;
+  --color-gold: #c9a84c;
+  --color-gold-muted: rgba(201, 168, 76, 0.2);
+  --font-playfair: 'Playfair Display', serif;
+  --font-plex: 'IBM Plex Sans', sans-serif;
+}
+
+:root {
+  font-family: var(--font-plex);
+  color: #e2e8f0;
+  background-color: var(--color-navy);
+}
+
+h1, h2, h3, h4, .font-heading {
+  font-family: var(--font-playfair);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar for sidebars */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--color-navy);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-navy-light);
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold);
+}
+
+@keyframes pulse-green {
+  0% { transform: scale(0.95); opacity: 0.5; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.5; }
+}
+
+.animate-pulse-green {
+  animation: pulse-green 2s infinite ease-in-out;
+}

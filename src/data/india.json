@@ -1,0 +1,133 @@
+{
+  "country": "India",
+  "electionName": "General Election (Lok Sabha)",
+  "phases": [
+    {
+      "id": "registration",
+      "label": "Voter Registration",
+      "icon": "📋",
+      "duration": "Ongoing until ~6 weeks before poll",
+      "description": "The first step to participating in democracy. Ensure your name is on the electoral roll.",
+      "steps": [
+        "Check name in Voter List via Voter Service Portal",
+        "Fill Form 6 if not registered",
+        "Verification by Booth Level Officer (BLO)",
+        "Issuance of Voter ID (EPIC)"
+      ],
+      "voterActions": [
+        "Visit voterportal.eci.gov.in",
+        "Keep Aadhaar/Address proof ready",
+        "Download e-EPIC card"
+      ],
+      "keyLinks": [
+        { "label": "Voter Service Portal", "url": "https://voters.eci.gov.in" }
+      ]
+    },
+    {
+      "id": "nomination",
+      "label": "Candidate Nomination",
+      "icon": "🖋️",
+      "duration": "7 days after Notification",
+      "description": "Candidates file their papers to contest the election.",
+      "steps": [
+        "Filing of nomination papers with Returning Officer",
+        "Submission of security deposit",
+        "Affidavit submission (Assets, Criminal Record)",
+        "Scrutiny of nominations"
+      ],
+      "voterActions": [
+        "Check candidate affidavits on ECI site",
+        "Know your candidate's background"
+      ],
+      "keyLinks": [
+        { "label": "Know Your Candidate", "url": "https://affidavit.eci.gov.in" }
+      ]
+    },
+    {
+      "id": "campaign",
+      "label": "Campaigning",
+      "icon": "📢",
+      "duration": "Until 48 hours before polling",
+      "description": "Political parties and candidates reach out to voters with their manifestos.",
+      "steps": [
+        "Public rallies and manifestos",
+        "Door-to-door campaigning",
+        "Media advertisements",
+        "Model Code of Conduct (MCC) enforcement"
+      ],
+      "voterActions": [
+        "Attend local debates",
+        "Read manifestos carefully",
+        "Report MCC violations via cVIGIL app"
+      ],
+      "keyLinks": [
+        { "label": "cVIGIL App", "url": "https://cvigil.eci.gov.in" }
+      ]
+    },
+    {
+      "id": "voting",
+      "label": "Polling Day",
+      "icon": "🗳️",
+      "duration": "One Day (per phase)",
+      "description": "The day you cast your vote using EVMs and VVPATs.",
+      "steps": [
+        "Mock poll by polling agents",
+        "Identity verification at booth",
+        "Inking of finger",
+        "Casting vote on EVM",
+        "Verification of VVPAT slip"
+      ],
+      "voterActions": [
+        "Carry Voter ID or approved alternative ID",
+        "Locate your polling station",
+        "Check the blue button on EVM"
+      ],
+      "keyLinks": [
+        { "label": "Find Polling Station", "url": "https://electorallookup.in" }
+      ]
+    },
+    {
+      "id": "counting",
+      "label": "Counting & Results",
+      "icon": "📊",
+      "duration": "One Day",
+      "description": "Votes are counted and results are declared.",
+      "steps": [
+        "Strong room opening",
+        "Counting of postal ballots first",
+        "EVM counting round by round",
+        "Declaration of winner per constituency"
+      ],
+      "voterActions": [
+        "Watch live results on ECI website",
+        "Follow official announcements only"
+      ],
+      "keyLinks": [
+        { "label": "ECI Results Portal", "url": "https://results.eci.gov.in" }
+      ]
+    }
+  ],
+  "keyDates": [
+    { "event": "Notification Date", "date": "T-30 Days" },
+    { "event": "Last Date for Nomination", "date": "T-23 Days" },
+    { "event": "Date of Poll", "date": "Phase dependent" },
+    { "event": "Counting Date", "date": "Fixed by ECI" }
+  ],
+  "eligibility": {
+    "age": "18 years and above",
+    "citizenship": "Indian Citizen",
+    "residence": "Ordinary resident in the constituency"
+  },
+  "glossary": [
+    { "term": "EVM", "definition": "Electronic Voting Machine used to record votes." },
+    { "term": "VVPAT", "definition": "Voter Verifiable Paper Audit Trail for verifying EVM votes." },
+    { "term": "MCC", "definition": "Model Code of Conduct - guidelines for parties and candidates." },
+    { "term": "NOTA", "definition": "None Of The Above - option to reject all candidates." }
+  ],
+  "quickQuestions": [
+    "What documents do I need to vote?",
+    "How to check my name in the voter list?",
+    "What is NOTA?",
+    "Can I vote if I am an NRI?"
+  ]
+}
