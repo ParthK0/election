@@ -1,5 +1,4 @@
-/* ElectIQ - App Styles */
-/* Most styles are handled via Tailwind CSS and the design system in index.css */
+/* ElectIQ - App Styles (Light Purple Theme) */
 
 .animate-float {
   animation: float 6s ease-in-out infinite;
@@ -7,30 +6,16 @@
 
 @keyframes float {
   0% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+  50% { transform: translateY(-10px); }
   100% { transform: translateY(0px); }
 }
 
-.glass {
-  background: rgba(22, 42, 77, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+/* Typing animation for chat */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
-.custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(201, 168, 76, 0.2);
-  border-radius: 10px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(201, 168, 76, 0.4);
+.animate-blink {
+  animation: blink 1s step-end infinite;
 }

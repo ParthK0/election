@@ -1,7 +1,7 @@
 import { useElection } from '../context/ElectionContext';
-import { ChevronDown, Globe } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 const countries = [
   { id: 'india', name: 'India', flag: '🇮🇳' },
@@ -11,41 +11,47 @@ const countries = [
 const CountrySelector = () => {
   const { country, setCountry } = useElection();
   const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef(null);
 
   const selectedCountry = countries.find(c => c.id === country) || countries[0];
 
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setIsOpen(false);
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
+
   return (
-    <div className="relative">
+    <div className="relative" ref={ref}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-3 px-4 py-2 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all active:scale-95 group"
+        className="flex items-center gap-2 px-3 py-2 bg-surface-tertiary border border-border rounded-lg hover:border-purple/30 transition-colors text-sm"
       >
-        <span className="text-xl">{selectedCountry.flag}</span>
-        <span className="font-semibold text-white text-sm">{selectedCountry.name}</span>
-        <ChevronDown className={`w-4 h-4 text-slate-500 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <span>{selectedCountry.flag}</span>
+        <span className="font-medium text-dark">{selectedCountry.name}</span>
+        <ChevronDown className={`w-3.5 h-3.5 text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.95 }}
-            className="absolute top-full mt-2 left-0 w-48 glass-morphism rounded-xl overflow-hidden shadow-2xl z-50 border border-white/10"
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 4 }}
+            className="absolute top-full mt-1 right-0 w-40 bg-dark-card rounded-xl overflow-hidden shadow-2xl border border-dark-border z-50"
           >
             {countries.map((c) => (
               <button
                 key={c.id}
-                onClick={() => {
-                  setCountry(c.id);
-                  setIsOpen(false);
-                }}
-                className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-white/10 transition-colors ${
-                  country === c.id ? 'bg-gold/10 text-gold' : 'text-slate-300'
+                onClick={() => { setCountry(c.id); setIsOpen(false); }}
+                className={`w-full flex items-center gap-3 px-4 py-3 text-left text-sm hover:bg-dark-card-2 transition-colors ${
+                  country === c.id ? 'bg-accent-purple/10 text-accent-purple font-bold' : 'text-text-muted'
                 }`}
               >
-                <span className="text-xl">{c.flag}</span>
-                <span className="font-medium text-sm">{c.name}</span>
+                <span>{c.flag}</span>
+                <span>{c.name}</span>
               </button>
             ))}
           </motion.div>

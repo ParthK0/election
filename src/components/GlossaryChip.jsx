@@ -10,18 +10,12 @@ const GlossaryChip = ({ term }) => {
   const handleTermClick = async (e) => {
     e.stopPropagation();
     const prompt = `Explain the electoral term "${term}" in the context of ${country} elections. Provide a clear definition and an example.`;
-    
-    // Redirect to Ask page
     navigate('/ask');
-    
-    // Initialize chat with this prompt
     const userMessage = { role: 'user', content: `What is ${term}?` };
     setChatHistory(prev => [...prev, userMessage]);
-    
     try {
       const response = await askGemini(prompt, { country, currentPhase: 'Glossary', role: 'Voter' });
-      const botMessage = { role: 'bot', content: response };
-      setChatHistory(prev => [...prev, botMessage]);
+      setChatHistory(prev => [...prev, { role: 'bot', content: response }]);
     } catch (error) {
       console.error(error);
     }
@@ -30,10 +24,10 @@ const GlossaryChip = ({ term }) => {
   return (
     <button
       onClick={handleTermClick}
-      className="inline-flex items-center gap-1.5 px-3 py-1 bg-gold/10 border border-gold/20 rounded-full text-[10px] font-bold text-gold hover:bg-gold/20 hover:border-gold/40 transition-all group uppercase tracking-widest"
+      className="inline-flex items-center gap-1.5 px-3 py-1 bg-purple-muted border border-purple/10 rounded-full text-[11px] font-semibold text-purple hover:bg-purple hover:text-white transition-all"
     >
-      {term}
-      <MessageSquare className="w-3 h-3 text-gold/50 group-hover:text-gold transition-colors" />
+      Ask AI
+      <MessageSquare className="w-3 h-3" />
     </button>
   );
 };

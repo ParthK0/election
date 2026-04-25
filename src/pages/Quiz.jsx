@@ -6,89 +6,131 @@ import { Link } from 'react-router-dom';
 
 const Quiz = () => {
   const { electionData, country } = useElection();
+  const [difficulty, setDifficulty] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
-  const [isCorrect, setIsCorrect] = useState(null);
 
   if (!electionData || !electionData.quiz) {
     return (
-      <div className="max-w-3xl mx-auto px-6 py-20 text-center">
-        <h2 className="text-2xl font-bold mb-4">No quiz available for {country} yet.</h2>
-        <Link to="/learn" className="text-gold hover:underline">Return to Learning</Link>
+      <div className="max-w-2xl mx-auto px-6 py-20 text-center">
+        <h2 className="text-xl font-bold text-white mb-4">No quiz available for {country} yet.</h2>
+        <Link to="/learn" className="text-accent-purple hover:underline text-sm font-bold uppercase tracking-widest">Return to Learning</Link>
       </div>
     );
   }
 
-  const questions = electionData.quiz;
+  // Add difficulty tiers to existing questions or simulate them
+  const questions = electionData.quiz.map((q, i) => ({
+    ...q,
+    difficulty: i === 0 ? 'Beginner' : i === 1 ? 'Intermediate' : 'Expert'
+  }));
+
+  const filteredQuestions = difficulty 
+    ? questions.filter(q => q.difficulty === difficulty)
+    : questions;
 
   const handleOptionClick = (index) => {
     if (selectedOption !== null) return;
-    
     setSelectedOption(index);
-    const correct = index === questions[currentQuestion].answer;
-    setIsCorrect(correct);
-    if (correct) setScore(score + 1);
+    if (index === filteredQuestions[currentQuestion].answer) setScore(score + 1);
   };
 
   const handleNext = () => {
-    if (currentQuestion + 1 < questions.length) {
+    if (currentQuestion + 1 < filteredQuestions.length) {
       setCurrentQuestion(currentQuestion + 1);
       setSelectedOption(null);
-      setIsCorrect(null);
     } else {
       setShowResult(true);
     }
   };
 
   const resetQuiz = () => {
+    setDifficulty(null);
     setCurrentQuestion(0);
     setScore(0);
     setShowResult(false);
     setSelectedOption(null);
-    setIsCorrect(null);
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-12">
-      <Link to="/learn" className="inline-flex items-center gap-2 text-slate-500 hover:text-gold transition-colors mb-8 group">
-        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+    <div className="max-w-2xl mx-auto px-6 py-12">
+      <Link to="/learn" className="inline-flex items-center gap-1.5 text-text-muted hover:text-accent-purple transition-colors mb-8 text-xs font-bold uppercase tracking-widest group">
+        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
         Back to Learning
       </Link>
 
       <AnimatePresence mode="wait">
-        {!showResult ? (
+        {!difficulty ? (
           <motion.div
-            key="question"
+            key="start"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="bg-dark-card border border-dark-border rounded-3xl p-10 lg:p-12 shadow-premium text-center"
+          >
+            <div className="w-20 h-20 bg-accent-purple/10 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-premium">
+              <Trophy className="w-10 h-10 text-accent-purple" />
+            </div>
+            <h1 className="text-3xl font-black text-white mb-4 tracking-tighter font-display">Election Intelligence Quiz</h1>
+            <p className="text-text-muted mb-10 max-w-sm mx-auto text-sm leading-relaxed">
+              Test your knowledge of {country}'s electoral process. Choose a difficulty level to begin.
+            </p>
+            <div className="grid gap-4">
+              {[
+                { id: 'Beginner', desc: 'Basic terminology and dates', color: 'bg-accent-green' },
+                { id: 'Intermediate', desc: 'Rules, procedures, and rights', color: 'bg-accent-purple' },
+                { id: 'Expert', desc: 'Deep-dive legislative details', color: 'bg-orange-500' }
+              ].map((tier) => (
+                <button
+                  key={tier.id}
+                  onClick={() => setDifficulty(tier.id)}
+                  className="group relative p-5 bg-dark-card-2 border border-dark-border rounded-2xl text-left hover:border-accent-purple/50 transition-all active:scale-[0.98]"
+                >
+                  <div className="flex justify-between items-center mb-1">
+                    <span className="text-white font-bold tracking-tight">{tier.id}</span>
+                    <div className={`w-2 h-2 rounded-full ${tier.color} shadow-[0_0_8px_rgba(0,0,0,0.5)]`} />
+                  </div>
+                  <p className="text-[11px] text-text-muted font-medium">{tier.desc}</p>
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        ) : !showResult ? (
+          <motion.div
+            key={`q-${currentQuestion}`}
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            className="bg-navy-light/30 border border-white/5 rounded-[40px] p-8 lg:p-12 shadow-2xl backdrop-blur-md"
+            className="bg-dark-card border border-dark-border rounded-3xl p-8 lg:p-10 shadow-premium"
           >
             <div className="flex justify-between items-center mb-8">
-              <span className="text-[10px] font-bold text-gold uppercase tracking-[0.2em]">Question {currentQuestion + 1} of {questions.length}</span>
-              <div className="h-1.5 w-32 bg-white/5 rounded-full overflow-hidden">
+              <div className="flex flex-col">
+                <span className="text-[10px] font-black text-accent-purple uppercase tracking-widest mb-1">{difficulty} Level</span>
+                <span className="text-xs font-bold text-white">Question {currentQuestion + 1} of {filteredQuestions.length}</span>
+              </div>
+              <div className="h-1.5 w-24 bg-dark-surface rounded-full overflow-hidden border border-dark-border">
                 <div 
-                  className="h-full bg-gold transition-all duration-500" 
-                  style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
-                ></div>
+                  className="h-full bg-accent-purple transition-all duration-500 rounded-full shadow-[0_0_10px_rgba(139,92,246,0.5)]" 
+                  style={{ width: `${((currentQuestion + 1) / filteredQuestions.length) * 100}%` }}
+                />
               </div>
             </div>
 
-            <h2 className="text-2xl lg:text-3xl font-bold mb-10 font-heading leading-tight">
-              {questions[currentQuestion].question}
+            <h2 className="text-xl lg:text-2xl font-black text-white mb-8 leading-[1.1] tracking-tight font-display">
+              {filteredQuestions[currentQuestion].question}
             </h2>
 
-            <div className="grid gap-4">
-              {questions[currentQuestion].options.map((option, index) => {
+            <div className="grid gap-3">
+              {filteredQuestions[currentQuestion].options.map((option, index) => {
                 const isSelected = selectedOption === index;
-                const isAnswer = questions[currentQuestion].answer === index;
+                const isAnswer = filteredQuestions[currentQuestion].answer === index;
                 
-                let buttonStyle = "bg-white/5 border-white/5 hover:bg-white/10";
+                let style = "bg-dark-card-2 border-dark-border text-text-primary hover:border-accent-purple/30";
                 if (selectedOption !== null) {
-                  if (isAnswer) buttonStyle = "bg-emerald-500/20 border-emerald-500/50 text-emerald-400";
-                  else if (isSelected) buttonStyle = "bg-red-500/20 border-red-500/50 text-red-400";
+                  if (isAnswer) style = "bg-accent-green/10 border-accent-green/30 text-accent-green";
+                  else if (isSelected) style = "bg-red-500/10 border-red-500/30 text-red-400";
                 }
 
                 return (
@@ -96,31 +138,31 @@ const Quiz = () => {
                     key={index}
                     onClick={() => handleOptionClick(index)}
                     disabled={selectedOption !== null}
-                    className={`w-full text-left p-6 rounded-2xl border transition-all duration-300 flex items-center justify-between group ${buttonStyle}`}
+                    className={`w-full text-left p-4 rounded-xl border transition-all flex items-center justify-between text-sm font-bold ${style}`}
                   >
-                    <span className="font-medium">{option}</span>
-                    {selectedOption !== null && isAnswer && <CheckCircle2 className="w-5 h-5" />}
-                    {selectedOption !== null && isSelected && !isAnswer && <XCircle className="w-5 h-5" />}
+                    <span>{option}</span>
+                    {selectedOption !== null && isAnswer && <CheckCircle2 className="w-5 h-5 text-accent-green" />}
+                    {selectedOption !== null && isSelected && !isAnswer && <XCircle className="w-5 h-5 text-red-400" />}
                   </button>
                 );
               })}
             </div>
 
             {selectedOption !== null && (
-              <motion.div 
-                initial={{ opacity: 0, y: 10 }} 
-                animate={{ opacity: 1, y: 0 }}
-                className="mt-8 p-6 rounded-2xl bg-white/5 border border-white/5"
-              >
-                <p className="text-sm text-slate-400 leading-relaxed italic">
-                  <strong className="text-slate-300 not-italic block mb-1">Explanation:</strong>
-                  {questions[currentQuestion].explanation}
-                </p>
+              <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="mt-6">
+                <div className="p-5 bg-dark-card-2 rounded-2xl border border-dark-border mb-6">
+                  <h4 className="text-[10px] font-black text-accent-purple uppercase tracking-[0.2em] mb-2 flex items-center gap-2">
+                    <Sparkles className="w-3.5 h-3.5" /> Intelligence Report
+                  </h4>
+                  <p className="text-sm text-text-primary/90 leading-relaxed font-medium">
+                    {filteredQuestions[currentQuestion].explanation}
+                  </p>
+                </div>
                 <button
                   onClick={handleNext}
-                  className="mt-6 w-full bg-gold text-navy py-4 rounded-xl font-bold hover:bg-gold-light transition-all shadow-lg shadow-gold/20"
+                  className="w-full bg-accent-purple text-white py-4 rounded-xl text-sm font-bold hover:bg-accent-purple/80 transition-all shadow-premium active:scale-95"
                 >
-                  {currentQuestion + 1 === questions.length ? 'See Results' : 'Next Question'}
+                  {currentQuestion + 1 === filteredQuestions.length ? 'See Final Score' : 'Continue'}
                 </button>
               </motion.div>
             )}
@@ -128,29 +170,27 @@ const Quiz = () => {
         ) : (
           <motion.div
             key="result"
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="text-center bg-navy-light/30 border border-white/5 rounded-[40px] p-12 lg:p-20 shadow-2xl backdrop-blur-md"
+            className="text-center bg-dark-card border border-dark-border rounded-3xl p-12 shadow-premium"
           >
-            <div className="w-24 h-24 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner">
-              <Trophy className="w-12 h-12 text-gold animate-bounce" />
+            <div className="w-20 h-20 bg-accent-purple/10 rounded-full flex items-center justify-center mx-auto mb-8 shadow-premium">
+              <Trophy className="w-10 h-10 text-accent-purple" />
             </div>
-            <h2 className="text-4xl font-bold mb-4 font-heading tracking-tight">Quiz Complete!</h2>
-            <p className="text-slate-400 text-xl mb-10">
-              You scored <span className="text-gold font-bold">{score}</span> out of <span className="text-white font-bold">{questions.length}</span>
+            <h2 className="text-3xl font-black text-white mb-3 tracking-tighter font-display">Analysis Complete</h2>
+            <p className="text-text-muted mb-8 font-medium">
+              You scored <span className="text-accent-purple font-black text-xl">{score}</span> out of <span className="font-bold text-white text-xl">{filteredQuestions.length}</span>
             </p>
-            
-            <div className="grid sm:grid-cols-2 gap-4 max-w-sm mx-auto">
+            <div className="flex gap-4 justify-center">
               <button
                 onClick={resetQuiz}
-                className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 px-6 py-4 rounded-2xl font-bold hover:bg-white/10 transition-all"
+                className="flex items-center gap-2 bg-dark-card-2 border border-dark-border px-8 py-3 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-dark-border transition-colors text-white"
               >
-                <RefreshCcw className="w-4 h-4" />
-                Retry Quiz
+                <RefreshCcw className="w-4 h-4" /> Retry
               </button>
               <Link
                 to="/learn"
-                className="bg-gold text-navy px-6 py-4 rounded-2xl font-bold hover:bg-gold-light transition-all shadow-lg shadow-gold/20 flex items-center justify-center"
+                className="bg-accent-purple text-white px-8 py-3 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-accent-purple/80 transition-all shadow-premium"
               >
                 Finish
               </Link>

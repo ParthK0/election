@@ -1,6 +1,7 @@
 {
   "country": "USA",
   "electionName": "Presidential Election",
+  "targetDate": "2028-11-07T07:00:00",
   "phases": [
     {
       "id": "primaries",
@@ -19,6 +20,11 @@
         "Check local primary dates",
         "Participate in caucuses if applicable"
       ],
+      "candidateDetails": {
+        "filing": "Requirements vary by state (Signature petitions vs Fees)",
+        "fec": "Must register with FEC once $5,000 is raised/spent",
+        "delegates": "Must reach threshold in state primaries to win delegates"
+      },
       "keyLinks": [
         { "label": "Vote.gov", "url": "https://vote.gov" }
       ]
@@ -38,6 +44,13 @@
         "Register early to avoid deadlines",
         "Check ID requirements for your state"
       ],
+      "candidateDetails": {
+        "eligibility": [
+          "Natural born citizen",
+          "Minimum 35 years old",
+          "U.S. resident for at least 14 years"
+        ]
+      },
       "keyLinks": [
         { "label": "USA.gov Voting", "url": "https://www.usa.gov/register-to-vote" }
       ]
@@ -57,6 +70,10 @@
         "Request absentee ballot early",
         "Track your ballot online"
       ],
+      "candidateDetails": {
+        "strategy": "GOTV (Get Out The Vote) programs for early voters",
+        "observation": "Right to appoint poll watchers"
+      },
       "keyLinks": [
         { "label": "Ballotpedia", "url": "https://ballotpedia.org" }
       ]
@@ -138,10 +155,16 @@
       "explanation": "A candidate must win a majority of electoral votes (270 out of 538) to become President."
     },
     {
-      "question": "Which website is the official portal for voter registration in the US?",
-      "options": ["USA.gov", "Vote.org", "Vote.gov", "Elections.gov"],
+      "question": "Which body officially certifies the Electoral College results?",
+      "options": ["The Supreme Court", "The Department of Justice", "The U.S. Congress", "The Federal Election Commission"],
       "answer": 2,
-      "explanation": "Vote.gov is the official government site for voter registration."
+      "explanation": "Congress meets in a joint session to count electoral votes and certify the result."
+    },
+    {
+      "question": "What is Super Tuesday?",
+      "options": ["The day the President is inaugurated", "The day many states hold primary elections", "The first day of early voting", "The day the budget is passed"],
+      "answer": 1,
+      "explanation": "Super Tuesday is the day when the largest number of U.S. states hold primary elections or caucuses."
     }
   ]
 }

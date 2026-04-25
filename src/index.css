@@ -1,29 +1,49 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy: #0d1f3c;
-  --color-navy-light: #162a4d;
-  --color-navy-dark: #081529;
-  --color-gold: #c9a84c;
-  --color-gold-light: #dfc57d;
-  --color-gold-muted: rgba(201, 168, 76, 0.2);
+  /* Hero / Light side colors - Shifted to Deep Purple/Black */
+  --color-hero-from: #1e1b4b; /* deep indigo/purple */
+  --color-hero-to: #4338ca;   /* rich violet */
   
-  --font-playfair: 'Playfair Display', serif;
-  --font-plex: 'IBM Plex Sans', sans-serif;
+  /* Dark panels / App side colors */
+  --color-dark-surface: #050508;   /* True deep black */
+  --color-dark-card: #0f0f1a;      /* Deep purple-tinted card */
+  --color-dark-card-2: #161625;    /* Slightly lighter card */
+  --color-dark-border: #1e1e2e;    /* Subtle dark purple border */
 
-  --shadow-gold: 0 10px 15px -3px rgba(201, 168, 76, 0.1), 0 4px 6px -2px rgba(201, 168, 76, 0.05);
+  /* Accents */
+  --color-accent-purple: #8b5cf6;
+  --color-accent-gold: #f59e0b;
+  --color-accent-green: #10b981;
+
+  /* Text */
+  --color-text-hero: #ffffff;
+  --color-text-primary: #f1f0ff;
+  --color-text-muted: #6b7280;
+
+  /* Typography */
+  --font-jakarta: 'Plus Jakarta Sans', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Custom Shadows */
+  --shadow-premium: 0 25px 60px rgba(0, 0, 0, 0.5);
+  --shadow-purple-glow: 0 0 30px rgba(139, 92, 246, 0.2);
 }
 
 :root {
-  font-family: var(--font-plex);
-  color: #e2e8f0;
-  background-color: var(--color-navy);
+  font-family: var(--font-inter);
+  color: var(--color-text-primary);
+  background-color: var(--color-dark-surface);
   color-scheme: dark;
 }
 
-h1, h2, h3, h4, .font-heading {
-  font-family: var(--font-playfair);
-  letter-spacing: -0.02em;
+/* Base Headings */
+h1, h2, h3, .font-display {
+  font-family: var(--font-jakarta);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: white;
 }
 
 body {
@@ -31,49 +51,63 @@ body {
   padding: 0;
   min-height: 100vh;
   overflow-x: hidden;
-  background: radial-gradient(circle at 50% 0%, var(--color-navy-light) 0%, var(--color-navy) 100%);
+  background-color: var(--color-dark-surface);
+}
+
+/* Utility Animations */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientShift 10s ease infinite;
+}
+
+.hero-gradient {
+  /* Darker, moodier purple gradient */
+  background: linear-gradient(135deg, #0f0f14 0%, #1e1b4b 40%, #4338ca 100%);
+}
+
+/* Layout Classes */
+.dark-panel {
+  background-color: var(--color-dark-surface);
+  color: var(--color-text-primary);
+}
+
+.dark-card {
+  background-color: var(--color-dark-card);
+  border: 1px solid var(--color-dark-border);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
 /* Custom Scrollbar */
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
 .custom-scrollbar::-webkit-scrollbar {
-  width: 4px;
+  width: 5px;
 }
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: var(--color-navy);
+  background: transparent;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: var(--color-navy-light);
+  background: var(--color-dark-border);
   border-radius: 10px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: var(--color-gold);
+  background: var(--color-accent-purple);
 }
 
-@keyframes pulse-green {
-  0% { transform: scale(0.95); opacity: 0.5; }
-  50% { transform: scale(1.05); opacity: 1; }
-  100% { transform: scale(0.95); opacity: 0.5; }
+/* Selection */
+::selection {
+  background: var(--color-accent-purple);
+  color: white;
 }
 
-.animate-pulse-green {
-  animation: pulse-green 2s infinite ease-in-out;
-}
-
-/* Utility Classes */
-.text-balance {
-  text-wrap: balance;
-}
-
-.glass-morphism {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+/* Glass Effect */
+.glass-purple {
+  background: rgba(30, 27, 75, 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(139, 92, 246, 0.1);
 }

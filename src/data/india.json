@@ -1,6 +1,7 @@
 {
   "country": "India",
   "electionName": "General Election (Lok Sabha)",
+  "targetDate": "2029-05-15T08:00:00",
   "phases": [
     {
       "id": "registration",
@@ -19,6 +20,14 @@
         "Keep Aadhaar/Address proof ready",
         "Download e-EPIC card"
       ],
+      "candidateDetails": {
+        "requirements": [
+          "Must be a registered voter in any constituency",
+          "Minimum age: 25 years",
+          "Must not be a 'Proclaimed Offender'"
+        ],
+        "forms": ["Form 26 (Affidavit)"]
+      },
       "keyLinks": [
         { "label": "Voter Service Portal", "url": "https://voters.eci.gov.in" }
       ]
@@ -39,6 +48,16 @@
         "Check candidate affidavits on ECI site",
         "Know your candidate's background"
       ],
+      "candidateDetails": {
+        "deposit": "₹25,000 (General) / ₹12,500 (SC/ST)",
+        "proposers": "10 proposers required for independent candidates",
+        "disqualification": "Failure to lodge account of election expenses",
+        "documents": [
+          "Certified copy of electoral roll entry",
+          "Security deposit receipt",
+          "Form 26 Affidavit"
+        ]
+      },
       "keyLinks": [
         { "label": "Know Your Candidate", "url": "https://affidavit.eci.gov.in" }
       ]
@@ -60,6 +79,15 @@
         "Read manifestos carefully",
         "Report MCC violations via cVIGIL app"
       ],
+      "candidateDetails": {
+        "expenditureLimit": "₹95 Lakhs per constituency",
+        "mccRules": [
+          "No appeal to caste or communal feelings",
+          "No use of religious places for election propaganda",
+          "48-hour silence period before polling"
+        ],
+        "permits": "Required for loudspeakers, rallies, and vehicles"
+      },
       "keyLinks": [
         { "label": "cVIGIL App", "url": "https://cvigil.eci.gov.in" }
       ]
@@ -144,10 +172,16 @@
       "explanation": "VVPAT stands for Voter Verifiable Paper Audit Trail."
     },
     {
-      "question": "What is the minimum age to vote in India?",
-      "options": ["16", "18", "21", "25"],
-      "answer": 1,
-      "explanation": "The minimum age to vote in India is 18 years."
+      "question": "What is the security deposit for a General category candidate in Lok Sabha elections?",
+      "options": ["₹10,000", "₹15,000", "₹25,000", "₹50,000"],
+      "answer": 2,
+      "explanation": "A General category candidate must deposit ₹25,000, while SC/ST candidates deposit ₹12,500."
+    },
+    {
+      "question": "How many proposers are required for an independent candidate to file a nomination?",
+      "options": ["1", "5", "10", "20"],
+      "answer": 2,
+      "explanation": "Independent candidates require 10 proposers from their constituency, while candidates from recognized parties require only 1."
     }
   ]
 }

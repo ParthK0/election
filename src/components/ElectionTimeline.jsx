@@ -3,34 +3,40 @@ import { Check } from 'lucide-react';
 
 const ElectionTimeline = ({ phases, currentPhaseId, onPhaseClick }) => {
   return (
-    <div className="relative mb-12 overflow-x-auto pb-6 scrollbar-hide">
-      <div className="flex items-center min-w-max px-4">
+    <div className="relative overflow-x-auto pb-4 scrollbar-hide">
+      <div className="flex items-center min-w-max px-2">
         {phases.map((phase, index) => {
           const isActive = phase.id === currentPhaseId;
           const isPast = phases.findIndex(p => p.id === currentPhaseId) > index;
           
           return (
             <div key={phase.id} className="flex items-center">
-              {/* Step Circle */}
               <div 
-                className="flex flex-col items-center gap-3 cursor-pointer group"
+                className="flex flex-col items-center gap-2 cursor-pointer group"
                 onClick={() => onPhaseClick(phase.id)}
               >
                 <div className={`
-                  w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 border-2
-                  ${isActive ? 'bg-gold border-gold-light scale-110 shadow-lg shadow-gold/50' : 
-                    isPast ? 'bg-emerald-500 border-emerald-400' : 'bg-navy-light border-white/5 hover:border-gold/30'}
+                  w-10 h-10 rounded-full flex items-center justify-center transition-all border-2
+                  ${isActive 
+                    ? 'bg-accent-purple border-accent-purple text-white scale-110 shadow-[0_0_15px_rgba(139,92,246,0.5)]' 
+                    : isPast 
+                      ? 'bg-accent-green border-accent-green text-white' 
+                      : 'bg-dark-card border-dark-border text-text-muted group-hover:border-accent-purple/40'}
                 `}>
-                  {isPast ? <Check className="w-6 h-6 text-white" /> : <span className={`font-bold ${isActive ? 'text-navy' : 'text-slate-400 group-hover:text-gold'}`}>{index + 1}</span>}
+                  {isPast 
+                    ? <Check className="w-4 h-4" /> 
+                    : <span className="text-xs font-bold">{index + 1}</span>
+                  }
                 </div>
-                <span className={`text-[10px] font-bold uppercase tracking-widest ${isActive ? 'text-gold' : 'text-slate-500 group-hover:text-slate-300'}`}>
+                <span className={`text-[11px] font-semibold whitespace-nowrap ${
+                  isActive ? 'text-purple' : 'text-gray-400 group-hover:text-gray-600'
+                }`}>
                   {phase.label}
                 </span>
               </div>
 
-              {/* Connector Line */}
               {index < phases.length - 1 && (
-                <div className="w-16 lg:w-24 h-0.5 mx-2 bg-white/5 relative">
+                <div className="w-12 lg:w-20 h-0.5 mx-2 bg-border relative">
                   <motion.div 
                     initial={false}
                     animate={{ width: isPast ? '100%' : '0%' }}

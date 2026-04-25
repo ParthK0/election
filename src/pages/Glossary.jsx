@@ -15,45 +15,40 @@ const Glossary = () => {
   );
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-12">
-      <header className="mb-12">
-        <h1 className="text-4xl font-bold mb-4 flex items-center gap-3 font-heading">
-          <Book className="w-8 h-8 text-gold" />
+    <div className="max-w-6xl mx-auto px-6 py-12">
+      <header className="mb-10">
+        <h1 className="text-3xl font-extrabold text-dark mb-2 flex items-center gap-3 tracking-tight">
+          <Book className="w-7 h-7 text-purple" />
           Election Glossary
         </h1>
-        <p className="text-slate-400 text-lg max-w-2xl text-balance">
-          A comprehensive guide to electoral terminology in {country}. 
-          Click on any term to get a more detailed AI-powered explanation.
+        <p className="text-gray-500 max-w-xl">
+          Electoral terminology for {country}. Click "Ask AI" on any term for a detailed explanation.
         </p>
       </header>
 
-      {/* Search */}
-      <div className="relative max-w-md mb-12">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+      <div className="relative max-w-sm mb-10">
+        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
         <input
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search for terms or definitions..."
-          className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-6 focus:outline-none focus:ring-2 focus:ring-gold/50 transition-all text-sm"
+          placeholder="Search terms..."
+          className="w-full bg-dark-card border border-dark-border rounded-xl py-3 pl-10 pr-4 focus:outline-none focus:border-accent-purple/40 text-white text-sm"
         />
       </div>
 
-      {/* Glossary Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
         {filteredGlossary.map((item, idx) => (
-          <div key={idx} className="p-8 rounded-[32px] bg-white/5 border border-white/5 hover:border-gold/30 transition-all group">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-bold text-white group-hover:text-gold transition-colors font-heading">{item.term}</h3>
+          <div key={idx} className="p-6 rounded-2xl bg-dark-card border border-dark-border hover:border-accent-purple/30 transition-all group">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-base font-bold text-white group-hover:text-accent-purple transition-colors">{item.term}</h3>
               <GlossaryChip term={item.term} />
             </div>
-            <p className="text-slate-400 leading-relaxed text-sm">
-              {item.definition}
-            </p>
+            <p className="text-text-muted text-sm leading-relaxed">{item.definition}</p>
           </div>
         ))}
         {filteredGlossary.length === 0 && (
-          <div className="col-span-full py-20 text-center text-slate-500 italic">
+          <div className="col-span-full py-16 text-center text-gray-400 text-sm">
             No terms found matching "{search}"
           </div>
         )}

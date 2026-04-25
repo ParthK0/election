@@ -9,28 +9,23 @@ export const ElectionProvider = ({ children }) => {
   const [currentPhase, setCurrentPhase] = useState('registration');
   const [role, setRole] = useState(() => localStorage.getItem('electiq_role') || 'voter');
   const [electionData, setElectionData] = useState(null);
-  const [chatHistory, setChatHistory] = useState(() => {
-    const saved = localStorage.getItem('electiq_chat');
-    return saved ? JSON.parse(saved) : [];
+  const [checklist, setChecklist] = useState(() => {
+    const saved = localStorage.getItem('electiq_checklist');
+    return saved ? JSON.parse(saved) : {};
   });
 
-  // Sync role to localStorage
-  useEffect(() => {
-    localStorage.setItem('electiq_role', role);
-  }, [role]);
+  useEffect(() => { localStorage.setItem('electiq_role', role); }, [role]);
+  useEffect(() => { localStorage.setItem('electiq_checklist', JSON.stringify(checklist)); }, [checklist]);
 
-  // Sync chat to localStorage
-  useEffect(() => {
-    localStorage.setItem('electiq_chat', JSON.stringify(chatHistory));
-  }, [chatHistory]);
+  const toggleChecklistItem = (id) => {
+    setChecklist(prev => ({ ...prev, [id]: !prev[id] }));
+  };
 
   useEffect(() => {
-    // Load country data dynamically
     const loadData = async () => {
       try {
         const data = await import(`../data/${country}.json`);
         setElectionData(data.default);
-        // Reset phase when country changes if current phase doesn't exist in new data
         if (data.default.phases && data.default.phases.length > 0) {
           const phaseExists = data.default.phases.some(p => p.id === currentPhase);
           if (!phaseExists) {
@@ -44,46 +39,23 @@ export const ElectionProvider = ({ children }) => {
     loadData();
   }, [country]);
 
-  // Persona configuration
   const personaTheme = useMemo(() => {
     switch (role) {
       case 'candidate':
-        return {
-          name: 'Candidate',
-          color: '#c9a84c', // Gold
-          secondary: '#162a4d',
-          accent: 'gold',
-          icon: '👔'
-        };
+        return { name: 'Candidate', color: '#7c3aed', icon: '👔' };
       case 'voter':
-        return {
-          name: 'Voter',
-          color: '#3b82f6', // Blue
-          secondary: '#1e3a8a',
-          accent: 'blue',
-          icon: '🗳️'
-        };
+        return { name: 'Voter', color: '#7c3aed', icon: '🗳️' };
       default:
-        return {
-          name: 'General',
-          color: '#10b981', // Emerald
-          secondary: '#064e3b',
-          accent: 'emerald',
-          icon: '🌍'
-        };
+        return { name: 'General', color: '#7c3aed', icon: '🌍' };
     }
   }, [role]);
 
   const value = {
-    country,
-    setCountry,
-    currentPhase,
-    setCurrentPhase,
-    role,
-    setRole,
+    country, setCountry,
+    currentPhase, setCurrentPhase,
+    role, setRole,
     electionData,
-    chatHistory,
-    setChatHistory,
+    checklist, toggleChecklistItem,
     personaTheme
   };
 
