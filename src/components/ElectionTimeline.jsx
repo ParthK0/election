@@ -18,19 +18,19 @@ const ElectionTimeline = ({ phases, currentPhaseId, onPhaseClick }) => {
               >
                 <div className={`
                   w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 border-2
-                  ${isActive ? 'bg-blue-600 border-blue-400 scale-110 shadow-lg shadow-blue-500/50' : 
-                    isPast ? 'bg-emerald-500 border-emerald-400' : 'bg-slate-800 border-slate-700 hover:border-slate-500'}
+                  ${isActive ? 'bg-gold border-gold-light scale-110 shadow-lg shadow-gold/50' : 
+                    isPast ? 'bg-emerald-500 border-emerald-400' : 'bg-navy-light border-white/5 hover:border-gold/30'}
                 `}>
-                  {isPast ? <Check className="w-6 h-6 text-white" /> : <span className="font-bold text-white">{index + 1}</span>}
+                  {isPast ? <Check className="w-6 h-6 text-white" /> : <span className={`font-bold ${isActive ? 'text-navy' : 'text-slate-400 group-hover:text-gold'}`}>{index + 1}</span>}
                 </div>
-                <span className={`text-xs font-bold uppercase tracking-widest ${isActive ? 'text-blue-400' : 'text-slate-500 group-hover:text-slate-300'}`}>
+                <span className={`text-[10px] font-bold uppercase tracking-widest ${isActive ? 'text-gold' : 'text-slate-500 group-hover:text-slate-300'}`}>
                   {phase.label}
                 </span>
               </div>
 
               {/* Connector Line */}
               {index < phases.length - 1 && (
-                <div className="w-16 lg:w-24 h-0.5 mx-2 bg-slate-800 relative">
+                <div className="w-16 lg:w-24 h-0.5 mx-2 bg-white/5 relative">
                   <motion.div 
                     initial={false}
                     animate={{ width: isPast ? '100%' : '0%' }}

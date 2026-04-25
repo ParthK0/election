@@ -17,11 +17,11 @@ const Glossary = () => {
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
       <header className="mb-12">
-        <h1 className="text-4xl font-bold mb-4 flex items-center gap-3">
-          <Book className="w-8 h-8 text-blue-500" />
+        <h1 className="text-4xl font-bold mb-4 flex items-center gap-3 font-heading">
+          <Book className="w-8 h-8 text-gold" />
           Election Glossary
         </h1>
-        <p className="text-slate-400 text-lg max-w-2xl">
+        <p className="text-slate-400 text-lg max-w-2xl text-balance">
           A comprehensive guide to electoral terminology in {country}. 
           Click on any term to get a more detailed AI-powered explanation.
         </p>
@@ -35,16 +35,16 @@ const Glossary = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search for terms or definitions..."
-          className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-6 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+          className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-6 focus:outline-none focus:ring-2 focus:ring-gold/50 transition-all text-sm"
         />
       </div>
 
       {/* Glossary Grid */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredGlossary.map((item, idx) => (
-          <div key={idx} className="p-8 rounded-[32px] bg-white/5 border border-white/10 hover:border-blue-500/20 transition-all group">
+          <div key={idx} className="p-8 rounded-[32px] bg-white/5 border border-white/5 hover:border-gold/30 transition-all group">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">{item.term}</h3>
+              <h3 className="text-xl font-bold text-white group-hover:text-gold transition-colors font-heading">{item.term}</h3>
               <GlossaryChip term={item.term} />
             </div>
             <p className="text-slate-400 leading-relaxed text-sm">

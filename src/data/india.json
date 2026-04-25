@@ -129,5 +129,25 @@
     "How to check my name in the voter list?",
     "What is NOTA?",
     "Can I vote if I am an NRI?"
+  ],
+  "quiz": [
+    {
+      "question": "Which form is used for voter registration in India?",
+      "options": ["Form 6", "Form 7", "Form 8", "Form 10"],
+      "answer": 0,
+      "explanation": "Form 6 is specifically used for the registration of new voters."
+    },
+    {
+      "question": "What does VVPAT stand for?",
+      "options": ["Voter Verified Paper Audit Trail", "Voter Validated Paper Audit Trail", "Voter Verified Paper Account Trail", "Voter Validated Paper Account Trail"],
+      "answer": 0,
+      "explanation": "VVPAT stands for Voter Verifiable Paper Audit Trail."
+    },
+    {
+      "question": "What is the minimum age to vote in India?",
+      "options": ["16", "18", "21", "25"],
+      "answer": 1,
+      "explanation": "The minimum age to vote in India is 18 years."
+    }
   ]
 }

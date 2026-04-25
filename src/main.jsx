@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import { ElectionProvider } from './context/ElectionContext'
+import ErrorBoundary from './components/ErrorBoundary'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ElectionProvider>
-      <App />
-    </ElectionProvider>
+    <ErrorBoundary>
+      <ElectionProvider>
+        <App />
+      </ElectionProvider>
+    </ErrorBoundary>
   </React.StrictMode>,
 )

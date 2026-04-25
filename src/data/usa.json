@@ -123,5 +123,25 @@
     "What is the Electoral College?",
     "Can I vote by mail?",
     "What ID do I need to vote?"
+  ],
+  "quiz": [
+    {
+      "question": "What is the day the US Presidential Election is held?",
+      "options": ["First Monday of November", "First Tuesday after the first Monday of November", "November 1st", "Second Tuesday of November"],
+      "answer": 1,
+      "explanation": "Election Day is the Tuesday after the first Monday in November."
+    },
+    {
+      "question": "How many Electoral College votes are needed to win the Presidency?",
+      "options": ["218", "270", "538", "300"],
+      "answer": 1,
+      "explanation": "A candidate must win a majority of electoral votes (270 out of 538) to become President."
+    },
+    {
+      "question": "Which website is the official portal for voter registration in the US?",
+      "options": ["USA.gov", "Vote.org", "Vote.gov", "Elections.gov"],
+      "answer": 2,
+      "explanation": "Vote.gov is the official government site for voter registration."
+    }
   ]
 }

@@ -7,7 +7,8 @@ const GlossaryChip = ({ term }) => {
   const { country, setChatHistory } = useElection();
   const navigate = useNavigate();
 
-  const handleTermClick = async () => {
+  const handleTermClick = async (e) => {
+    e.stopPropagation();
     const prompt = `Explain the electoral term "${term}" in the context of ${country} elections. Provide a clear definition and an example.`;
     
     // Redirect to Ask page
@@ -29,10 +30,10 @@ const GlossaryChip = ({ term }) => {
   return (
     <button
       onClick={handleTermClick}
-      className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-blue-400 hover:bg-blue-500/10 hover:border-blue-500/30 transition-all group"
+      className="inline-flex items-center gap-1.5 px-3 py-1 bg-gold/10 border border-gold/20 rounded-full text-[10px] font-bold text-gold hover:bg-gold/20 hover:border-gold/40 transition-all group uppercase tracking-widest"
     >
       {term}
-      <MessageSquare className="w-3 h-3 text-slate-500 group-hover:text-blue-400 transition-colors" />
+      <MessageSquare className="w-3 h-3 text-gold/50 group-hover:text-gold transition-colors" />
     </button>
   );
 };

@@ -2,149 +2,184 @@ import { motion } from 'framer-motion';
 import { useElection } from '../context/ElectionContext';
 import CountrySelector from '../components/CountrySelector';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle, Shield, Globe, Users } from 'lucide-react';
+import { ArrowRight, CheckCircle, Shield, Globe, Users, Vote, MessageSquare, Sparkles, Zap, TrendingUp } from 'lucide-react';
 
 const Home = () => {
-  const { setRole } = useElection();
+  const { setRole, role, personaTheme } = useElection();
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2
+        staggerChildren: 0.1,
+        delayChildren: 0.1
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 }
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { type: 'spring', damping: 20, stiffness: 100 }
+    }
   };
 
   return (
-    <div className="relative overflow-hidden">
-      {/* Background Orbs */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-[128px] -z-10 animate-pulse"></div>
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-emerald-600/10 rounded-full blur-[128px] -z-10"></div>
+    <motion.div 
+      initial="hidden"
+      animate="visible"
+      exit={{ opacity: 0, y: -20 }}
+      variants={containerVariants}
+      className="relative overflow-hidden min-h-screen"
+    >
+      {/* Intense Background Orbs */}
+      <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-blue-600/10 rounded-full blur-[150px] -z-10 animate-pulse"></div>
+      <div className="absolute bottom-[-10%] right-[-5%] w-[50%] h-[50%] bg-gold/10 rounded-full blur-[150px] -z-10 animate-pulse" style={{ animationDelay: '3s' }}></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,transparent_0%,var(--color-navy)_80%)] -z-10"></div>
 
-      <motion.div 
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="max-w-7xl mx-auto px-6 py-20 lg:py-32"
-      >
-        <div className="text-center mb-16">
-          <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-6">
-            <Shield className="w-4 h-4" />
-            Verified Educational Resource
+      {/* Hero Content */}
+      <div className="max-w-7xl mx-auto px-6 pt-24 pb-32 relative">
+        <div className="text-center mb-32">
+          <motion.div 
+            variants={itemVariants}
+            whileHover={{ scale: 1.05 }}
+            className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-white/5 border border-white/10 text-white text-[11px] font-black uppercase tracking-[0.3em] mb-10 shadow-2xl backdrop-blur-md cursor-default"
+          >
+            <div className="flex items-center -space-x-2">
+              <div className="w-6 h-6 rounded-full bg-blue-500 border-2 border-navy"></div>
+              <div className="w-6 h-6 rounded-full bg-gold border-2 border-navy"></div>
+              <div className="w-6 h-6 rounded-full bg-emerald-500 border-2 border-navy"></div>
+            </div>
+            Next-Gen Election Intelligence
           </motion.div>
           
-          <motion.h1 variants={itemVariants} className="text-5xl lg:text-7xl font-bold mb-6 tracking-tight">
-            Democracy, <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">
-              Simplified for You.
+          <motion.h1 variants={itemVariants} className="text-7xl lg:text-9xl font-black mb-10 tracking-tighter font-heading text-balance leading-[0.85]">
+            VOTE WITH <br />
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-gold via-white to-gold animate-shimmer bg-[length:200%_auto]">
+              CONFIDENCE.
             </span>
           </motion.h1>
           
-          <motion.p variants={itemVariants} className="text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Navigate the complexities of elections with our AI-powered guide. 
-            From registration to results, we've got you covered with neutral, factual information.
+          <motion.p variants={itemVariants} className="text-xl lg:text-2xl text-slate-400 max-w-2xl mx-auto mb-16 leading-relaxed text-balance font-medium">
+            Bridging the gap between complex bureaucracy and clear citizen action with state-of-the-art AI.
           </motion.p>
 
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <div className="flex flex-col items-center gap-2">
-              <span className="text-xs text-slate-500 uppercase tracking-widest font-bold">Select Your Country</span>
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-10">
+            <div className="group bg-white/5 p-4 rounded-[32px] border border-white/5 hover:border-white/20 transition-all">
+              <span className="text-[10px] text-slate-500 uppercase tracking-[0.4em] font-black mb-4 block">Region</span>
               <CountrySelector />
             </div>
-            <div className="h-10 w-[1px] bg-white/10 hidden sm:block"></div>
+            
             <Link 
               to="/learn"
-              className="group bg-white text-slate-950 px-8 py-4 rounded-2xl font-bold text-lg flex items-center gap-2 hover:bg-slate-200 transition-all shadow-xl shadow-white/10 active:scale-95"
+              className="group relative bg-white text-navy px-12 py-6 rounded-[32px] font-black text-xl flex items-center gap-4 hover:bg-gold transition-all shadow-[0_20px_80px_rgba(255,255,255,0.1)] active:scale-95 overflow-hidden"
             >
-              Explore Timeline
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <span>Get Started</span>
+              <Zap className="w-6 h-6 fill-current group-hover:scale-125 transition-transform" />
             </Link>
           </motion.div>
         </div>
 
-        {/* Feature Grid */}
-        <div className="grid md:grid-cols-3 gap-8 mt-20">
+        {/* Dynamic Cards Grid */}
+        <div className="grid md:grid-cols-3 gap-10 mb-40">
           {[
             {
               icon: Globe,
-              title: "Country Specific",
-              desc: "Tailored rules, dates, and processes for your specific electoral system."
+              title: "Global Logic",
+              desc: "Localized electoral intelligence for India and USA.",
+              color: "blue-500"
             },
             {
               icon: MessageSquare,
-              title: "AI Assistant",
-              desc: "Ask anything about voting, eligibility, or terms and get instant, neutral answers."
+              title: "Gemini AI",
+              desc: "Ask anything. Get neutral, verified answers instantly.",
+              color: "purple-500"
             },
             {
-              icon: CheckCircle,
-              title: "Voter Journey",
-              desc: "Personalized checklists whether you are a first-time voter or a candidate."
+              icon: TrendingUp,
+              title: "Real-time",
+              desc: "Stay updated with phases, dates, and live procedures.",
+              color: "gold"
             }
           ].map((feature, idx) => (
             <motion.div
               key={idx}
               variants={itemVariants}
-              className="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-blue-500/30 hover:bg-white/[0.07] transition-all group"
+              whileHover={{ y: -15, rotateZ: 1 }}
+              className="p-10 rounded-[48px] bg-white/5 border border-white/5 hover:border-white/20 hover:bg-white/[0.08] transition-all group relative overflow-hidden"
             >
-              <div className="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <feature.icon className="w-6 h-6 text-blue-400" />
+              <div className={`w-16 h-16 rounded-[24px] bg-${feature.color}/10 flex items-center justify-center mb-8 group-hover:bg-${feature.color} group-hover:text-navy transition-all duration-500 shadow-2xl`}>
+                <feature.icon className={`w-8 h-8 text-${feature.color} group-hover:text-navy`} />
               </div>
-              <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-              <p className="text-slate-400 leading-relaxed">{feature.desc}</p>
+              <h3 className="text-3xl font-black mb-4 font-heading">{feature.title}</h3>
+              <p className="text-slate-400 leading-relaxed font-medium">{feature.desc}</p>
             </motion.div>
           ))}
         </div>
 
-        {/* Role Selection */}
+        {/* Solid Color Persona Selection */}
         <motion.div 
           variants={itemVariants}
-          className="mt-32 p-12 rounded-[40px] bg-gradient-to-br from-blue-600/20 to-emerald-600/10 border border-white/10 relative overflow-hidden"
+          className="relative rounded-[64px] overflow-hidden"
         >
-          <div className="relative z-10 grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl lg:text-4xl font-bold mb-6 italic">Who are you today?</h2>
-              <p className="text-slate-300 text-lg mb-8">
-                Tell us your role so we can personalize your election timeline and tasks.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <button 
-                  onClick={() => setRole('voter')}
-                  className="px-6 py-3 rounded-xl bg-white/10 border border-white/20 hover:bg-white/20 transition-all font-semibold flex items-center gap-2"
-                >
-                  <Users className="w-5 h-5" /> I'm a Voter
-                </button>
-                <button 
-                  onClick={() => setRole('candidate')}
-                  className="px-6 py-3 rounded-xl bg-white/10 border border-white/20 hover:bg-white/20 transition-all font-semibold flex items-center gap-2"
-                >
-                  <Vote className="w-5 h-5" /> I'm a Candidate
-                </button>
-              </div>
-            </div>
-            <div className="hidden lg:block relative">
-              <div className="w-full h-64 bg-slate-800/50 rounded-2xl border border-white/10 p-6 flex flex-col gap-4 animate-float">
-                <div className="w-2/3 h-4 bg-blue-500/20 rounded-full"></div>
-                <div className="w-full h-4 bg-white/5 rounded-full"></div>
-                <div className="w-1/2 h-4 bg-white/5 rounded-full"></div>
-                <div className="mt-4 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-emerald-500/20"></div>
-                  <div className="space-y-2">
-                    <div className="w-24 h-3 bg-white/10 rounded-full"></div>
-                    <div className="w-16 h-3 bg-white/5 rounded-full"></div>
-                  </div>
+          <div className="grid lg:grid-cols-2">
+            {/* Voter Block */}
+            <motion.button
+              onClick={() => setRole('voter')}
+              whileHover={{ flexGrow: 1.2 }}
+              className={`p-16 lg:p-24 text-left transition-all duration-700 relative overflow-hidden group ${role === 'voter' ? 'bg-blue-600' : 'bg-blue-900/40'}`}
+            >
+              <div className="relative z-10">
+                <div className="w-20 h-20 bg-white/10 rounded-3xl flex items-center justify-center mb-10 group-hover:scale-110 transition-transform">
+                  <Users className="w-10 h-10 text-white" />
+                </div>
+                <h2 className="text-5xl lg:text-7xl font-black text-white mb-6 font-heading tracking-tighter">I'M A <br/> VOTER.</h2>
+                <p className="text-blue-100 text-xl font-medium max-w-sm mb-10 opacity-80">
+                  I want to know where, when, and how to cast my ballot.
+                </p>
+                <div className={`inline-flex items-center gap-3 px-6 py-3 rounded-full font-bold uppercase tracking-widest text-sm ${role === 'voter' ? 'bg-white text-blue-600' : 'bg-white/10 text-white'}`}>
+                  Select Perspective <ArrowRight className="w-5 h-5" />
                 </div>
               </div>
-            </div>
+              <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-white/5 rounded-full blur-3xl group-hover:scale-150 transition-transform"></div>
+            </motion.button>
+
+            {/* Candidate Block */}
+            <motion.button
+              onClick={() => setRole('candidate')}
+              whileHover={{ flexGrow: 1.2 }}
+              className={`p-16 lg:p-24 text-left transition-all duration-700 relative overflow-hidden group ${role === 'candidate' ? 'bg-gold' : 'bg-gold/20'}`}
+            >
+              <div className="relative z-10">
+                <div className="w-20 h-20 bg-black/10 rounded-3xl flex items-center justify-center mb-10 group-hover:scale-110 transition-transform text-navy">
+                  <Vote className="w-10 h-10" />
+                </div>
+                <h2 className="text-5xl lg:text-7xl font-black text-navy mb-6 font-heading tracking-tighter">I'M A <br/> CANDIDATE.</h2>
+                <p className="text-navy/70 text-xl font-medium max-w-sm mb-10">
+                  I need to understand nomination, compliance, and campaign rules.
+                </p>
+                <div className={`inline-flex items-center gap-3 px-6 py-3 rounded-full font-bold uppercase tracking-widest text-sm ${role === 'candidate' ? 'bg-navy text-white' : 'bg-white/10 text-navy'}`}>
+                  Select Perspective <ArrowRight className="w-5 h-5" />
+                </div>
+              </div>
+              <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-white/20 rounded-full blur-3xl group-hover:scale-150 transition-transform"></div>
+            </motion.button>
           </div>
         </motion.div>
-      </motion.div>
-    </div>
+
+        {/* Social Proof Section */}
+        <motion.div variants={itemVariants} className="mt-40 text-center">
+          <div className="inline-flex items-center gap-8 opacity-40 grayscale hover:grayscale-0 transition-all cursor-default">
+            <span className="text-2xl font-black tracking-tighter">DEMOCRACY</span>
+            <span className="text-2xl font-black tracking-tighter">INTELLIGENCE</span>
+            <span className="text-2xl font-black tracking-tighter">NEUTRALITY</span>
+          </div>
+        </motion.div>
+      </div>
+    </motion.div>
   );
 };
 
