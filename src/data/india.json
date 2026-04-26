@@ -147,10 +147,32 @@
     "residence": "Ordinary resident in the constituency"
   },
   "glossary": [
-    { "term": "EVM", "definition": "Electronic Voting Machine used to record votes." },
-    { "term": "VVPAT", "definition": "Voter Verifiable Paper Audit Trail for verifying EVM votes." },
-    { "term": "MCC", "definition": "Model Code of Conduct - guidelines for parties and candidates." },
-    { "term": "NOTA", "definition": "None Of The Above - option to reject all candidates." }
+    { "term": "Lok Sabha", "definition": "The lower house of India's bicameral Parliament, known as the 'House of the People.' It has 543 directly elected seats. The party or coalition with a majority forms the government.", "category": "Structure" },
+    { "term": "Rajya Sabha", "definition": "The upper house of Parliament, known as the 'Council of States.' It has 245 members — 233 elected by state legislative assemblies and 12 nominated by the President.", "category": "Structure" },
+    { "term": "Election Commission of India (ECI)", "definition": "The autonomous constitutional body established under Article 324 that administers all election processes in India.", "category": "Institutions" },
+    { "term": "EVM (Electronic Voting Machine)", "definition": "A standalone electronic device used to cast and count votes in Indian elections. Each EVM consists of a Control Unit and a Ballot Unit.", "category": "Process" },
+    { "term": "VVPAT", "definition": "Voter Verified Paper Audit Trail — a printer device attached to EVMs that generates a paper slip showing the voter's choice, visible for 7 seconds.", "category": "Process" },
+    { "term": "Model Code of Conduct (MCC)", "definition": "Guidelines issued by the ECI to regulate political parties and candidates during elections. Comes into effect when election dates are announced.", "category": "Rules" },
+    { "term": "Constituency", "definition": "A geographic area whose residents elect one representative to Parliament or a state legislature. India has 543 Lok Sabha constituencies.", "category": "Structure" },
+    { "term": "Returning Officer", "definition": "An official appointed by the ECI to oversee the election process in a constituency — from receiving nominations to declaring results.", "category": "Institutions" },
+    { "term": "NOTA", "definition": "'None of the Above' — an option on the EVM ballot allowing voters to reject all candidates. Introduced in 2013 following the Supreme Court's PUCL judgment.", "category": "Process" },
+    { "term": "Delimitation", "definition": "The process of redrawing electoral constituency boundaries based on census data, carried out by the Delimitation Commission.", "category": "Structure" },
+    { "term": "Affidavit", "definition": "A sworn legal declaration every candidate must file disclosing criminal record, assets, liabilities, and educational qualifications.", "category": "Process" },
+    { "term": "Anti-Defection Law", "definition": "The 10th Schedule of the Constitution (1985) which disqualifies an MP/MLA who votes against their party whip or voluntarily gives up membership.", "category": "Rules" },
+    { "term": "President's Rule", "definition": "Direct Central Rule under Article 356, imposed when a state government cannot function constitutionally. State legislature is suspended.", "category": "Structure" },
+    { "term": "By-election", "definition": "An election held to fill a seat that has become vacant mid-term due to death, resignation, or disqualification of a sitting member.", "category": "Process" },
+    { "term": "Booth Level Officer (BLO)", "definition": "A government official assigned to a specific polling booth responsible for maintaining the electoral roll and assisting in voter registration.", "category": "Institutions" },
+    { "term": "Postal Ballot", "definition": "A facility allowing armed forces personnel, police on election duty, and voters with disabilities to vote by post without visiting a polling booth.", "category": "Process" },
+    { "term": "Rajya Sabha Biennial Elections", "definition": "One-third of Rajya Sabha members retire every two years, with elections held by state legislative assemblies using the Single Transferable Vote method.", "category": "Structure" },
+    { "term": "Recognized Political Party", "definition": "A party recognized by the ECI based on electoral performance. Classification: National (recognized in 4+ states) or State parties.", "category": "Institutions" },
+    { "term": "Election Observer", "definition": "Senior IAS/IPS officers deployed by the ECI to monitor election conduct and ensure the Model Code of Conduct is followed.", "category": "Institutions" },
+    { "term": "Silent Period", "definition": "The 48-hour period before polls close during which no political campaigning is permitted, giving voters time to reflect.", "category": "Rules" },
+    { "term": "SC/ST Reserved Constituencies", "definition": "84 Lok Sabha seats reserved for SC candidates and 47 for ST candidates. Only members of these communities can contest, though all voters vote.", "category": "Structure" },
+    { "term": "Voter ID Card (EPIC)", "definition": "The Electoral Photo Identity Card issued by the ECI. The ECI also accepts 11 alternative documents including Aadhaar and passport.", "category": "Process" },
+    { "term": "Campaign Expenditure Limit", "definition": "For Lok Sabha elections, the limit is ₹95 lakh per candidate. Violation is grounds for disqualification.", "category": "Rules" },
+    { "term": "Representation of the People Act, 1951", "definition": "The primary legislation governing elections in India — covers qualification/disqualification, election offences, corrupt practices, and dispute resolution.", "category": "Rules" },
+    { "term": "President's Role in Elections", "definition": "The President issues election notifications, invites the majority party leader to form government, and administers the oath of office to the PM.", "category": "Institutions" },
+    { "term": "Horse Trading", "definition": "Informal term for the practice of political parties attempting to poach elected members from rival parties through inducements — often money or ministerial positions. The Anti-Defection Law (10th Schedule) was introduced specifically to curb this practice.", "category": "Rules" }
   ],
   "quickQuestions": [
     "What documents do I need to vote?",
@@ -159,29 +181,20 @@
     "Can I vote if I am an NRI?"
   ],
   "quiz": [
-    {
-      "question": "Which form is used for voter registration in India?",
-      "options": ["Form 6", "Form 7", "Form 8", "Form 10"],
-      "answer": 0,
-      "explanation": "Form 6 is specifically used for the registration of new voters."
-    },
-    {
-      "question": "What does VVPAT stand for?",
-      "options": ["Voter Verified Paper Audit Trail", "Voter Validated Paper Audit Trail", "Voter Verified Paper Account Trail", "Voter Validated Paper Account Trail"],
-      "answer": 0,
-      "explanation": "VVPAT stands for Voter Verifiable Paper Audit Trail."
-    },
-    {
-      "question": "What is the security deposit for a General category candidate in Lok Sabha elections?",
-      "options": ["₹10,000", "₹15,000", "₹25,000", "₹50,000"],
-      "answer": 2,
-      "explanation": "A General category candidate must deposit ₹25,000, while SC/ST candidates deposit ₹12,500."
-    },
-    {
-      "question": "How many proposers are required for an independent candidate to file a nomination?",
-      "options": ["1", "5", "10", "20"],
-      "answer": 2,
-      "explanation": "Independent candidates require 10 proposers from their constituency, while candidates from recognized parties require only 1."
-    }
+    { "id": "in_b1", "difficulty": "Beginner", "question": "What is the minimum age to vote in Indian general elections?", "options": ["16 years", "18 years", "21 years", "25 years"], "answer": 1, "explanation": "The 61st Constitutional Amendment (1988) lowered the voting age from 21 to 18 years.", "funFact": "India has more voters under the age of 25 than the entire population of the United States." },
+    { "id": "in_b2", "difficulty": "Beginner", "question": "Which body is responsible for conducting elections in India?", "options": ["Supreme Court of India", "Election Commission of India", "Parliament of India", "Ministry of Home Affairs"], "answer": 1, "explanation": "The Election Commission of India (ECI) is an autonomous constitutional authority established on January 25, 1950.", "funFact": "January 25 is celebrated as National Voters' Day in India — the anniversary of the ECI's founding." },
+    { "id": "in_b3", "difficulty": "Beginner", "question": "What does 'Lok Sabha' literally mean?", "options": ["House of Elders", "House of the People", "Council of States", "House of Ministers"], "answer": 1, "explanation": "'Lok Sabha' translates to 'House of the People' in Hindi. It is the lower house with 543 elected seats.", "funFact": "The first Lok Sabha session was held on May 13, 1952. The youngest-ever MP was Chandrani Murmu, elected at age 25." },
+    { "id": "in_b4", "difficulty": "Beginner", "question": "What is NOTA in Indian elections?", "options": ["Name of a political party", "None of the Above option on ballot", "A type of EVM", "National Officers Training Academy"], "answer": 1, "explanation": "NOTA was introduced in 2013 following a Supreme Court order, allowing voters to reject all candidates.", "funFact": "In the 2019 general election, over 6.5 million voters chose NOTA — more than the population of Singapore." },
+    { "id": "in_b5", "difficulty": "Beginner", "question": "How many seats does a party need to win a majority in the Lok Sabha?", "options": ["200", "243", "272", "300"], "answer": 2, "explanation": "The Lok Sabha has 543 elected seats. A simple majority requires 272 seats (more than half).", "funFact": "The largest-ever Lok Sabha majority was in 1984, when the INC won 414 of 543 seats after Indira Gandhi's assassination." },
+    { "id": "in_i1", "difficulty": "Intermediate", "question": "What is the security deposit amount for a Lok Sabha candidate?", "options": ["₹10,000", "₹25,000", "₹50,000", "₹1,00,000"], "answer": 1, "explanation": "A candidate must deposit ₹25,000 (₹12,500 for SC/ST). Forfeited if they fail to secure 1/6th of valid votes.", "funFact": "In the 2019 elections, over 80% of independent candidates lost their security deposits — the deposit is designed to deter frivolous candidacies." },
+    { "id": "in_i2", "difficulty": "Intermediate", "question": "What is the Model Code of Conduct (MCC)?", "options": ["A law passed by Parliament", "Guidelines issued by ECI for parties and candidates during elections", "Rules for EVM usage", "A Supreme Court judgment"], "answer": 1, "explanation": "The MCC regulates parties and candidates during elections, active from date announcement to result declaration.", "funFact": "The MCC is not a law — it's a voluntary code. But parties follow it because the ECI can postpone elections in a constituency if it's violated." },
+    { "id": "in_i3", "difficulty": "Intermediate", "question": "What is VVPAT and what is its purpose?", "options": ["A biometric voter ID system", "A paper trail that lets voters verify their EVM vote", "A postal ballot system for armed forces", "A voter registration portal"], "answer": 1, "explanation": "VVPAT prints a slip showing the candidate voted for, visible for 7 seconds, providing an audit trail.", "funFact": "In 2019, the Supreme Court ordered VVPAT verification of 5 randomly selected EVMs per constituency — requiring over 20,000 VVPAT audits." },
+    { "id": "in_i4", "difficulty": "Intermediate", "question": "Which Article of the Indian Constitution establishes the Election Commission?", "options": ["Article 148", "Article 280", "Article 324", "Article 356"], "answer": 2, "explanation": "Article 324 vests the superintendence and control of all elections in the Election Commission of India.", "funFact": "Sukumar Sen, the first Chief Election Commissioner, organized India's first-ever election in 1951-52 — covering 173 million voters, most of whom couldn't read." },
+    { "id": "in_i5", "difficulty": "Intermediate", "question": "Why does India conduct elections in multiple phases?", "options": ["To save money on printing", "To allow candidates to campaign in multiple constituencies", "To deploy adequate security forces across a vast geography", "Because the Constitution mandates it"], "answer": 2, "explanation": "Multi-phase elections (up to 7) allow adequate deployment of central security forces across 543 constituencies.", "funFact": "The 2019 general election lasted 39 days across 7 phases and cost approximately ₹60,000 crore — making it the most expensive election in the world at that time." },
+    { "id": "in_e1", "difficulty": "Expert", "question": "Under which provision can the President of India dissolve the Lok Sabha?", "options": ["Article 83(2)", "Article 85(2)(b)", "Article 74(1)", "Article 356"], "answer": 1, "explanation": "Under Article 85(2)(b), the President can dissolve the Lok Sabha on the advice of the Prime Minister.", "funFact": "The Lok Sabha has been dissolved prematurely 8 times — most recently in 1999 when the Vajpayee government lost a confidence motion by just 1 vote." },
+    { "id": "in_e2", "difficulty": "Expert", "question": "What is the Representation of the People Act, 1951 primarily concerned with?", "options": ["Defining citizen rights", "Regulating the actual conduct of elections and qualifications of representatives", "Delimitation of constituencies", "Formation of the Election Commission"], "answer": 1, "explanation": "The RPA 1951 governs conduct of elections, qualification/disqualification, corrupt practices, and election disputes.", "funFact": "Section 123 of the RPA defines 'corrupt practices' — including hiring vehicles to transport voters to polling stations, which is still illegal today." },
+    { "id": "in_e3", "difficulty": "Expert", "question": "What happens if a Lok Sabha candidate's security deposit is forfeited?", "options": ["They are banned from future elections", "The ₹25,000 deposit is retained by the government", "The result of the constituency is annulled", "The candidate must pay a penalty"], "answer": 1, "explanation": "If a candidate fails to secure 1/6th of valid votes, the deposit is forfeited to the Consolidated Fund of India.", "funFact": "In 2019, the ECI collected over ₹47 crore in forfeited deposits — mostly from independent candidates who got very few votes." },
+    { "id": "in_e4", "difficulty": "Expert", "question": "What is 'delimitation' in the context of Indian elections?", "options": ["The process of counting votes", "The fixing of boundaries and seats of electoral constituencies", "The announcement of election dates", "The verification of nomination papers"], "answer": 1, "explanation": "Delimitation redraws constituency boundaries based on census data. The current freeze is due for review after 2026.", "funFact": "The 2002 Delimitation Commission took 6 years to complete its work. The freeze on delimitation (based on 1971 population data) was meant to encourage family planning." },
+    { "id": "in_e5", "difficulty": "Expert", "question": "Under the anti-defection law (10th Schedule), when can an MP vote against their party without losing their seat?", "options": ["Never — any vote against the party results in disqualification", "Only if more than 2/3 of the party's legislature members support the dissent", "Only with written permission from the Speaker", "If the vote is on a private member's bill"], "answer": 1, "explanation": "An MP is not disqualified if at least 2/3 of the party's legislative members vote in favour of a merger.", "funFact": "The 10th Schedule was introduced in 1985 after the 'Aaya Ram Gaya Ram' era of the 1960s-70s, when one MLA in Haryana switched parties 3 times in a single day." }
   ]
 }

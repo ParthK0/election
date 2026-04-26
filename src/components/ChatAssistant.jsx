@@ -54,12 +54,19 @@ const ChatAssistant = () => {
     setError(null);
 
     try {
-      const response = await askGemini(finalInput, { country, currentPhase, role });
+      const response = await askGemini(finalInput, { country, currentPhase, role }, chatHistory);
       typeText(response, () => {
         setChatHistory(prev => [...prev, { role: 'bot', content: response, timestamp: new Date().toISOString() }]);
       });
     } catch (err) {
-      setError('Connection lost. Please try again.');
+      const msg = err?.message || '';
+      if (msg.includes('429') || msg.includes('Quota') || msg.includes('quota')) {
+        setError('API quota exhausted. Please wait a minute and try again.');
+      } else if (msg.includes('API key') || msg.includes('403')) {
+        setError('Invalid API key. Check your .env configuration.');
+      } else {
+        setError('Connection lost. Please try again.');
+      }
       console.error(err);
     } finally {
       setIsLoading(false);

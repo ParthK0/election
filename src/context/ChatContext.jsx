@@ -14,7 +14,8 @@ export const ChatProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    localStorage.setItem('electiq_chat', JSON.stringify(chatHistory));
+    const capped = chatHistory.slice(-50);
+    localStorage.setItem('electiq_chat', JSON.stringify(capped));
   }, [chatHistory]);
 
   const clearHistory = () => {
