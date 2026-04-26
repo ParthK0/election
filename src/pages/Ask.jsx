@@ -1,4 +1,5 @@
 import { useElection } from '../context/ElectionContext';
+import { useChat } from '../context/ChatContext';
 import ChatAssistant from '../components/ChatAssistant';
 import QuickPrompts from '../components/QuickPrompts';
 import { askGemini } from '../api/gemini';
@@ -6,7 +7,8 @@ import { useState } from 'react';
 import { Sparkles, ShieldCheck, MapPin } from 'lucide-react';
 
 const Ask = () => {
-  const { country, currentPhase, role, setChatHistory } = useElection();
+  const { country, currentPhase, role } = useElection();
+  const { setChatHistory } = useChat();
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handleQuickPrompt = async (prompt) => {

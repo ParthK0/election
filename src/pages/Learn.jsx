@@ -2,14 +2,14 @@ import { useElection } from '../context/ElectionContext';
 import ElectionTimeline from '../components/ElectionTimeline';
 import PhaseCard from '../components/PhaseCard';
 import { AnimatePresence } from 'framer-motion';
-import { Info, Calendar, MapPin, ChevronRight, Sparkles, Trophy, Clock } from 'lucide-react';
+import { Info, Calendar, MapPin, Sparkles, Trophy } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { PhaseCardSkeleton } from '../components/Skeleton';
 import VoterChecklist from '../components/VoterChecklist';
 import CountdownTimer from '../components/CountdownTimer';
 
 const Learn = () => {
-  const { electionData, currentPhase, setCurrentPhase, country, role } = useElection();
+  const { electionData, currentPhase, setCurrentPhase, country } = useElection();
 
   if (!electionData) {
     return (

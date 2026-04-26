@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, CheckCircle2, ChevronRight, ArrowRight } from 'lucide-react';
+import { ExternalLink, CheckCircle2, ChevronRight } from 'lucide-react';
+import { useElection } from '../context/ElectionContext';
 
 const PhaseCard = ({ phase, isActive, onClick }) => {
   const { role } = useElection();

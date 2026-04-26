@@ -1,10 +1,12 @@
 import { useElection } from '../context/ElectionContext';
+import { useChat } from '../context/ChatContext';
 import { useNavigate } from 'react-router-dom';
 import { askGemini } from '../api/gemini';
 import { MessageSquare } from 'lucide-react';
 
 const GlossaryChip = ({ term }) => {
-  const { country, setChatHistory } = useElection();
+  const { country } = useElection();
+  const { setChatHistory } = useChat();
   const navigate = useNavigate();
 
   const handleTermClick = async (e) => {

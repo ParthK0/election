@@ -37,7 +37,7 @@ export const ElectionProvider = ({ children }) => {
       }
     };
     loadData();
-  }, [country]);
+  }, [country, currentPhase]);
 
   const personaTheme = useMemo(() => {
     switch (role) {

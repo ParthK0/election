@@ -25,7 +25,7 @@ const CountdownTimer = () => {
     setTimeLeft(calculate());
     const timer = setInterval(() => setTimeLeft(calculate()), 1000);
     return () => clearInterval(timer);
-  }, [config]);
+  }, [targetDate]);
 
   if (!targetDate) return null;
   const configLabel = electionData?.electionName || 'Next Election';

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Share2, Check, Link2 } from 'lucide-react';
+import { Share2, Check } from 'lucide-react';
 
 const ShareButton = ({ text, title = 'ElectIQ — Election Info' }) => {
   const [copied, setCopied] = useState(false);

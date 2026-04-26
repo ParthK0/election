@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 const Skeleton = ({ className }) => (
   <div className={`animate-pulse bg-surface-tertiary rounded-xl ${className}`} />

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useElection } from '../context/ElectionContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, XCircle, Trophy, ArrowLeft, RefreshCcw } from 'lucide-react';
+import { CheckCircle2, XCircle, Trophy, ArrowLeft, RefreshCcw, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Quiz = () => {
@@ -21,11 +21,7 @@ const Quiz = () => {
     );
   }
 
-  // Add difficulty tiers to existing questions or simulate them
-  const questions = electionData.quiz.map((q, i) => ({
-    ...q,
-    difficulty: i === 0 ? 'Beginner' : i === 1 ? 'Intermediate' : 'Expert'
-  }));
+  const questions = electionData.quiz;
 
   const filteredQuestions = difficulty 
     ? questions.filter(q => q.difficulty === difficulty)
@@ -150,7 +146,7 @@ const Quiz = () => {
 
             {selectedOption !== null && (
               <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="mt-6">
-                <div className="p-5 bg-dark-card-2 rounded-2xl border border-dark-border mb-6">
+                <div className="p-5 bg-dark-card-2 rounded-2xl border border-dark-border mb-4">
                   <h4 className="text-[10px] font-black text-accent-purple uppercase tracking-[0.2em] mb-2 flex items-center gap-2">
                     <Sparkles className="w-3.5 h-3.5" /> Intelligence Report
                   </h4>
@@ -158,6 +154,16 @@ const Quiz = () => {
                     {filteredQuestions[currentQuestion].explanation}
                   </p>
                 </div>
+                {filteredQuestions[currentQuestion].funFact && (
+                  <div className="p-4 bg-amber-500/5 rounded-2xl border border-amber-500/10 mb-6">
+                    <h4 className="text-[10px] font-black text-amber-400 uppercase tracking-[0.2em] mb-1.5 flex items-center gap-2">
+                      💡 Did you know?
+                    </h4>
+                    <p className="text-sm text-amber-200/80 leading-relaxed">
+                      {filteredQuestions[currentQuestion].funFact}
+                    </p>
+                  </div>
+                )}
                 <button
                   onClick={handleNext}
                   className="w-full bg-accent-purple text-white py-4 rounded-xl text-sm font-bold hover:bg-accent-purple/80 transition-all shadow-premium active:scale-95"
