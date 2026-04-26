@@ -11,15 +11,29 @@
   --color-dark-card-2: #161625;    /* Slightly lighter card */
   --color-dark-border: #1e1e2e;    /* Subtle dark purple border */
 
+  /* Surface aliases (used by components) */
+  --color-surface: #050508;
+  --color-surface-secondary: #0f0f1a;
+  --color-surface-tertiary: #161625;
+
   /* Accents */
   --color-accent-purple: #8b5cf6;
   --color-accent-gold: #f59e0b;
   --color-accent-green: #10b981;
 
+  /* Named color aliases (used by older components) */
+  --color-purple: #8b5cf6;
+  --color-purple-muted: rgba(139, 92, 246, 0.1);
+  --color-purple-dark: #7c3aed;
+
   /* Text */
   --color-text-hero: #ffffff;
   --color-text-primary: #f1f0ff;
   --color-text-muted: #6b7280;
+  --color-dark: #ffffff;  /* text-dark maps to white on dark theme */
+
+  /* Borders */
+  --color-border: #1e1e2e;
 
   /* Typography */
   --font-jakarta: 'Plus Jakarta Sans', sans-serif;

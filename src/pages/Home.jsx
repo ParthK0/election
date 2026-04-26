@@ -2,10 +2,10 @@ import { motion } from 'framer-motion';
 import { useElection } from '../context/ElectionContext';
 import CountrySelector from '../components/CountrySelector';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, Clock, Shield, Vote, MessageCircle, Users } from 'lucide-react';
+import { ArrowRight, Sparkles, Clock, Shield, Vote, Users } from 'lucide-react';
 
 const Home = () => {
-  const { setRole, role, country } = useElection();
+  const { setRole, role, country, electionData, currentPhase } = useElection();
 
   return (
     <div className="relative min-h-screen flex flex-col lg:flex-row overflow-hidden bg-dark-surface">
@@ -89,18 +89,18 @@ const Home = () => {
             className="dark-card p-6 shadow-premium z-30"
           >
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-muted">Global Timeline</h3>
+              <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-muted">Election Progress</h3>
               <Clock className="w-4 h-4 text-accent-purple" />
             </div>
             <div className="space-y-4">
               <div className="flex justify-between text-[10px] font-mono">
-                <span className="text-white">Validation Phase</span>
-                <span className="text-accent-purple">88% Complete</span>
+                <span className="text-white">{electionData?.phases?.find(p => p.id === currentPhase)?.label || 'Current Phase'}</span>
+                <span className="text-accent-purple">{electionData?.phases ? `${Math.round(((electionData.phases.findIndex(p => p.id === currentPhase) + 1) / electionData.phases.length) * 100)}%` : '—'}</span>
               </div>
               <div className="h-1.5 w-full bg-dark-border rounded-full overflow-hidden">
                 <motion.div 
                   initial={{ width: 0 }}
-                  animate={{ width: '88%' }}
+                  animate={{ width: electionData?.phases ? `${((electionData.phases.findIndex(p => p.id === currentPhase) + 1) / electionData.phases.length) * 100}%` : '0%' }}
                   className="h-full bg-accent-purple shadow-[0_0_10px_rgba(139,92,246,0.5)]"
                 ></motion.div>
               </div>
@@ -129,15 +129,15 @@ const Home = () => {
 
           <div className="grid grid-cols-2 gap-4 z-20">
             <div className="dark-card p-5 bg-dark-card flex flex-col gap-1">
-              <span className="text-[9px] font-bold text-text-muted uppercase tracking-[0.2em]">Registered</span>
-              <span className="text-2xl font-extrabold text-white font-display tracking-tight">1.2B+</span>
+              <span className="text-[9px] font-bold text-text-muted uppercase tracking-[0.2em]">Phases</span>
+              <span className="text-2xl font-extrabold text-white font-display tracking-tight">{electionData?.phases?.length || '—'}</span>
               <span className="text-[9px] text-accent-green font-bold flex items-center gap-1 uppercase tracking-widest">
-                <Shield className="w-2.5 h-2.5" /> Encrypted
+                <Shield className="w-2.5 h-2.5" /> Tracked
               </span>
             </div>
             <div className="dark-card p-5 bg-dark-card-2 border-accent-purple/20 flex flex-col gap-1">
               <span className="text-[9px] font-bold text-accent-purple uppercase tracking-[0.2em]">Next Election</span>
-              <span className="text-2xl font-extrabold text-white font-display tracking-tight">Q2 2024</span>
+              <span className="text-2xl font-extrabold text-white font-display tracking-tight">{electionData?.targetDate ? new Date(electionData.targetDate).getFullYear() : '—'}</span>
               <span className="text-[9px] font-mono text-text-muted">COUNTDOWN SYNCED</span>
             </div>
           </div>
