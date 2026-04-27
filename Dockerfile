@@ -2,7 +2,7 @@
 FROM node:22 AS build
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN npm install --legacy-peer-deps
 COPY . .
 ENV CI=false
 RUN npm run build
@@ -11,7 +11,7 @@ RUN npm run build
 FROM node:22-slim
 WORKDIR /app
 COPY package*.json ./
-RUN npm install --production
+RUN npm install --legacy-peer-deps --production
 COPY --from=build /app/dist ./dist
 COPY server.js ./
 EXPOSE 8080
