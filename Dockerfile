@@ -1,18 +1,19 @@
-# Build Stage
-FROM node:22 AS build
-WORKDIR /app
-COPY package*.json ./
-RUN npm install --legacy-peer-deps
-COPY . .
-ENV CI=false
-RUN npm run build
-
-# Production Stage
 FROM node:22-slim
 WORKDIR /app
+
+# Copy package files and install all dependencies once
 COPY package*.json ./
-RUN npm install --legacy-peer-deps --production
-COPY --from=build /app/dist ./dist
-COPY server.js ./
+RUN npm install --legacy-peer-deps
+
+# Copy the rest of the code
+COPY . .
+
+# Set CI to false to prevent build errors on warnings
+ENV CI=false
+
+# Build the Vite frontend
+RUN npm run build
+
+# Expose the port and start the server
 EXPOSE 8080
-CMD ["node", "server.js"]
+CMD ["npm", "start"]
