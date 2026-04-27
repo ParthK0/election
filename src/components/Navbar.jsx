@@ -8,6 +8,16 @@ const Navbar = () => {
   const location = useLocation();
   const { country } = useElection();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Track scroll position for navbar background
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Close menu on route change
   useEffect(() => {
@@ -33,7 +43,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-[100] px-6 py-4 pointer-events-none">
+      <nav className={`fixed top-0 left-0 right-0 z-[100] px-6 transition-all duration-300 pointer-events-none ${isScrolled ? 'py-3 bg-dark-surface/80 backdrop-blur-2xl border-b border-dark-border/50 shadow-2xl' : 'py-4'}`}>
         <div className="max-w-7xl mx-auto flex justify-between items-center pointer-events-auto">
           
           {/* Logo */}

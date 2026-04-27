@@ -1,20 +1,43 @@
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { useElection } from '../context/ElectionContext';
 import CountrySelector from '../components/CountrySelector';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, Clock, Shield, Vote, Users } from 'lucide-react';
+import { ArrowRight, Sparkles, Clock, Shield, Vote, Users, CheckCircle, Database, Zap } from 'lucide-react';
 
 const Home = () => {
   const { setRole, role, country, electionData, currentPhase } = useElection();
 
+  // Mouse tracking for premium glow effect
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springX = useSpring(mouseX, { stiffness: 50, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+
+  function handleMouseMove({ currentTarget, clientX, clientY }) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
+
   return (
-    <div className="relative min-h-screen flex flex-col lg:flex-row overflow-hidden bg-dark-surface">
+    <div 
+      className="relative min-h-screen flex flex-col lg:flex-row overflow-hidden bg-dark-surface -mt-20"
+      onMouseMove={handleMouseMove}
+    >
+      {/* Dynamic Cursor Glow */}
+      <motion.div 
+        className="pointer-events-none absolute -inset-px z-30 transition-opacity duration-300 opacity-0 lg:group-hover:opacity-100"
+        style={{
+          background: `radial-gradient(600px circle at ${springX}px ${springY}px, rgba(139, 92, 246, 0.07), transparent 80%)`,
+        }}
+      />
       
       {/* LEFT HALF: Moody Purple/Black Hero */}
       <div className="relative w-full lg:w-[55%] hero-gradient min-h-[70vh] lg:min-h-screen flex items-center px-8 lg:px-20 py-20 z-10 animate-gradient">
         {/* Giant Watermark - Even more subtle on dark */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-          <span className="text-[200px] lg:text-[400px] font-black text-accent-purple/5 select-none tracking-tighter leading-none transform -rotate-12 translate-y-20">
+          <span className="text-[200px] lg:text-[400px] font-black text-white/[0.03] select-none tracking-tighter leading-none transform -rotate-12 translate-y-20">
             VOTE
           </span>
         </div>
@@ -57,11 +80,11 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="flex flex-wrap items-center gap-6"
+            className="flex flex-wrap items-center gap-6 mb-16"
           >
             <Link 
               to="/learn"
-              className="px-8 py-4 bg-accent-purple text-white font-bold rounded-full text-base transition-all hover:scale-105 hover:bg-accent-purple/80 shadow-premium active:scale-95"
+              className="px-8 py-4 bg-accent-purple text-white font-bold rounded-full text-base transition-all hover:scale-105 hover:bg-accent-purple/80 shadow-[0_0_20px_rgba(139,92,246,0.3)] active:scale-95"
             >
               Explore Guide
             </Link>
@@ -72,6 +95,25 @@ const Home = () => {
               Consult AI <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform text-accent-purple" />
             </Link>
           </motion.div>
+
+          {/* Hero Trust Indicators */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className="flex flex-wrap items-center gap-x-10 gap-y-6 pt-8 border-t border-white/5"
+          >
+            {[
+              { icon: CheckCircle, label: "AI Verified Data" },
+              { icon: Database, label: "Official Sources" },
+              { icon: Zap, label: "Real-time Sync" }
+            ].map((stat, i) => (
+              <div key={i} className="flex items-center gap-2.5">
+                <stat.icon className="w-4 h-4 text-accent-purple/60" />
+                <span className="text-[10px] font-bold text-text-muted uppercase tracking-[0.2em]">{stat.label}</span>
+              </div>
+            ))}
+          </motion.div>
         </div>
       </div>
 
@@ -79,7 +121,7 @@ const Home = () => {
       <div className="relative w-full lg:w-[45%] bg-dark-surface min-h-screen p-8 lg:p-20 flex flex-col justify-center gap-12 overflow-visible">
         
         {/* Slanted Card Grid */}
-        <div className="relative w-full max-w-xl mx-auto flex flex-col gap-6 lg:scale-110">
+        <div className="relative w-full max-w-xl mx-auto flex flex-col gap-6">
           
           <motion.div
             initial={{ opacity: 0, rotate: -5, x: 50 }}
@@ -145,7 +187,7 @@ const Home = () => {
 
         {/* Role Selector */}
         <div className="mt-8 space-y-4">
-          <p className="text-[9px] font-bold text-text-muted uppercase tracking-[0.3em] text-center">Perspective Tuning</p>
+          <p className="text-[10px] font-bold text-accent-purple uppercase tracking-[0.2em] text-center">Choose Your Perspective</p>
           <div className="flex gap-3">
             {[
               { id: 'voter', label: 'Voter', icon: Users, sub: 'Dates & Procedures' },

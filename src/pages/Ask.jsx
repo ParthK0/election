@@ -38,7 +38,7 @@ const Ask = () => {
             <h1 className="text-3xl font-extrabold text-dark mb-3 tracking-tight">
               Election Assistant
             </h1>
-            <p className="text-sm text-gray-500 leading-relaxed">
+            <p className="text-sm text-text-muted leading-relaxed">
               Get instant answers about {country}'s electoral processes. Powered by Gemini AI.
             </p>
           </div>
@@ -47,7 +47,7 @@ const Ask = () => {
             <div className="flex items-center gap-2.5">
               <MapPin className="w-4 h-4 text-purple" />
               <div>
-                <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Region</p>
+                <p className="text-[10px] font-semibold text-text-muted uppercase tracking-wider">Region</p>
                 <p className="text-sm font-medium text-dark capitalize">{country}</p>
               </div>
             </div>
@@ -57,7 +57,7 @@ const Ask = () => {
                 <div className="w-1.5 h-1.5 bg-white rounded-full" />
               </div>
               <div>
-                <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Phase</p>
+                <p className="text-[10px] font-semibold text-text-muted uppercase tracking-wider">Phase</p>
                 <p className="text-sm font-medium text-dark capitalize">{currentPhase}</p>
               </div>
             </div>
@@ -65,12 +65,12 @@ const Ask = () => {
 
           <QuickPrompts onPromptSelect={handleQuickPrompt} />
 
-          <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-100">
-            <h4 className="flex items-center gap-1.5 text-emerald-700 font-semibold text-xs mb-2">
+          <div className="p-4 rounded-xl bg-accent-green/5 border border-accent-green/15">
+            <h4 className="flex items-center gap-1.5 text-accent-green font-semibold text-xs mb-2">
               <ShieldCheck className="w-3.5 h-3.5" />
               Neutrality Guaranteed
             </h4>
-            <p className="text-[11px] text-emerald-600/70 leading-relaxed">
+            <p className="text-[11px] text-text-muted leading-relaxed">
               Strictly educational. No political opinions or candidate recommendations.
             </p>
           </div>

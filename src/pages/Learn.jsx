@@ -39,7 +39,7 @@ const Learn = () => {
         <h1 className="text-4xl lg:text-5xl font-extrabold text-dark mb-3 tracking-tight">
           {electionData.electionName}
         </h1>
-        <p className="text-gray-500 text-lg max-w-2xl">
+        <p className="text-text-muted text-lg max-w-2xl">
           Complete guide to the electoral process. Select a phase to see details.
         </p>
       </header>

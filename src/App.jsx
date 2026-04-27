@@ -1,7 +1,17 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Shield } from 'lucide-react';
+
+// Scroll to top on route change
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
 
 const Home = lazy(() => import('./pages/Home'));
 const Learn = lazy(() => import('./pages/Learn'));
@@ -74,38 +84,66 @@ const AnimatedRoutes = () => {
 export default function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen bg-dark-surface text-text-primary font-inter flex flex-col">
         <Navbar />
         <main className="flex-grow pt-20">
           <AnimatedRoutes />
         </main>
 
-        <footer className="py-12 px-6 border-t border-dark-border bg-dark-card">
-          <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-            <div className="flex flex-col items-center md:items-start gap-3">
-              <div className="flex items-center gap-2">
-                <div className="w-7 h-7 bg-accent-purple rounded-lg flex items-center justify-center">
-                  <div className="w-3 h-3 bg-white rounded-sm" />
+        <footer className="relative pt-16 pb-10 px-6 bg-dark-card overflow-hidden">
+          {/* Gradient top edge */}
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-purple/40 to-transparent" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-[1px] bg-accent-purple/30 blur-sm" />
+          
+          <div className="max-w-6xl mx-auto">
+            <div className="flex flex-col md:flex-row justify-between items-start gap-10">
+              {/* Brand */}
+              <div className="flex flex-col gap-4">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 bg-accent-purple rounded-xl flex items-center justify-center shadow-[0_0_15px_rgba(139,92,246,0.25)]">
+                    <Shield className="w-4 h-4 text-white" />
+                  </div>
+                  <span className="font-extrabold text-lg text-white tracking-tight font-display">ElectIQ</span>
                 </div>
-                <span className="font-extrabold text-lg text-white tracking-tight">ElectIQ</span>
+                <p className="text-xs text-accent-purple font-medium tracking-wide">Your Civic Intelligence Partner</p>
               </div>
-              <p className="text-xs text-text-muted tracking-wide">Your Civic Intelligence Partner</p>
-              <div className="flex gap-5 mt-2">
-                {[
-                  { label: 'Sources', to: '/sources' },
-                  { label: 'Learn', to: '/learn' },
-                  { label: 'Ask AI', to: '/ask' },
-                  { label: 'Glossary', to: '/glossary' },
-                ].map(link => (
-                  <Link key={link.label} to={link.to} className="text-xs text-text-muted hover:text-accent-purple transition-colors">{link.label}</Link>
-                ))}
+
+              {/* Nav Links */}
+              <div className="flex flex-col gap-3">
+                <p className="text-[9px] font-bold text-text-muted uppercase tracking-[0.3em]">Navigate</p>
+                <div className="flex gap-6">
+                  {[
+                    { label: 'Sources', to: '/sources' },
+                    { label: 'Learn', to: '/learn' },
+                    { label: 'Ask AI', to: '/ask' },
+                    { label: 'Glossary', to: '/glossary' },
+                    { label: 'Quiz', to: '/quiz' },
+                  ].map(link => (
+                    <Link key={link.label} to={link.to} className="text-xs text-text-muted hover:text-accent-purple transition-colors font-medium">{link.label}</Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* Trust Badge */}
+              <div className="max-w-xs text-right">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-accent-green/10 border border-accent-green/20 rounded-full mb-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-accent-green shadow-[0_0_6px_rgba(16,185,129,0.5)]" />
+                  <span className="text-[9px] font-bold text-accent-green uppercase tracking-widest">Verified Sources</span>
+                </div>
+                <p className="text-xs text-text-muted leading-relaxed">
+                  Neutral educational platform powered by Google Gemini AI. Data verified from official electoral commissions.
+                </p>
               </div>
             </div>
-            <div className="text-center md:text-right max-w-sm">
-              <p className="text-sm text-text-muted leading-relaxed">
-                Neutral educational platform powered by Google Gemini AI. Data verified from official electoral commissions.
-              </p>
-              <p className="text-[11px] text-text-muted/60 mt-2">© 2026 ElectIQ</p>
+
+            {/* Bottom bar */}
+            <div className="mt-10 pt-6 border-t border-dark-border flex flex-col sm:flex-row justify-between items-center gap-4">
+              <p className="text-[10px] text-text-muted/50 font-mono">© 2026 ElectIQ — Open Civic Intelligence</p>
+              <div className="flex items-center gap-2">
+                <div className="w-1 h-1 rounded-full bg-accent-purple/40" />
+                <span className="text-[10px] text-text-muted/40 font-mono">v1.0</span>
+              </div>
             </div>
           </div>
         </footer>
