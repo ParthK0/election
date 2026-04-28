@@ -6,6 +6,7 @@ export const useElection = () => useContext(ElectionContext);
 
 export const ElectionProvider = ({ children }) => {
   const [country, setCountry] = useState('india');
+  const [subCategory, setSubCategory] = useState('loksabha');
   const [currentPhase, setCurrentPhase] = useState('registration');
   const [role, setRole] = useState(() => localStorage.getItem('electiq_role') || 'voter');
   const [electionData, setElectionData] = useState(null);
@@ -24,7 +25,8 @@ export const ElectionProvider = ({ children }) => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const data = await import(`../data/${country}.json`);
+        const filename = country === 'india' ? `india_${subCategory}` : country;
+        const data = await import(`../data/${filename}.json`);
         setElectionData(data.default);
         if (data.default.phases && data.default.phases.length > 0) {
           const phaseExists = data.default.phases.some(p => p.id === currentPhase);
@@ -37,7 +39,7 @@ export const ElectionProvider = ({ children }) => {
       }
     };
     loadData();
-  }, [country, currentPhase]);
+  }, [country, subCategory, currentPhase]);
 
   const personaTheme = useMemo(() => {
     switch (role) {
@@ -52,6 +54,7 @@ export const ElectionProvider = ({ children }) => {
 
   const value = {
     country, setCountry,
+    subCategory, setSubCategory,
     currentPhase, setCurrentPhase,
     role, setRole,
     electionData,

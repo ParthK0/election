@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useElection } from '../context/ElectionContext';
-import { Clock } from 'lucide-react';
+import { Clock, Info } from 'lucide-react';
 
 const CountdownTimer = () => {
   const { electionData } = useElection();
@@ -38,7 +38,7 @@ const CountdownTimer = () => {
   ];
 
   return (
-    <div className="mb-10 p-5 rounded-2xl bg-dark flex flex-col sm:flex-row items-center justify-between gap-4 border border-dark-border relative overflow-hidden">
+    <div className="mb-10 p-5 rounded-2xl bg-[rgba(255,255,255,0.05)] flex flex-col sm:flex-row items-center justify-between gap-4 border border-dark-border relative overflow-hidden">
       {!timeLeft.isActive && (
         <div className="absolute inset-0 bg-dark/80 backdrop-blur-sm z-10 flex items-center justify-center">
           <p className="text-white font-bold tracking-widest uppercase text-xs">No active election date set</p>
@@ -49,8 +49,17 @@ const CountdownTimer = () => {
           <Clock className="w-5 h-5 text-accent-purple" />
         </div>
         <div>
-          <p className="text-white font-bold text-sm tracking-tight">{configLabel}</p>
-          <p className="text-text-muted text-[10px] font-bold uppercase tracking-widest">Polling Day Countdown</p>
+          <div className="flex items-center gap-2">
+            <p className="text-white font-bold text-sm tracking-tight">{configLabel}</p>
+            <div className="group relative flex items-center">
+              <Info className="w-3.5 h-3.5 text-text-muted hover:text-white cursor-help transition-colors" />
+              <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max px-2.5 py-1.5 bg-dark-card border border-dark-border rounded shadow-xl text-[10px] text-white opacity-0 group-hover:opacity-100 pointer-events-none transition-all">
+                Source: Election Commission of India (ECI)
+              </div>
+            </div>
+          </div>
+          <p className="text-text-muted text-[10px] font-bold uppercase tracking-widest mt-0.5">Polling Day Countdown</p>
+          <p className="text-text-muted text-xs mt-1">Until Lok Sabha Polling Day · April 2029 (estimated)</p>
         </div>
       </div>
       <div className="flex gap-2">

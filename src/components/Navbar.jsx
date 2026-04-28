@@ -1,22 +1,30 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Shield, Menu, X } from 'lucide-react';
+import { Shield, Menu, X, ChevronDown, Settings, LogOut, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useElection } from '../context/ElectionContext';
+import { useAuth } from '../context/AuthContext';
+import CountrySelector from './CountrySelector';
 
 const Navbar = () => {
   const location = useLocation();
-  const { country } = useElection();
+  const { country, role, setRole } = useElection();
+  const { user, logout, openAuthModal } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isRoleDropdownOpen, setIsRoleDropdownOpen] = useState(false);
+  
+  const roleDropdownRef = useRef(null);
 
-  // Track scroll position for navbar background
+  // Close role dropdown on click outside
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+    const handleClick = (e) => {
+      if (roleDropdownRef.current && !roleDropdownRef.current.contains(e.target)) {
+        setIsRoleDropdownOpen(false);
+      }
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
   }, []);
 
   // Close menu on route change
@@ -44,10 +52,10 @@ const Navbar = () => {
   return (
     <>
       <nav className={`fixed top-0 left-0 right-0 z-[100] px-6 transition-all duration-300 pointer-events-none ${isScrolled ? 'py-3 bg-dark-surface/80 backdrop-blur-2xl border-b border-dark-border/50 shadow-2xl' : 'py-4'}`}>
-        <div className="max-w-7xl mx-auto flex justify-between items-center pointer-events-auto">
+        <div className="max-w-7xl mx-auto flex justify-between items-center pointer-events-auto relative">
           
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5 group">
+          <Link to="/" className="flex items-center gap-2.5 group w-[200px]">
             <div className="w-10 h-10 bg-accent-purple rounded-xl flex items-center justify-center shadow-[0_0_20px_rgba(139,92,246,0.3)] group-hover:rotate-12 transition-transform duration-500">
               <Shield className="text-white w-5 h-5" />
             </div>
@@ -57,7 +65,7 @@ const Navbar = () => {
           </Link>
 
           {/* Navigation Pill — Desktop Only */}
-          <div className="hidden lg:flex items-center bg-dark-card/60 backdrop-blur-2xl border border-dark-border p-1.5 rounded-full shadow-2xl">
+          <div className="hidden lg:flex items-center mx-auto bg-dark-card/60 backdrop-blur-2xl border border-dark-border p-1.5 rounded-full shadow-2xl">
             {navItems.map((item) => {
               const isActive = location.pathname === item.path;
               return (
@@ -82,40 +90,71 @@ const Navbar = () => {
           </div>
 
           {/* Action Controls */}
-          <div className="flex items-center gap-4">
-            <div className="hidden sm:flex items-center gap-3">
-               {/* Language Hint */}
-               <div className="relative group/lang">
-                  <button className="flex items-center gap-2 px-3 py-1.5 bg-dark-card/40 border border-dark-border rounded-full backdrop-blur-md hover:border-accent-purple/30 transition-all">
-                    <span className="text-[9px] font-black text-white/60 uppercase tracking-widest">EN</span>
-                    <div className="w-1 h-1 bg-accent-purple rounded-full"></div>
-                  </button>
-                  <div className="absolute top-full right-0 mt-2 w-32 bg-dark-card border border-dark-border rounded-xl p-2 opacity-0 translate-y-2 pointer-events-none group-hover/lang:opacity-100 group-hover/lang:translate-y-0 transition-all shadow-2xl backdrop-blur-xl">
-                    <div className="px-2 py-1.5 bg-accent-purple/10 rounded-lg">
-                      <p className="text-[9px] font-black text-accent-purple uppercase tracking-widest">English</p>
-                    </div>
-                    <div className="mt-1 px-2 py-1.5 opacity-40">
-                      <p className="text-[9px] font-bold text-white uppercase tracking-widest">Hindi (Soon)</p>
-                    </div>
-                    <div className="px-2 py-1.5 opacity-40">
-                      <p className="text-[9px] font-bold text-white uppercase tracking-widest">Spanish (Soon)</p>
-                    </div>
-                  </div>
+          <div className="flex items-center justify-end gap-3 w-[280px]">
+            <div className="hidden sm:flex items-center gap-2">
+               
+               {/* Country Selector embedded */}
+               <div className="border-r border-dark-border pr-2">
+                 <CountrySelector />
                </div>
 
-               <div className="flex items-center gap-2 px-4 py-2 bg-dark-card/40 border border-dark-border rounded-full backdrop-blur-md">
-                  <div className="w-1.5 h-1.5 rounded-full bg-accent-green shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
-                  <span className="text-[10px] font-bold text-white/80 uppercase tracking-widest">{country} LIVE</span>
+               {/* Role Dropdown */}
+               <div className="flex items-center gap-1">
+                 <div className="relative" ref={roleDropdownRef}>
+                   <button 
+                     onClick={() => setIsRoleDropdownOpen(!isRoleDropdownOpen)}
+                     className="flex items-center gap-1.5 px-3 py-1.5 bg-dark-card/40 border border-dark-border rounded-full backdrop-blur-md hover:border-accent-purple/30 transition-all"
+                   >
+                     <span className="text-[9px] font-bold text-white/80 tracking-widest uppercase">Viewing as: <span className="text-white capitalize">{role}</span></span>
+                     <ChevronDown className={`w-3 h-3 text-white/60 transition-transform ${isRoleDropdownOpen ? 'rotate-180' : ''}`} />
+                   </button>
+                   <AnimatePresence>
+                     {isRoleDropdownOpen && (
+                       <motion.div 
+                         initial={{ opacity: 0, y: 10 }}
+                         animate={{ opacity: 1, y: 0 }}
+                         exit={{ opacity: 0, y: 10 }}
+                         className="absolute top-full right-0 mt-2 w-32 bg-dark-card border border-dark-border rounded-xl p-2 shadow-2xl backdrop-blur-xl z-50"
+                       >
+                         <button onClick={() => { setRole('voter'); setIsRoleDropdownOpen(false); }} className={`w-full text-left px-2 py-1.5 rounded-lg text-[10px] font-bold transition-colors uppercase tracking-widest ${role === 'voter' ? 'bg-accent-purple/10 text-accent-purple' : 'text-white hover:bg-dark-card-2'}`}>Voter</button>
+                         <button onClick={() => { setRole('candidate'); setIsRoleDropdownOpen(false); }} className={`w-full text-left mt-1 px-2 py-1.5 rounded-lg text-[10px] font-bold transition-colors uppercase tracking-widest ${role === 'candidate' ? 'bg-accent-purple/10 text-accent-purple' : 'text-white hover:bg-dark-card-2'}`}>Candidate</button>
+                       </motion.div>
+                     )}
+                   </AnimatePresence>
+                 </div>
+                 <button 
+                   onClick={() => window.dispatchEvent(new Event('open-preferences'))}
+                   className="p-1.5 text-text-muted hover:text-white hover:bg-dark-card rounded-full transition-colors"
+                   title="Preferences"
+                 >
+                   <Settings className="w-3.5 h-3.5" />
+                 </button>
                </div>
             </div>
 
-            {/* Desktop CTA */}
-            <Link 
-              to="/learn"
-              className="hidden sm:block bg-accent-purple text-white px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] hover:bg-accent-purple/80 transition-all shadow-premium"
-            >
-              Get Started
-            </Link>
+            {/* Auth Button */}
+            <div className="hidden md:block border-l border-dark-border pl-3">
+              {user ? (
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2">
+                    <div className="w-6 h-6 rounded-full bg-accent-purple/20 flex items-center justify-center border border-accent-purple/40">
+                      <User className="w-3 h-3 text-accent-purple" />
+                    </div>
+                    <span className="text-[10px] font-bold text-white capitalize">{user.name}</span>
+                  </div>
+                  <button onClick={logout} className="text-text-muted hover:text-red-400 transition-colors" title="Logout">
+                    <LogOut className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              ) : (
+                <button 
+                  onClick={openAuthModal}
+                  className="px-4 py-1.5 bg-accent-purple text-white rounded-full text-[10px] font-black uppercase tracking-[0.2em] hover:bg-accent-purple/80 transition-colors shadow-premium"
+                >
+                  Sign In
+                </button>
+              )}
+            </div>
 
             {/* Mobile Hamburger */}
             <button
@@ -221,12 +260,6 @@ const Navbar = () => {
                   <div className="w-1.5 h-1.5 rounded-full bg-accent-green shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
                   <span className="text-[10px] font-bold text-white/80 uppercase tracking-widest">{country} LIVE</span>
                 </div>
-                <Link
-                  to="/learn"
-                  className="block w-full text-center bg-accent-purple text-white py-3 rounded-xl text-xs font-black uppercase tracking-[0.2em] hover:bg-accent-purple/80 transition-all shadow-premium"
-                >
-                  Get Started
-                </Link>
               </div>
             </motion.div>
           </>

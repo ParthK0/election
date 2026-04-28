@@ -20,6 +20,8 @@
   --color-accent-purple: #8b5cf6;
   --color-accent-gold: #f59e0b;
   --color-accent-green: #10b981;
+  --color-accent-warning: #f59e0b;
+  --color-accent-danger: #ef4444;
 
   /* Named color aliases (used by older components) */
   --color-purple: #8b5cf6;
