@@ -4,6 +4,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, XCircle, Trophy, ArrowLeft, RefreshCcw, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+import EmptyState from '../components/EmptyState';
+import { HelpCircle } from 'lucide-react';
+
 const Quiz = () => {
   const { electionData, country } = useElection();
   const [difficulty, setDifficulty] = useState(null);
@@ -12,12 +15,15 @@ const Quiz = () => {
   const [showResult, setShowResult] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
 
-  if (!electionData || !electionData.quiz) {
+  if (!electionData || !electionData.quiz || electionData.quiz.length === 0) {
     return (
-      <div className="max-w-2xl mx-auto px-6 py-20 text-center">
-        <h2 className="text-xl font-bold text-white mb-4">No quiz available for {country} yet.</h2>
-        <Link to="/learn" className="text-accent-purple hover:underline text-sm font-bold uppercase tracking-widest">Return to Learning</Link>
-      </div>
+      <EmptyState 
+        icon={HelpCircle}
+        title="Intelligence Not Available"
+        message={`We are currently compiling the quiz data for ${country.toUpperCase()}. Please check back later.`}
+        actionText="Return to Learning"
+        actionLink="/learn"
+      />
     );
   }
 
@@ -52,6 +58,10 @@ const Quiz = () => {
 
   return (
     <div className="max-w-2xl mx-auto px-6 py-12">
+      <Helmet>
+        <title>{country.toUpperCase()} Election Intelligence Quiz | ElectIQ</title>
+        <meta name="description" content={`Test your knowledge of ${country}'s electoral process. Various difficulty levels from beginner to expert.`} />
+      </Helmet>
       <Link to="/learn" className="inline-flex items-center gap-1.5 text-text-muted hover:text-accent-purple transition-colors mb-8 text-xs font-bold uppercase tracking-widest group">
         <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
         Back to Learning
@@ -77,7 +87,7 @@ const Quiz = () => {
               {[
                 { id: 'Beginner', desc: 'Basic terminology and dates', color: 'bg-accent-green' },
                 { id: 'Intermediate', desc: 'Rules, procedures, and rights', color: 'bg-accent-purple' },
-                { id: 'Expert', desc: 'Deep-dive legislative details', color: 'bg-orange-500' }
+                { id: 'Expert', desc: 'Deep-dive legislative details', color: 'bg-accent-warning' }
               ].map((tier) => (
                 <button
                   key={tier.id}
@@ -155,11 +165,11 @@ const Quiz = () => {
                   </p>
                 </div>
                 {filteredQuestions[currentQuestion].funFact && (
-                  <div className="p-4 bg-amber-500/5 rounded-2xl border border-amber-500/10 mb-6">
-                    <h4 className="text-[10px] font-black text-amber-400 uppercase tracking-[0.2em] mb-1.5 flex items-center gap-2">
+                  <div className="p-4 bg-accent-warning/5 rounded-2xl border border-accent-warning/10 mb-6">
+                    <h4 className="text-[10px] font-black text-accent-warning uppercase tracking-[0.2em] mb-1.5 flex items-center gap-2">
                       💡 Did you know?
                     </h4>
-                    <p className="text-sm text-amber-200/80 leading-relaxed">
+                    <p className="text-sm text-accent-warning/80 leading-relaxed">
                       {filteredQuestions[currentQuestion].funFact}
                     </p>
                   </div>

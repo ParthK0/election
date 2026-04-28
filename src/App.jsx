@@ -1,6 +1,8 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import OnboardingModal from './components/OnboardingModal';
+import AuthModal from './components/AuthModal';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Shield } from 'lucide-react';
 
@@ -87,6 +89,8 @@ export default function App() {
       <ScrollToTop />
       <div className="min-h-screen bg-dark-surface text-text-primary font-inter flex flex-col">
         <Navbar />
+        <OnboardingModal />
+        <AuthModal />
         <main className="flex-grow pt-20">
           <AnimatedRoutes />
         </main>

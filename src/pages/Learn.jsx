@@ -7,9 +7,10 @@ import { Link } from 'react-router-dom';
 import { PhaseCardSkeleton } from '../components/Skeleton';
 import VoterChecklist from '../components/VoterChecklist';
 import CountdownTimer from '../components/CountdownTimer';
+import { Helmet } from 'react-helmet-async';
 
 const Learn = () => {
-  const { electionData, currentPhase, setCurrentPhase, country } = useElection();
+  const { electionData, currentPhase, setCurrentPhase, country, subCategory, setSubCategory } = useElection();
 
   if (!electionData) {
     return (
@@ -31,15 +32,41 @@ const Learn = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-12">
+      <Helmet>
+        <title>{electionData.electionName} Guide | ElectIQ</title>
+        <meta name="description" content={`Complete guide to the ${electionData.electionName} electoral process. Understand phases, candidate obligations, and voter procedures.`} />
+      </Helmet>
       <header className="mb-12">
-        <div className="flex items-center gap-2 text-purple text-sm font-semibold mb-3">
+        <div className="flex items-center gap-2 text-accent-purple text-sm font-semibold mb-3">
           <MapPin className="w-4 h-4" />
           {country.charAt(0).toUpperCase() + country.slice(1)}
         </div>
-        <h1 className="text-4xl lg:text-5xl font-extrabold text-dark mb-3 tracking-tight">
-          {electionData.electionName}
-        </h1>
-        <p className="text-text-muted text-lg max-w-2xl">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-3">
+          <h1 className="text-4xl lg:text-5xl font-extrabold text-white tracking-tight font-display">
+            {electionData.electionName}
+          </h1>
+          {country === 'india' && (
+            <div className="bg-dark-card border border-dark-border p-1 rounded-xl inline-flex shadow-premium">
+              <button
+                onClick={() => setSubCategory('loksabha')}
+                className={`px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${
+                  subCategory === 'loksabha' ? 'bg-accent-purple text-white shadow-md' : 'text-text-muted hover:text-white'
+                }`}
+              >
+                Lok Sabha
+              </button>
+              <button
+                onClick={() => setSubCategory('rajyasabha')}
+                className={`px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${
+                  subCategory === 'rajyasabha' ? 'bg-accent-purple text-white shadow-md' : 'text-text-muted hover:text-white'
+                }`}
+              >
+                Rajya Sabha
+              </button>
+            </div>
+          )}
+        </div>
+        <p className="text-text-muted text-sm max-w-2xl leading-relaxed">
           Complete guide to the electoral process. Select a phase to see details.
         </p>
       </header>
@@ -56,25 +83,23 @@ const Learn = () => {
         />
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-10">
+      <div className="grid lg:grid-cols-[1fr_260px] gap-10 items-start">
         {/* Phase Cards */}
-        <div className="lg:col-span-2">
-          <div className="grid sm:grid-cols-2 gap-5">
-            <AnimatePresence mode="popLayout">
-              {electionData.phases.map((phase) => (
-                <PhaseCard 
-                  key={phase.id} 
-                  phase={phase} 
-                  isActive={currentPhase === phase.id}
-                  onClick={() => setCurrentPhase(phase.id)}
-                />
-              ))}
-            </AnimatePresence>
-          </div>
+        <div className="grid sm:grid-cols-2 gap-5">
+          <AnimatePresence mode="popLayout">
+            {electionData.phases.map((phase) => (
+              <PhaseCard 
+                key={phase.id} 
+                phase={phase} 
+                isActive={currentPhase === phase.id}
+                onClick={() => setCurrentPhase(phase.id)}
+              />
+            ))}
+          </AnimatePresence>
         </div>
 
         {/* Sidebar */}
-        <div className="space-y-6">
+        <div className="space-y-6 sticky top-24">
           {/* Voter Checklist */}
           <VoterChecklist />
 

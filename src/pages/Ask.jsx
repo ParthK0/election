@@ -2,12 +2,14 @@ import { useElection } from '../context/ElectionContext';
 import { useChat } from '../context/ChatContext';
 import ChatAssistant from '../components/ChatAssistant';
 import QuickPrompts from '../components/QuickPrompts';
+import { checklistData } from '../components/VoterChecklist';
 import { askGemini } from '../api/gemini';
 import { useState } from 'react';
 import { Sparkles, ShieldCheck, MapPin } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 
 const Ask = () => {
-  const { country, currentPhase, role } = useElection();
+  const { country, currentPhase, role, checklist } = useElection();
   const { setChatHistory } = useChat();
   const [isProcessing, setIsProcessing] = useState(false);
 
@@ -16,7 +18,15 @@ const Ask = () => {
     setChatHistory(prev => [...prev, { role: 'user', content: prompt }]);
     setIsProcessing(true);
     try {
-      const response = await askGemini(prompt, { country, currentPhase, role });
+      const items = checklistData[country] || [];
+      const completedItems = items.filter(i => checklist[i.id]).map(i => i.text);
+      const remainingItems = items.filter(i => !checklist[i.id]).map(i => i.text);
+      
+      const contextData = { 
+        country, currentPhase, role, 
+        checklist: { completed: completedItems, remaining: remainingItems } 
+      };
+      const response = await askGemini(prompt, contextData);
       setChatHistory(prev => [...prev, { role: 'bot', content: response }]);
     } catch (error) {
       console.error(error);
@@ -27,6 +37,10 @@ const Ask = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-12">
+      <Helmet>
+        <title>Ask AI | ElectIQ</title>
+        <meta name="description" content={`Consult our AI assistant for specific questions regarding the ${country} election rules, candidates, and procedures.`} />
+      </Helmet>
       <div className="grid lg:grid-cols-4 gap-10">
         {/* Sidebar */}
         <div className="lg:col-span-1 space-y-8 hidden lg:block">
@@ -39,7 +53,7 @@ const Ask = () => {
               Election Assistant
             </h1>
             <p className="text-sm text-text-muted leading-relaxed">
-              Get instant answers about {country}'s electoral processes. Powered by Gemini AI.
+              Get instant answers about {country.charAt(0).toUpperCase() + country.slice(1)}'s electoral processes. Powered by Gemini AI.
             </p>
           </div>
 

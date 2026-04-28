@@ -1,40 +1,25 @@
 import { useState } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useElection } from '../context/ElectionContext';
 import CountrySelector from '../components/CountrySelector';
+import CursorGlow from '../components/CursorGlow';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles, Clock, Shield, Vote, Users, CheckCircle, Database, Zap } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
   const { setRole, role, country, electionData, currentPhase } = useElection();
 
-  // Mouse tracking for premium glow effect
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const springX = useSpring(mouseX, { stiffness: 50, damping: 20 });
-  const springY = useSpring(mouseY, { stiffness: 50, damping: 20 });
-
-  function handleMouseMove({ currentTarget, clientX, clientY }) {
-    const { left, top } = currentTarget.getBoundingClientRect();
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
-  }
-
   return (
-    <div 
-      className="relative min-h-screen flex flex-col lg:flex-row overflow-hidden bg-dark-surface -mt-20"
-      onMouseMove={handleMouseMove}
-    >
-      {/* Dynamic Cursor Glow */}
-      <motion.div 
-        className="pointer-events-none absolute -inset-px z-30 transition-opacity duration-300 opacity-0 lg:group-hover:opacity-100"
-        style={{
-          background: `radial-gradient(600px circle at ${springX}px ${springY}px, rgba(139, 92, 246, 0.07), transparent 80%)`,
-        }}
-      />
+    <div className="relative min-h-screen flex flex-col lg:flex-row overflow-hidden bg-dark-surface -mt-20">
+      <Helmet>
+        <title>ElectIQ — Premium AI Election Intelligence</title>
+        <meta name="description" content="The ultimate civic toolkit. Navigate registration, candidates, and voting procedures with precision." />
+      </Helmet>
+      <CursorGlow />
       
       {/* LEFT HALF: Moody Purple/Black Hero */}
-      <div className="relative w-full lg:w-[55%] hero-gradient min-h-[70vh] lg:min-h-screen flex items-center px-8 lg:px-20 py-20 z-10 animate-gradient">
+      <div className="relative w-full lg:w-[50%] hero-gradient min-h-[70vh] lg:min-h-screen flex items-center px-8 lg:px-20 py-20 z-10 animate-gradient" style={{ background: 'radial-gradient(circle at top left, rgba(139,92,246,0.1), transparent 70%)' }}>
         {/* Giant Watermark - Even more subtle on dark */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
           <span className="text-[200px] lg:text-[400px] font-black text-white/[0.03] select-none tracking-tighter leading-none transform -rotate-12 translate-y-20">
@@ -51,7 +36,7 @@ const Home = () => {
             <div className="px-3 py-1 bg-accent-purple/10 backdrop-blur-md border border-accent-purple/20 rounded-full flex items-center gap-2">
               <div className="w-2 h-2 bg-accent-green rounded-full animate-pulse"></div>
               <span className="text-[10px] font-bold text-accent-purple uppercase tracking-widest">
-                {country.toUpperCase()} Election Intelligence Active
+                {country.charAt(0).toUpperCase() + country.slice(1)} Election Intelligence Active
               </span>
             </div>
           </motion.div>
@@ -101,16 +86,16 @@ const Home = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="flex flex-wrap items-center gap-x-10 gap-y-6 pt-8 border-t border-white/5"
+            className="flex flex-wrap items-center gap-x-8 gap-y-4 pt-8 border-t border-white/5"
           >
             {[
-              { icon: CheckCircle, label: "AI Verified Data" },
-              { icon: Database, label: "Official Sources" },
-              { icon: Zap, label: "Real-time Sync" }
+              { label: "AI Verified Data" },
+              { label: "Official Sources" },
+              { label: "Real-time Sync" }
             ].map((stat, i) => (
-              <div key={i} className="flex items-center gap-2.5">
-                <stat.icon className="w-4 h-4 text-accent-purple/60" />
-                <span className="text-[10px] font-bold text-text-muted uppercase tracking-[0.2em]">{stat.label}</span>
+              <div key={i} className="flex items-center gap-2">
+                <CheckCircle className="w-4 h-4 text-accent-green" />
+                <span className="text-[11px] font-medium text-text-muted">{stat.label}</span>
               </div>
             ))}
           </motion.div>
@@ -118,76 +103,11 @@ const Home = () => {
       </div>
 
       {/* RIGHT HALF: Deep Dark UI Panels */}
-      <div className="relative w-full lg:w-[45%] bg-dark-surface min-h-screen p-8 lg:p-20 flex flex-col justify-center gap-12 overflow-visible">
+      <div className="relative w-full lg:w-[50%] bg-dark-surface min-h-screen p-8 lg:p-20 flex flex-col justify-center gap-12 overflow-visible">
         
-        {/* Slanted Card Grid */}
-        <div className="relative w-full max-w-xl mx-auto flex flex-col gap-6">
-          
-          <motion.div
-            initial={{ opacity: 0, rotate: -5, x: 50 }}
-            animate={{ opacity: 1, rotate: -2, x: 0 }}
-            transition={{ type: 'spring', damping: 20 }}
-            whileHover={{ rotate: 0, scale: 1.02, y: -5 }}
-            className="dark-card p-6 shadow-premium z-30"
-          >
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-muted">Election Progress</h3>
-              <Clock className="w-4 h-4 text-accent-purple" />
-            </div>
-            <div className="space-y-4">
-              <div className="flex justify-between text-[10px] font-mono">
-                <span className="text-white">{electionData?.phases?.find(p => p.id === currentPhase)?.label || 'Current Phase'}</span>
-                <span className="text-accent-purple">{electionData?.phases ? `${Math.round(((electionData.phases.findIndex(p => p.id === currentPhase) + 1) / electionData.phases.length) * 100)}%` : '—'}</span>
-              </div>
-              <div className="h-1.5 w-full bg-dark-border rounded-full overflow-hidden">
-                <motion.div 
-                  initial={{ width: 0 }}
-                  animate={{ width: electionData?.phases ? `${((electionData.phases.findIndex(p => p.id === currentPhase) + 1) / electionData.phases.length) * 100}%` : '0%' }}
-                  className="h-full bg-accent-purple shadow-[0_0_10px_rgba(139,92,246,0.5)]"
-                ></motion.div>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, rotate: 5, x: 50 }}
-            animate={{ opacity: 1, rotate: 1.5, x: 0 }}
-            transition={{ type: 'spring', damping: 20, delay: 0.1 }}
-            whileHover={{ rotate: 0, scale: 1.02, y: -5 }}
-            className="dark-card p-6 shadow-premium self-end w-[85%] z-40 -mt-8 -mr-8 border-accent-purple/20 bg-dark-card-2"
-          >
-            <div className="flex gap-4 items-start">
-              <div className="w-9 h-9 rounded-full bg-accent-purple/20 border border-accent-purple/40 flex items-center justify-center shrink-0">
-                <Sparkles className="w-4 h-4 text-accent-purple" />
-              </div>
-              <div className="space-y-1">
-                <p className="text-[10px] font-bold text-accent-purple uppercase tracking-widest">Assistant</p>
-                <p className="text-xs text-text-primary leading-relaxed opacity-90">
-                  "Your nomination package requires 10 proposers from your specific assembly constituency."
-                </p>
-              </div>
-            </div>
-          </motion.div>
-
-          <div className="grid grid-cols-2 gap-4 z-20">
-            <div className="dark-card p-5 bg-dark-card flex flex-col gap-1">
-              <span className="text-[9px] font-bold text-text-muted uppercase tracking-[0.2em]">Phases</span>
-              <span className="text-2xl font-extrabold text-white font-display tracking-tight">{electionData?.phases?.length || '—'}</span>
-              <span className="text-[9px] text-accent-green font-bold flex items-center gap-1 uppercase tracking-widest">
-                <Shield className="w-2.5 h-2.5" /> Tracked
-              </span>
-            </div>
-            <div className="dark-card p-5 bg-dark-card-2 border-accent-purple/20 flex flex-col gap-1">
-              <span className="text-[9px] font-bold text-accent-purple uppercase tracking-[0.2em]">Next Election</span>
-              <span className="text-2xl font-extrabold text-white font-display tracking-tight">{electionData?.targetDate ? new Date(electionData.targetDate).getFullYear() : '—'}</span>
-              <span className="text-[9px] font-mono text-text-muted">COUNTDOWN SYNCED</span>
-            </div>
-          </div>
-        </div>
-
         {/* Role Selector */}
-        <div className="mt-8 space-y-4">
-          <p className="text-[10px] font-bold text-accent-purple uppercase tracking-[0.2em] text-center">Choose Your Perspective</p>
+        <div className="space-y-4 w-full max-w-xl mx-auto z-50">
+          <p className="text-[10px] font-bold text-accent-purple uppercase tracking-[0.2em]">Choose Your Perspective</p>
           <div className="flex gap-3">
             {[
               { id: 'voter', label: 'Voter', icon: Users, sub: 'Dates & Procedures' },
@@ -210,20 +130,75 @@ const Home = () => {
           </div>
         </div>
 
-      </div>
+        {/* Slanted Card Grid */}
+        <div className="relative w-full max-w-xl mx-auto flex flex-col gap-6">
+          
+          <motion.div
+            key={`progress-${role}`}
+            initial={{ opacity: 0, rotate: -5, x: 50 }}
+            animate={{ opacity: 1, rotate: -2, x: 0 }}
+            transition={{ type: 'spring', damping: 20 }}
+            whileHover={{ rotate: 0, scale: 1.02, y: -5 }}
+            className="dark-card p-6 shadow-premium z-30"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-muted">
+                {role === 'candidate' ? 'Campaign Progress' : 'Election Progress'}
+              </h3>
+              <Clock className="w-4 h-4 text-accent-purple" />
+            </div>
 
-      {/* Floating Region Selector */}
-      <div className="absolute top-6 left-1/2 -translate-x-1/2 z-50">
-        <div className="bg-dark-card/60 backdrop-blur-xl border border-dark-border px-4 py-2 rounded-full flex items-center gap-3 shadow-2xl">
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] font-bold text-white tracking-widest">{country.toUpperCase()}</span>
-            <div className="w-1.5 h-1.5 rounded-full bg-accent-green shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
-          </div>
-          <div className="w-px h-3 bg-dark-border"></div>
-          <CountrySelector />
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <span className="text-2xl font-extrabold text-white font-display tracking-tight mr-3">{electionData?.phases?.length || '—'} Phases</span>
+                <span className="text-[10px] text-accent-green font-bold uppercase tracking-widest"><Shield className="w-3 h-3 inline-block -mt-0.5" /> Tracked</span>
+              </div>
+              <div className="text-right">
+                <span className="text-[10px] font-bold text-accent-purple uppercase tracking-[0.2em] block">Next Election</span>
+                <span className="text-xl font-bold text-white">{electionData?.targetDate ? new Date(electionData.targetDate).getFullYear() : '—'}</span>
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <div className="flex justify-between text-[10px] font-mono">
+                <span className="text-white">{electionData?.phases?.find(p => p.id === currentPhase)?.label || 'Current Phase'}</span>
+                <span className="text-accent-purple">{electionData?.phases ? `${Math.round(((electionData.phases.findIndex(p => p.id === currentPhase) + 1) / electionData.phases.length) * 100)}%` : '—'}</span>
+              </div>
+              <div className="h-1.5 w-full bg-dark-border rounded-full overflow-hidden">
+                <motion.div 
+                  initial={{ width: 0 }}
+                  animate={{ width: electionData?.phases ? `${((electionData.phases.findIndex(p => p.id === currentPhase) + 1) / electionData.phases.length) * 100}%` : '0%' }}
+                  className="h-full bg-accent-purple shadow-[0_0_10px_rgba(139,92,246,0.5)]"
+                ></motion.div>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            key={`assistant-${role}`}
+            initial={{ opacity: 0, rotate: 5, x: 50 }}
+            animate={{ opacity: 1, rotate: 1.5, x: 0 }}
+            transition={{ type: 'spring', damping: 20, delay: 0.1 }}
+            whileHover={{ rotate: 0, scale: 1.02, y: -5 }}
+            className="dark-card p-6 shadow-premium self-end w-[85%] z-40 -mt-8 -mr-8 border-accent-purple/20 bg-dark-card-2"
+          >
+            <div className="flex gap-4 items-start">
+              <div className="w-9 h-9 rounded-full bg-accent-purple/20 border border-accent-purple/40 flex items-center justify-center shrink-0">
+                <Sparkles className="w-4 h-4 text-accent-purple" />
+              </div>
+              <div className="space-y-1">
+                <p className="text-[10px] font-bold text-accent-purple uppercase tracking-widest">Assistant</p>
+                <p className="text-xs text-text-primary leading-relaxed opacity-90">
+                  {role === 'candidate' 
+                    ? '"Your nomination package requires 10 proposers from your specific assembly constituency."'
+                    : '"Don\'t forget to bring your EPIC card or a valid government ID to the polling booth."'}
+                </p>
+              </div>
+            </div>
+          </motion.div>
         </div>
-      </div>
 
+      </div>
     </div>
   );
 };
