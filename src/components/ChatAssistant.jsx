@@ -2,12 +2,13 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { useElection } from '../context/ElectionContext';
 import { useChat } from '../context/ChatContext';
 import { askGemini } from '../api/gemini';
-import { Send, User, Sparkles, Trash2, AlertCircle, MessageCircle, ThumbsUp, ThumbsDown, BookOpen, Brain } from 'lucide-react';
+import { checklistData } from './VoterChecklist';
+import { Send, User, Sparkles, Trash2, AlertCircle, MessageCircle, ThumbsUp, ThumbsDown, BookOpen, Brain, X, Volume2, Square } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 
 const ChatAssistant = () => {
-  const { country, currentPhase, role } = useElection();
+  const { country, currentPhase, role, checklist } = useElection();
   const { 
     chatHistory, setChatHistory, 
     isLoading, setIsLoading, 
@@ -18,13 +19,26 @@ const ChatAssistant = () => {
   const [input, setInput] = useState('');
   const [displayedText, setDisplayedText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const messagesEndRef = useRef(null);
+  const [speakingIndex, setSpeakingIndex] = useState(null);
+  const scrollContainerRef = useRef(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({
+        top: scrollContainerRef.current.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
   };
 
   useEffect(() => { scrollToBottom(); }, [chatHistory, isLoading, displayedText]);
+
+  // Clean up speech synthesis on unmount
+  useEffect(() => {
+    return () => {
+      window.speechSynthesis.cancel();
+    };
+  }, []);
 
   const typeText = useCallback((fullText, onComplete) => {
     setIsTyping(true);
@@ -54,7 +68,16 @@ const ChatAssistant = () => {
     setError(null);
 
     try {
-      const response = await askGemini(finalInput, { country, currentPhase, role }, chatHistory);
+      const items = checklistData[country] || [];
+      const completedItems = items.filter(i => checklist[i.id]).map(i => i.text);
+      const remainingItems = items.filter(i => !checklist[i.id]).map(i => i.text);
+
+      const contextData = { 
+        country, currentPhase, role, 
+        checklist: { completed: completedItems, remaining: remainingItems } 
+      };
+      
+      const response = await askGemini(finalInput, contextData, chatHistory);
       typeText(response, () => {
         setChatHistory(prev => [...prev, { role: 'bot', content: response, timestamp: new Date().toISOString() }]);
       });
@@ -76,6 +99,23 @@ const ChatAssistant = () => {
   const handleELI5 = () => {
     const eli5Prompt = `Explain the ${currentPhase} phase in ${country} to me like I'm 10 years old. Keep it very simple and use analogies.`;
     handleSubmit(null, eli5Prompt);
+  };
+
+  const handleSpeech = (text, index) => {
+    if (speakingIndex === index) {
+      window.speechSynthesis.cancel();
+      setSpeakingIndex(null);
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    
+    utterance.onend = () => setSpeakingIndex(null);
+    utterance.onerror = () => setSpeakingIndex(null);
+    
+    setSpeakingIndex(index);
+    window.speechSynthesis.speak(utterance);
   };
 
   const getSourceLinks = (content) => {
@@ -100,7 +140,25 @@ const ChatAssistant = () => {
   };
 
   return (
-    <div className="flex flex-col h-[650px] bg-dark-surface border border-dark-border rounded-2xl overflow-hidden shadow-premium">
+    <div className="flex flex-col h-[650px] bg-dark-surface border border-dark-border rounded-2xl overflow-hidden shadow-premium relative">
+      {/* Toast Error */}
+      <AnimatePresence>
+        {error && (
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="absolute top-20 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 text-red-400 text-xs bg-red-400/10 p-3 rounded-xl border border-red-400/20 shadow-2xl backdrop-blur-md"
+          >
+            <AlertCircle className="w-4 h-4" /> 
+            <span>{error}</span>
+            <button onClick={() => setError(null)} className="ml-2 hover:bg-red-400/20 p-1 rounded-md transition-colors">
+              <X className="w-3 h-3" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Header */}
       <div className="px-6 py-4 flex items-center justify-between border-b border-dark-border bg-dark-card/50 backdrop-blur-md">
         <div className="flex items-center gap-3">
@@ -133,7 +191,10 @@ const ChatAssistant = () => {
       </div>
 
       {/* Messages */}
-      <div className="flex-grow overflow-y-auto p-6 space-y-6 custom-scrollbar bg-[radial-gradient(circle_at_top,rgba(124,58,237,0.03),transparent)]">
+      <div 
+        ref={scrollContainerRef}
+        className="flex-grow overflow-y-auto p-6 space-y-6 custom-scrollbar bg-[radial-gradient(circle_at_top,rgba(124,58,237,0.03),transparent)]"
+      >
         {chatHistory.length === 0 && !isTyping && (
           <div className="h-full flex flex-col items-center justify-center text-center">
             <div className="w-16 h-16 bg-dark-card border border-dark-border rounded-2xl flex items-center justify-center mb-6 shadow-premium">
@@ -141,16 +202,21 @@ const ChatAssistant = () => {
             </div>
             <h4 className="text-xl font-bold text-white mb-2 font-display">How can I guide you?</h4>
             <p className="text-sm text-text-muted max-w-xs mx-auto">
-              Ask about registration deadlines, candidate rules, or voting procedures in {country}.
+              Ask about registration deadlines, candidate rules, or voting procedures in {country.charAt(0).toUpperCase() + country.slice(1)}.
             </p>
-            <div className="grid grid-cols-2 gap-3 mt-8">
-              {['Registration steps', 'Candidate rules', 'Polling day ID', 'EVM Security'].map(q => (
+            <div className="flex flex-col gap-3 mt-8 w-full max-w-sm">
+              {[
+                'What are the rules for campaigning?', 
+                'How do I check my polling booth?', 
+                'Explain the counting process'
+              ].map(q => (
                 <button 
                   key={q}
                   onClick={() => handleSubmit(null, q)}
-                  className="px-4 py-2 bg-dark-card border border-dark-border rounded-xl text-xs text-text-primary hover:border-accent-purple/50 transition-colors"
+                  className="px-4 py-3 bg-dark-card border border-dark-border rounded-xl text-xs text-text-primary hover:border-accent-purple/50 hover:bg-accent-purple/5 transition-all w-full text-left flex justify-between items-center group"
                 >
                   {q}
+                  <Send className="w-3 h-3 text-text-muted opacity-0 group-hover:opacity-100 transition-opacity" />
                 </button>
               ))}
             </div>
@@ -198,10 +264,17 @@ const ChatAssistant = () => {
                       className="flex items-center justify-between gap-4 px-2"
                     >
                       <div className="flex gap-2">
-                        <button className="text-text-muted hover:text-accent-green transition-colors p-1 rounded hover:bg-accent-green/10">
+                        <button 
+                          onClick={() => handleSpeech(msg.content, i)}
+                          className={`p-1 rounded transition-colors ${speakingIndex === i ? 'text-accent-purple bg-accent-purple/10' : 'text-text-muted hover:text-white hover:bg-white/10'}`}
+                          title={speakingIndex === i ? "Stop speaking" : "Read aloud"}
+                        >
+                          {speakingIndex === i ? <Square className="w-3 h-3" /> : <Volume2 className="w-3 h-3" />}
+                        </button>
+                        <button className="text-text-muted hover:text-accent-green transition-colors p-1 rounded hover:bg-accent-green/10" title="Helpful">
                           <ThumbsUp className="w-3 h-3" />
                         </button>
-                        <button className="text-text-muted hover:text-red-400 transition-colors p-1 rounded hover:bg-red-400/10">
+                        <button className="text-text-muted hover:text-red-400 transition-colors p-1 rounded hover:bg-red-400/10" title="Not helpful">
                           <ThumbsDown className="w-3 h-3" />
                         </button>
                       </div>
@@ -253,12 +326,7 @@ const ChatAssistant = () => {
       </div>
 
       {/* Input */}
-      <form onSubmit={handleSubmit} className="p-6 bg-dark-card/50 border-t border-dark-border">
-        {error && (
-          <div className="mb-4 flex items-center gap-2 text-red-400 text-xs bg-red-400/10 p-3 rounded-xl border border-red-400/20">
-            <AlertCircle className="w-4 h-4" /> {error}
-          </div>
-        )}
+      <form onSubmit={handleSubmit} className="p-6 bg-dark-card/50 border-t border-dark-border mt-auto">
         <div className="relative flex items-center gap-3 bg-dark-surface border border-dark-border rounded-xl p-2 focus-within:border-accent-purple transition-all shadow-premium">
           <input
             type="text"

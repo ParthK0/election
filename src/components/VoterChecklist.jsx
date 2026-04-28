@@ -1,9 +1,10 @@
 import { useElection } from '../context/ElectionContext';
 import { CheckSquare, Square, ListChecks, Share2, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import confetti from 'canvas-confetti';
 
-const checklistData = {
+export const checklistData = {
   india: [
     { id: 'in-1', text: 'Check name in voter list' },
     { id: 'in-2', text: 'Get Voter ID (EPIC) card' },
@@ -28,6 +29,22 @@ const VoterChecklist = () => {
   const items = checklistData[country] || [];
   const completed = items.filter(item => checklist[item.id]).length;
   const progress = items.length > 0 ? (completed / items.length) * 100 : 0;
+  const [hasFiredConfetti, setHasFiredConfetti] = useState(false);
+
+  useEffect(() => {
+    if (progress === 100 && !hasFiredConfetti) {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#7c3aed', '#10b981', '#ffffff'],
+        zIndex: 1000
+      });
+      setHasFiredConfetti(true);
+    } else if (progress < 100) {
+      setHasFiredConfetti(false);
+    }
+  }, [progress, hasFiredConfetti]);
 
   const handleShare = () => {
     const completedItems = items.filter(item => checklist[item.id]).map(i => `[x] ${i.text}`);
