@@ -49,11 +49,20 @@ app.post('/api/chat', async (req, res) => {
   try {
     const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
+    let checklistText = 'No checklist data provided.';
+    if (context?.checklist) {
+      const { completed, remaining } = context.checklist;
+      checklistText = `
+  Completed Actions: ${completed?.length ? completed.join(', ') : 'None'}
+  Remaining Actions: ${remaining?.length ? remaining.join(', ') : 'None'}`;
+    }
+
     const contextBlock = `
 Current context:
 - Country: ${context?.country || 'Global'}
 - Current Phase: ${context?.currentPhase || 'Overview'}
-- User role: ${context?.role || 'Voter'}`;
+- User role: ${context?.role || 'Voter'}
+- Checklist Progress: ${checklistText}`;
 
     const contents = [
       { role: 'user', parts: [{ text: SYSTEM_PROMPT + contextBlock }] },
