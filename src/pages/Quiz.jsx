@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useElection } from '../context/ElectionContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, XCircle, Trophy, ArrowLeft, RefreshCcw, Sparkles } from 'lucide-react';
+import { CheckCircle2, XCircle, Trophy, ArrowLeft, RefreshCcw, Sparkles, HelpCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
+import { Helmet } from 'react-helmet-async';
 import EmptyState from '../components/EmptyState';
-import { HelpCircle } from 'lucide-react';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../lib/firebase';
 
 const Quiz = () => {
   const { electionData, country } = useElection();
@@ -39,12 +40,29 @@ const Quiz = () => {
     if (index === filteredQuestions[currentQuestion].answer) setScore(score + 1);
   };
 
+  const saveScore = async (finalScore) => {
+    if (!db) return;
+    try {
+      await addDoc(collection(db, 'quizScores'), {
+        score: finalScore,
+        total: filteredQuestions.length,
+        difficulty,
+        country,
+        timestamp: new Date()
+      });
+      console.log('Quiz score securely saved to Firestore.');
+    } catch (error) {
+      console.error('Failed to save quiz score to Firestore:', error);
+    }
+  };
+
   const handleNext = () => {
     if (currentQuestion + 1 < filteredQuestions.length) {
       setCurrentQuestion(currentQuestion + 1);
       setSelectedOption(null);
     } else {
       setShowResult(true);
+      saveScore(score + (selectedOption === filteredQuestions[currentQuestion].answer ? 1 : 0));
     }
   };
 

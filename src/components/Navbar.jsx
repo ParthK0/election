@@ -51,7 +51,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-[100] px-6 transition-all duration-300 pointer-events-none ${isScrolled ? 'py-3 bg-dark-surface/80 backdrop-blur-2xl border-b border-dark-border/50 shadow-2xl' : 'py-4'}`}>
+      <nav aria-label="Main Navigation" className={`fixed top-0 left-0 right-0 z-[100] px-6 transition-all duration-300 pointer-events-none ${isScrolled ? 'py-3 bg-dark-surface/80 backdrop-blur-2xl border-b border-dark-border/50 shadow-2xl' : 'py-4'}`}>
         <div className="max-w-7xl mx-auto flex justify-between items-center pointer-events-auto relative">
           
           {/* Logo */}
@@ -65,7 +65,7 @@ const Navbar = () => {
           </Link>
 
           {/* Navigation Pill — Desktop Only */}
-          <div className="hidden lg:flex items-center mx-auto bg-dark-card/60 backdrop-blur-2xl border border-dark-border p-1.5 rounded-full shadow-2xl">
+          <div aria-label="Desktop Navigation Links" className="hidden lg:flex items-center mx-auto bg-dark-card/60 backdrop-blur-2xl border border-dark-border p-1.5 rounded-full shadow-2xl">
             {navItems.map((item) => {
               const isActive = location.pathname === item.path;
               return (
@@ -212,7 +212,7 @@ const Navbar = () => {
               </div>
 
               {/* Nav Links */}
-              <div className="flex-1 p-6 space-y-2">
+              <nav aria-label="Mobile Navigation Links" className="flex-1 p-6 space-y-2">
                 {navItems.map((item, i) => {
                   const isActive = location.pathname === item.path;
                   return (
@@ -252,7 +252,7 @@ const Navbar = () => {
                     Quiz
                   </Link>
                 </motion.div>
-              </div>
+              </nav>
 
               {/* Drawer Footer */}
               <div className="p-6 border-t border-dark-border space-y-4">

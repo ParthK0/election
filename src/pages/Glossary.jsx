@@ -5,6 +5,37 @@ import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 
+const GlossaryItem = ({ item }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <details 
+      className="group bg-dark-card border border-dark-border rounded-xl overflow-hidden [&_summary::-webkit-details-marker]:hidden"
+      onToggle={(e) => setIsOpen(e.currentTarget.open)}
+    >
+      <summary 
+        className="flex items-center justify-between p-4 cursor-pointer hover:bg-dark-card-2 transition-colors"
+        aria-expanded={isOpen}
+      >
+        <div className="flex items-center gap-3">
+          <h3 className="text-sm font-bold text-white group-hover:text-accent-purple transition-colors">{item.term}</h3>
+          {item.category && (
+            <span className="px-2 py-0.5 bg-accent-purple/10 text-accent-purple text-[9px] font-bold uppercase tracking-widest rounded-md">
+              {item.category}
+            </span>
+          )}
+        </div>
+        <div className="text-text-muted transform transition-transform group-open:rotate-180">
+          ▼
+        </div>
+      </summary>
+      <div className="p-4 pt-0 border-t border-dark-border/50 text-text-muted text-sm leading-relaxed bg-dark-card-2/50">
+        <p className="mb-4">{item.definition}</p>
+        <GlossaryChip term={item.term} />
+      </div>
+    </details>
+  );
+};
+
 const Glossary = () => {
   const { electionData, country } = useElection();
   const [search, setSearch] = useState('');
@@ -120,28 +151,7 @@ const Glossary = () => {
                 </div>
                 <div className="space-y-3">
                   {groupedGlossary[letter].map((item) => (
-                    <details 
-                      key={item.term}
-                      className="group bg-dark-card border border-dark-border rounded-xl overflow-hidden [&_summary::-webkit-details-marker]:hidden"
-                    >
-                      <summary className="flex items-center justify-between p-4 cursor-pointer hover:bg-dark-card-2 transition-colors">
-                        <div className="flex items-center gap-3">
-                          <h3 className="text-sm font-bold text-white group-hover:text-accent-purple transition-colors">{item.term}</h3>
-                          {item.category && (
-                            <span className="px-2 py-0.5 bg-accent-purple/10 text-accent-purple text-[9px] font-bold uppercase tracking-widest rounded-md">
-                              {item.category}
-                            </span>
-                          )}
-                        </div>
-                        <div className="text-text-muted transform transition-transform group-open:rotate-180">
-                          ▼
-                        </div>
-                      </summary>
-                      <div className="p-4 pt-0 border-t border-dark-border/50 text-text-muted text-sm leading-relaxed bg-dark-card-2/50">
-                        <p className="mb-4">{item.definition}</p>
-                        <GlossaryChip term={item.term} />
-                      </div>
-                    </details>
+                    <GlossaryItem key={item.term} item={item} />
                   ))}
                 </div>
               </motion.div>

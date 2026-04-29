@@ -36,14 +36,14 @@ const Ask = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-12">
+    <main className="max-w-6xl mx-auto px-6 py-12">
       <Helmet>
         <title>Ask AI | ElectIQ</title>
         <meta name="description" content={`Consult our AI assistant for specific questions regarding the ${country} election rules, candidates, and procedures.`} />
       </Helmet>
       <div className="grid lg:grid-cols-4 gap-10">
         {/* Sidebar */}
-        <div className="lg:col-span-1 space-y-8 hidden lg:block">
+        <aside className="lg:col-span-1 space-y-8 hidden lg:block" aria-label="Election Context">
           <div>
             <div className="flex items-center gap-2 text-purple text-sm font-semibold mb-3">
               <Sparkles className="w-4 h-4" />
@@ -88,14 +88,14 @@ const Ask = () => {
               Strictly educational. No political opinions or candidate recommendations.
             </p>
           </div>
-        </div>
+        </aside>
 
         {/* Chat */}
-        <div className="lg:col-span-3">
+        <section className="lg:col-span-3" aria-label="AI Chat Interface">
           <ChatAssistant />
-        </div>
+        </section>
       </div>
-    </div>
+    </main>
   );
 };
 

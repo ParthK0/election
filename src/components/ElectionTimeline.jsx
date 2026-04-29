@@ -14,6 +14,7 @@ const ElectionTimeline = ({ phases, currentPhaseId, onPhaseClick }) => {
               <div 
                 className="flex flex-col items-center gap-2 cursor-pointer group"
                 onClick={() => onPhaseClick(phase.id)}
+                aria-current={isActive ? 'step' : undefined}
               >
                 <div className="relative">
                   {isActive && (

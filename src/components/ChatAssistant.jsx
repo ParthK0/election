@@ -6,6 +6,7 @@ import { checklistData } from './VoterChecklist';
 import { Send, User, Sparkles, Trash2, AlertCircle, MessageCircle, ThumbsUp, ThumbsDown, BookOpen, Brain, X, Volume2, Square } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
+import DOMPurify from 'dompurify';
 
 const ChatAssistant = () => {
   const { country, currentPhase, role, checklist } = useElection();
@@ -21,9 +22,12 @@ const ChatAssistant = () => {
   const [isTyping, setIsTyping] = useState(false);
   const [speakingIndex, setSpeakingIndex] = useState(null);
   const scrollContainerRef = useRef(null);
+  const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
-    if (scrollContainerRef.current) {
+    if (messagesEndRef.current && typeof messagesEndRef.current.scrollIntoView === 'function') {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    } else if (scrollContainerRef.current && typeof scrollContainerRef.current.scrollTo === 'function') {
       scrollContainerRef.current.scrollTo({
         top: scrollContainerRef.current.scrollHeight,
         behavior: 'smooth'
@@ -36,7 +40,9 @@ const ChatAssistant = () => {
   // Clean up speech synthesis on unmount
   useEffect(() => {
     return () => {
-      window.speechSynthesis.cancel();
+      if (typeof window !== 'undefined' && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
     };
   }, []);
 
@@ -178,12 +184,14 @@ const ChatAssistant = () => {
             onClick={handleELI5}
             className="flex items-center gap-2 px-3 py-1.5 bg-accent-purple/10 hover:bg-accent-purple/20 border border-accent-purple/30 rounded-lg text-[10px] font-bold text-accent-purple transition-all"
             title="Explain Like I'm 10"
+            aria-label="Explain current phase like I'm 10 years old"
           >
             <Brain className="w-3 h-3" /> ELI5
           </button>
           <button 
             onClick={clearHistory}
             className="p-2 text-text-muted hover:text-white transition-colors"
+            aria-label="Clear chat history"
           >
             <Trash2 className="w-4 h-4" />
           </button>
@@ -252,7 +260,7 @@ const ChatAssistant = () => {
                           strong: ({ children }) => <strong className="text-white font-bold">{children}</strong>,
                         }}
                       >
-                        {msg.content}
+                        {DOMPurify.sanitize(msg.content)}
                       </ReactMarkdown>
                     </article>
                   </div>
@@ -268,13 +276,14 @@ const ChatAssistant = () => {
                           onClick={() => handleSpeech(msg.content, i)}
                           className={`p-1 rounded transition-colors ${speakingIndex === i ? 'text-accent-purple bg-accent-purple/10' : 'text-text-muted hover:text-white hover:bg-white/10'}`}
                           title={speakingIndex === i ? "Stop speaking" : "Read aloud"}
+                          aria-label={speakingIndex === i ? "Stop speaking" : "Read message aloud"}
                         >
                           {speakingIndex === i ? <Square className="w-3 h-3" /> : <Volume2 className="w-3 h-3" />}
                         </button>
-                        <button className="text-text-muted hover:text-accent-green transition-colors p-1 rounded hover:bg-accent-green/10" title="Helpful">
+                        <button className="text-text-muted hover:text-accent-green transition-colors p-1 rounded hover:bg-accent-green/10" title="Helpful" aria-label="Mark message as helpful">
                           <ThumbsUp className="w-3 h-3" />
                         </button>
-                        <button className="text-text-muted hover:text-red-400 transition-colors p-1 rounded hover:bg-red-400/10" title="Not helpful">
+                        <button className="text-text-muted hover:text-red-400 transition-colors p-1 rounded hover:bg-red-400/10" title="Not helpful" aria-label="Mark message as not helpful">
                           <ThumbsDown className="w-3 h-3" />
                         </button>
                       </div>
@@ -305,7 +314,7 @@ const ChatAssistant = () => {
               </div>
               <div className="p-4 rounded-2xl bg-dark-card text-text-primary border border-dark-border rounded-tl-sm text-sm">
                 <article className="prose prose-invert prose-sm max-w-none">
-                  <ReactMarkdown>{displayedText}</ReactMarkdown>
+                  <ReactMarkdown>{DOMPurify.sanitize(displayedText)}</ReactMarkdown>
                 </article>
                 <span className="inline-block w-1 h-4 bg-accent-purple ml-1 animate-pulse" />
               </div>
@@ -339,6 +348,7 @@ const ChatAssistant = () => {
             type="submit"
             disabled={isLoading || !input.trim()}
             className="w-10 h-10 bg-accent-purple hover:bg-accent-purple/80 disabled:bg-dark-border text-white rounded-lg flex items-center justify-center transition-all active:scale-95"
+            aria-label="Send message"
           >
             <Send className="w-4 h-4" />
           </button>
