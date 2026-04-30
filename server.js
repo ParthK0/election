@@ -40,15 +40,23 @@ const apiLimiter = rateLimit({
 
 app.use('/api/', apiLimiter);
 
-const allowedOrigins = process.env.NODE_ENV === 'production' 
-  ? ['https://electiq-production.web.app', 'https://electiq-production.firebaseapp.com']
-  : ['http://localhost:5173', 'http://localhost:8080'];
+const allowedOrigins = [
+  'https://electiq-production.web.app',
+  'https://electiq-production.firebaseapp.com',
+  'https://election-186840368227.us-central1.run.app',
+  'http://localhost:5173',
+  'http://localhost:8080'
+];
 
 app.use(cors({
   origin: function(origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
+    // allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV !== 'production') {
       callback(null, true);
     } else {
+      console.warn(`CORS blocked for origin: ${origin}`);
       callback(new Error('Not allowed by CORS'));
     }
   },
@@ -159,4 +167,10 @@ app.get('*', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Something broke!', details: err.message });
 });
