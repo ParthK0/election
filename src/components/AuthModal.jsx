@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, Shield, Mail, Lock, Loader2, ArrowRight } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 
 const AuthModal = () => {

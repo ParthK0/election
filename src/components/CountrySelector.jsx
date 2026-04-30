@@ -1,5 +1,7 @@
 import { useElection } from "../context/ElectionContext";
 import { useState, useRef, useEffect } from "react";
+import { ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const countries = [
   { id: "india", name: "India", flag: "🇮🇳" },

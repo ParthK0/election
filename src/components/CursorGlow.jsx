@@ -1,4 +1,4 @@
-import { useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useEffect } from "react";
 
 const CursorGlow = () => {

@@ -1,11 +1,21 @@
 import { useState, useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
-
-
+import { Link, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import FocusTrap from "focus-trap-react";
+import {
+  Shield,
+  Menu,
+  X,
+  ChevronDown,
+  Settings,
+  User,
+  LogOut,
+} from "lucide-react";
 import { useElection } from "../context/ElectionContext";
 import { useAuth } from "../context/AuthContext";
 import { logEvent } from "firebase/analytics";
 import { analytics } from "../lib/firebase";
+import CountrySelector from "./CountrySelector";
 
 const Navbar = () => {
   const location = useLocation();

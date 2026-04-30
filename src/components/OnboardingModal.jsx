@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, Shield, Globe, Check, User } from "lucide-react";
 import { useElection } from "../context/ElectionContext";
 import { logEvent } from "firebase/analytics";
 import { analytics } from "../lib/firebase";

@@ -1,7 +1,16 @@
-import { lazy, useEffect } from "react";
+import { lazy, useEffect, Suspense } from "react";
 import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
   useLocation,
 } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { Shield } from "lucide-react";
+import Navbar from "./components/Navbar";
+import OnboardingModal from "./components/OnboardingModal";
+import AuthModal from "./components/AuthModal";
 
 // Scroll to top on route change
 const ScrollToTop = () => {

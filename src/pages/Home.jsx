@@ -1,8 +1,17 @@
 import { useElection } from "../context/ElectionContext";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import {
   Vote,
   Users,
+  ArrowRight,
+  CheckCircle,
+  Clock,
+  Shield,
+  Sparkles,
 } from "lucide-react";
+import CursorGlow from "../components/CursorGlow";
 
 const Home = () => {
   const { setRole, role, country, electionData, currentPhase } = useElection();
