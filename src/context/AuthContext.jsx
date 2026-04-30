@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
 
@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
 
   // Simulate checking for a session on load
   useEffect(() => {
-    const savedUser = localStorage.getItem('electiq_user');
+    const savedUser = localStorage.getItem("electiq_user");
     if (savedUser) {
       setUser(JSON.parse(savedUser));
     }
@@ -18,22 +18,22 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 800));
-    
+    await new Promise((resolve) => setTimeout(resolve, 800));
+
     const mockUser = {
-      id: 'usr_' + Math.random().toString(36).substr(2, 9),
+      id: "usr_" + Math.random().toString(36).substr(2, 9),
       email,
-      name: email.split('@')[0],
-      createdAt: new Date().toISOString()
+      name: email.split("@")[0],
+      createdAt: new Date().toISOString(),
     };
-    
+
     setUser(mockUser);
-    localStorage.setItem('electiq_user', JSON.stringify(mockUser));
+    localStorage.setItem("electiq_user", JSON.stringify(mockUser));
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('electiq_user');
+    localStorage.removeItem("electiq_user");
   };
 
   const openAuthModal = () => setIsAuthModalOpen(true);
@@ -45,12 +45,8 @@ export const AuthProvider = ({ children }) => {
     logout,
     isAuthModalOpen,
     openAuthModal,
-    closeAuthModal
+    closeAuthModal,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

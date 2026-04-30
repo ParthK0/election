@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from "react";
 
 const ChatContext = createContext();
 
@@ -6,7 +6,7 @@ export const useChat = () => useContext(ChatContext);
 
 export const ChatProvider = ({ children }) => {
   const [chatHistory, setChatHistory] = useState(() => {
-    const saved = localStorage.getItem('electiq_chat');
+    const saved = localStorage.getItem("electiq_chat");
     return saved ? JSON.parse(saved) : [];
   });
 
@@ -15,12 +15,12 @@ export const ChatProvider = ({ children }) => {
 
   useEffect(() => {
     const capped = chatHistory.slice(-50);
-    localStorage.setItem('electiq_chat', JSON.stringify(capped));
+    localStorage.setItem("electiq_chat", JSON.stringify(capped));
   }, [chatHistory]);
 
   const clearHistory = () => {
     setChatHistory([]);
-    localStorage.removeItem('electiq_chat');
+    localStorage.removeItem("electiq_chat");
   };
 
   const value = {
@@ -30,12 +30,8 @@ export const ChatProvider = ({ children }) => {
     setIsLoading,
     error,
     setError,
-    clearHistory
+    clearHistory,
   };
 
-  return (
-    <ChatContext.Provider value={value}>
-      {children}
-    </ChatContext.Provider>
-  );
+  return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;
 };
