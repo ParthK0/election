@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import { GoogleGenerativeAI } from "@google/generative-ai";
-
+import { z } from "zod";
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -74,13 +74,32 @@ Rules:
 6. If the user asks a question unrelated to elections, politely guide them back to election education.
 7. Keep responses concise but informative.`;
 
+const ChatSchema = z.object({
+  prompt: z.string().min(1).max(500).trim(),
+  context: z.object({
+    country: z.string().optional(),
+    currentPhase: z.string().optional(),
+    role: z.string().optional(),
+    checklist: z.object({
+      completed: z.array(z.string()).optional(),
+      remaining: z.array(z.string()).optional()
+    }).optional()
+  }).optional(),
+  history: z.array(z.object({
+    role: z.string(),
+    content: z.string().max(1000).optional(),
+    text: z.string().max(1000).optional()
+  })).max(10).optional()
+});
+
 // API Route for AI Chat
 app.post('/api/chat', async (req, res) => {
-  const { prompt, context, history } = req.body;
-
-  if (!prompt) {
-    return res.status(400).json({ error: 'Prompt is required' });
+  const parsed = ChatSchema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({ error: 'Invalid request', details: parsed.error.flatten() });
   }
+
+  const { prompt, context, history } = parsed.data;
 
   if (!process.env.GEMINI_API_KEY) {
     return res.status(500).json({ error: 'GEMINI_API_KEY is not configured on the server.' });
