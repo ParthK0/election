@@ -153,7 +153,7 @@ Current context:
 });
 
 // Always return the main index.html for any other route (Client-side routing)
-app.get('/{*path}', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
