@@ -1,10 +1,11 @@
-import { motion, useMotionValue, useTransform } from 'framer-motion';
-import { ExternalLink, CheckCircle2, ChevronRight } from 'lucide-react';
-import { useElection } from '../context/ElectionContext';
+import { useMotionValue, useTransform } from "framer-motion";
+import { useElection } from "../context/ElectionContext";
+import { logEvent } from "firebase/analytics";
+import { analytics } from "../lib/firebase";
 
 const PhaseCard = ({ phase, isActive, onClick }) => {
   const { role } = useElection();
-  const isCandidate = role === 'candidate';
+  const isCandidate = role === "candidate";
 
   // 3D Tilt Effect
   const x = useMotionValue(0);
@@ -28,37 +29,57 @@ const PhaseCard = ({ phase, isActive, onClick }) => {
   return (
     <motion.div
       layout
-      onClick={onClick}
+      onClick={(e) => {
+        if (analytics) {
+          logEvent(analytics, "phase_selected", {
+            phase_name: phase.label,
+            country: phase.country || "unknown",
+            role,
+          });
+        }
+        if (onClick) onClick(e);
+      }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
       className={`cursor-pointer rounded-2xl p-6 transition-all duration-300 border relative group perspective-1000 ${
-        isActive 
-          ? 'bg-accent-purple/5 border-accent-purple border-l-[4px] shadow-premium' 
-          : 'bg-dark-card border-dark-border hover:border-text-muted/30 hover:shadow-xl'
+        isActive
+          ? "bg-accent-purple/5 border-accent-purple border-l-[4px] shadow-premium"
+          : "bg-dark-card border-dark-border hover:border-text-muted/30 hover:shadow-xl"
       }`}
     >
-      <div className="flex items-start justify-between mb-6 transform-gpu" style={{ transform: "translateZ(20px)" }}>
-        <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl transition-transform duration-500 group-hover:scale-110 ${
-          isActive ? 'bg-accent-purple text-white shadow-premium' : 'bg-dark-card-2 text-text-muted border border-dark-border'
-        }`}>
+      <div
+        className="flex items-start justify-between mb-6 transform-gpu"
+        style={{ transform: "translateZ(20px)" }}
+      >
+        <div
+          className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl transition-transform duration-500 group-hover:scale-110 ${
+            isActive
+              ? "bg-accent-purple text-white shadow-premium"
+              : "bg-dark-card-2 text-text-muted border border-dark-border"
+          }`}
+        >
           {phase.icon}
         </div>
         {isActive && (
-          <motion.span 
+          <motion.span
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             className={`px-3 py-1 text-white text-[10px] font-black rounded-full uppercase tracking-widest ${
-              isCandidate ? 'bg-accent-green shadow-[0_0_10px_rgba(16,185,129,0.3)]' : 'bg-accent-purple'
+              isCandidate
+                ? "bg-accent-green shadow-[0_0_10px_rgba(16,185,129,0.3)]"
+                : "bg-accent-purple"
             }`}
           >
-            {isCandidate ? 'Candidate Protocol' : 'Voter Guide'}
+            {isCandidate ? "Candidate Protocol" : "Voter Guide"}
           </motion.span>
         )}
       </div>
 
-      <h3 className={`text-xl font-bold mb-2 font-display ${isActive ? 'text-white' : 'text-text-primary'}`}>
+      <h3
+        className={`text-xl font-bold mb-2 font-display ${isActive ? "text-white" : "text-text-primary"}`}
+      >
         {phase.label}
       </h3>
       <p className="text-sm text-text-muted mb-6 line-clamp-2 leading-relaxed font-medium">
@@ -84,24 +105,32 @@ const PhaseCard = ({ phase, isActive, onClick }) => {
                     <ChevronRight className="w-4 h-4 transform group-open/details:rotate-90 transition-transform" />
                   </summary>
                   <div className="p-4 pt-0 space-y-4 border-t border-accent-green/10 mt-2">
-                    {Object.entries(phase.candidateDetails || {}).map(([key, value]) => (
-                      <div key={key}>
-                        <span className="text-[9px] font-bold text-accent-green/70 uppercase tracking-widest block mb-1">
-                          {key.replace(/([A-Z])/g, ' $1')}
-                        </span>
-                        {Array.isArray(value) ? (
-                          <ul className="space-y-1.5">
-                            {value.map((item, i) => (
-                              <li key={i} className="text-xs text-text-primary/90 flex gap-2">
-                                <span className="text-accent-green">•</span> {item}
-                              </li>
-                            ))}
-                          </ul>
-                        ) : (
-                          <p className="text-xs text-text-primary/90 leading-relaxed">{value}</p>
-                        )}
-                      </div>
-                    ))}
+                    {Object.entries(phase.candidateDetails || {}).map(
+                      ([key, value]) => (
+                        <div key={key}>
+                          <span className="text-[9px] font-bold text-accent-green/70 uppercase tracking-widest block mb-1">
+                            {key.replace(/([A-Z])/g, " $1")}
+                          </span>
+                          {Array.isArray(value) ? (
+                            <ul className="space-y-1.5">
+                              {value.map((item, i) => (
+                                <li
+                                  key={i}
+                                  className="text-xs text-text-primary/90 flex gap-2"
+                                >
+                                  <span className="text-accent-green">•</span>{" "}
+                                  {item}
+                                </li>
+                              ))}
+                            </ul>
+                          ) : (
+                            <p className="text-xs text-text-primary/90 leading-relaxed">
+                              {value}
+                            </p>
+                          )}
+                        </div>
+                      ),
+                    )}
                   </div>
                 </details>
               </div>
@@ -113,7 +142,10 @@ const PhaseCard = ({ phase, isActive, onClick }) => {
               </h4>
               <div className="space-y-2">
                 {phase.steps.map((step, i) => (
-                  <div key={i} className="flex items-start gap-3 text-text-primary/80 text-sm">
+                  <div
+                    key={i}
+                    className="flex items-start gap-3 text-text-primary/80 text-sm"
+                  >
                     <CheckCircle2 className="w-4 h-4 text-accent-green shrink-0 mt-0.5" />
                     <span>{step}</span>
                   </div>

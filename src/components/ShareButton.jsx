@@ -1,13 +1,12 @@
-import { useState } from 'react';
-import { Share2, Check } from 'lucide-react';
+import { useState } from "react";
 
-const ShareButton = ({ text, title = 'ElectIQ — Election Info' }) => {
+const ShareButton = ({ text, title = "ElectIQ — Election Info" }) => {
   const [copied, setCopied] = useState(false);
 
   const handleShare = async () => {
     const shareData = {
       title,
-      text: text || 'Check out this election information on ElectIQ!',
+      text: text || "Check out this election information on ElectIQ!",
       url: window.location.href,
     };
 
@@ -23,11 +22,13 @@ const ShareButton = ({ text, title = 'ElectIQ — Election Info' }) => {
 
     // Fallback: copy to clipboard
     try {
-      await navigator.clipboard.writeText(`${shareData.text}\n${shareData.url}`);
+      await navigator.clipboard.writeText(
+        `${shareData.text}\n${shareData.url}`,
+      );
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error('Failed to copy:', err);
+      console.error("Failed to copy:", err);
     }
   };
 

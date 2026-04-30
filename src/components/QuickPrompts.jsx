@@ -1,5 +1,4 @@
-import { useElection } from '../context/ElectionContext';
-import { HelpCircle, ArrowRight } from 'lucide-react';
+import { useElection } from "../context/ElectionContext";
 
 const QuickPrompts = ({ onPromptSelect }) => {
   const { electionData } = useElection();
@@ -18,7 +17,9 @@ const QuickPrompts = ({ onPromptSelect }) => {
             onClick={() => onPromptSelect(q)}
             className="text-left p-3 rounded-xl bg-surface-tertiary border border-border hover:border-purple/30 transition-all group flex items-center justify-between"
           >
-            <span className="text-xs text-gray-500 group-hover:text-dark transition-colors">{q}</span>
+            <span className="text-xs text-gray-500 group-hover:text-dark transition-colors">
+              {q}
+            </span>
             <ArrowRight className="w-3 h-3 text-gray-300 group-hover:text-purple group-hover:translate-x-0.5 transition-all" />
           </button>
         ))}

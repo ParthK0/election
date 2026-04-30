@@ -1,7 +1,7 @@
-
-
 const Skeleton = ({ className }) => (
-  <div className={`animate-pulse bg-surface-tertiary rounded-xl ${className}`} />
+  <div
+    className={`animate-pulse bg-surface-tertiary rounded-xl ${className}`}
+  />
 );
 
 export const PhaseCardSkeleton = () => (

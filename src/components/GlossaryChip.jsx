@@ -1,8 +1,7 @@
-import { useElection } from '../context/ElectionContext';
-import { useChat } from '../context/ChatContext';
-import { useNavigate } from 'react-router-dom';
-import { askGemini } from '../api/gemini';
-import { MessageSquare } from 'lucide-react';
+import { useElection } from "../context/ElectionContext";
+import { useChat } from "../context/ChatContext";
+import { useNavigate } from "react-router-dom";
+import { askGemini } from "../api/gemini";
 
 const GlossaryChip = ({ term }) => {
   const { country } = useElection();
@@ -12,12 +11,16 @@ const GlossaryChip = ({ term }) => {
   const handleTermClick = async (e) => {
     e.stopPropagation();
     const prompt = `Explain the electoral term "${term}" in the context of ${country} elections. Provide a clear definition and an example.`;
-    navigate('/ask');
-    const userMessage = { role: 'user', content: `What is ${term}?` };
-    setChatHistory(prev => [...prev, userMessage]);
+    navigate("/ask");
+    const userMessage = { role: "user", content: `What is ${term}?` };
+    setChatHistory((prev) => [...prev, userMessage]);
     try {
-      const response = await askGemini(prompt, { country, currentPhase: 'Glossary', role: 'Voter' });
-      setChatHistory(prev => [...prev, { role: 'bot', content: response }]);
+      const response = await askGemini(prompt, {
+        country,
+        currentPhase: "Glossary",
+        role: "Voter",
+      });
+      setChatHistory((prev) => [...prev, { role: "bot", content: response }]);
     } catch (error) {
       console.error(error);
     }

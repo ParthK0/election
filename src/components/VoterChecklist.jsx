@@ -1,25 +1,23 @@
-import { useElection } from '../context/ElectionContext';
-import { CheckSquare, Square, ListChecks, Share2, Check } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import confetti from 'canvas-confetti';
+import { useElection } from "../context/ElectionContext";
+import { useState, useEffect } from "react";
+import confetti from "canvas-confetti";
 
 export const checklistData = {
   india: [
-    { id: 'in-1', text: 'Check name in voter list' },
-    { id: 'in-2', text: 'Get Voter ID (EPIC) card' },
-    { id: 'in-3', text: 'Find your polling station' },
-    { id: 'in-4', text: 'Keep valid photo ID ready' },
-    { id: 'in-5', text: 'Know your constituency candidates' },
-    { id: 'in-6', text: 'Understand EVM & VVPAT process' },
+    { id: "in-1", text: "Check name in voter list" },
+    { id: "in-2", text: "Get Voter ID (EPIC) card" },
+    { id: "in-3", text: "Find your polling station" },
+    { id: "in-4", text: "Keep valid photo ID ready" },
+    { id: "in-5", text: "Know your constituency candidates" },
+    { id: "in-6", text: "Understand EVM & VVPAT process" },
   ],
   usa: [
-    { id: 'us-1', text: 'Register to vote (vote.gov)' },
-    { id: 'us-2', text: 'Check registration status' },
-    { id: 'us-3', text: 'Know your state ID requirements' },
-    { id: 'us-4', text: 'Find your polling place' },
-    { id: 'us-5', text: 'Request absentee ballot (if needed)' },
-    { id: 'us-6', text: 'Research candidates & ballot measures' },
+    { id: "us-1", text: "Register to vote (vote.gov)" },
+    { id: "us-2", text: "Check registration status" },
+    { id: "us-3", text: "Know your state ID requirements" },
+    { id: "us-4", text: "Find your polling place" },
+    { id: "us-5", text: "Request absentee ballot (if needed)" },
+    { id: "us-6", text: "Research candidates & ballot measures" },
   ],
 };
 
@@ -27,7 +25,7 @@ const VoterChecklist = () => {
   const { country, checklist, toggleChecklistItem } = useElection();
   const [copied, setCopied] = useState(false);
   const items = checklistData[country] || [];
-  const completed = items.filter(item => checklist[item.id]).length;
+  const completed = items.filter((item) => checklist[item.id]).length;
   const progress = items.length > 0 ? (completed / items.length) * 100 : 0;
   const [hasFiredConfetti, setHasFiredConfetti] = useState(false);
 
@@ -37,8 +35,8 @@ const VoterChecklist = () => {
         particleCount: 100,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ['#7c3aed', '#10b981', '#ffffff'],
-        zIndex: 1000
+        colors: ["#7c3aed", "#10b981", "#ffffff"],
+        zIndex: 1000,
       });
       setHasFiredConfetti(true);
     } else if (progress < 100) {
@@ -47,11 +45,15 @@ const VoterChecklist = () => {
   }, [progress, hasFiredConfetti]);
 
   const handleShare = () => {
-    const completedItems = items.filter(item => checklist[item.id]).map(i => `[x] ${i.text}`);
-    const pendingItems = items.filter(item => !checklist[item.id]).map(i => `[ ] ${i.text}`);
-    
-    const text = `🗳️ ElectIQ Checklist for ${country.toUpperCase()}\nProgress: ${completed}/${items.length}\n\nCompleted:\n${completedItems.join('\n')}\n\nRemaining:\n${pendingItems.join('\n')}\n\nPrepared with ElectIQ AI.`;
-    
+    const completedItems = items
+      .filter((item) => checklist[item.id])
+      .map((i) => `[x] ${i.text}`);
+    const pendingItems = items
+      .filter((item) => !checklist[item.id])
+      .map((i) => `[ ] ${i.text}`);
+
+    const text = `🗳️ ElectIQ Checklist for ${country.toUpperCase()}\nProgress: ${completed}/${items.length}\n\nCompleted:\n${completedItems.join("\n")}\n\nRemaining:\n${pendingItems.join("\n")}\n\nPrepared with ElectIQ AI.`;
+
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -64,7 +66,9 @@ const VoterChecklist = () => {
           <ListChecks className="w-4 h-4 text-accent-purple" />
           Your Checklist
         </h3>
-        <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">{completed}/{items.length}</span>
+        <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">
+          {completed}/{items.length}
+        </span>
       </div>
 
       {/* Progress bar */}
@@ -85,16 +89,17 @@ const VoterChecklist = () => {
               key={item.id}
               onClick={() => toggleChecklistItem(item.id)}
               className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-left transition-all group ${
-                isDone 
-                  ? 'text-text-muted line-through opacity-50' 
-                  : 'text-text-primary hover:bg-white/5'
+                isDone
+                  ? "text-text-muted line-through opacity-50"
+                  : "text-text-primary hover:bg-white/5"
               }`}
             >
               <div className="shrink-0 transition-transform group-active:scale-90">
-                {isDone 
-                  ? <CheckSquare className="w-4 h-4 text-accent-purple" /> 
-                  : <Square className="w-4 h-4 text-dark-border group-hover:text-text-muted" />
-                }
+                {isDone ? (
+                  <CheckSquare className="w-4 h-4 text-accent-purple" />
+                ) : (
+                  <Square className="w-4 h-4 text-dark-border group-hover:text-text-muted" />
+                )}
               </div>
               <span className="font-medium">{item.text}</span>
             </button>
@@ -103,7 +108,7 @@ const VoterChecklist = () => {
       </div>
 
       <div className="flex flex-col gap-2">
-        <button 
+        <button
           onClick={handleShare}
           className="w-full py-2.5 bg-dark-card-2 hover:bg-dark-border border border-dark-border rounded-xl text-xs font-bold text-white transition-all flex items-center justify-center gap-2"
         >
@@ -126,19 +131,22 @@ const VoterChecklist = () => {
                 exit={{ scale: 0.5, opacity: 0 }}
                 className="flex items-center gap-2"
               >
-                <Share2 className="w-3.5 h-3.5 text-accent-purple" /> Share Progress
+                <Share2 className="w-3.5 h-3.5 text-accent-purple" /> Share
+                Progress
               </motion.div>
             )}
           </AnimatePresence>
         </button>
 
         {progress === 100 && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             className="p-3 bg-accent-green/10 border border-accent-green/20 rounded-xl text-center"
           >
-            <p className="text-[11px] text-accent-green font-bold uppercase tracking-wider">🎉 Fully Prepared</p>
+            <p className="text-[11px] text-accent-green font-bold uppercase tracking-wider">
+              🎉 Fully Prepared
+            </p>
           </motion.div>
         )}
       </div>
