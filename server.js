@@ -67,7 +67,16 @@ app.use(express.json({ limit: '1mb' })); // Add limit to prevent payload too lar
 // Serve static files from the Vite build directory
 app.use(express.static(path.join(__dirname, 'dist')));
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+let genAI = null;
+const getGenAI = () => {
+  if (!genAI) {
+    if (!process.env.GEMINI_API_KEY) {
+      throw new Error('GEMINI_API_KEY is not configured');
+    }
+    genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+  }
+  return genAI;
+};
 
 const SYSTEM_PROMPT = `You are an election education assistant. Your role is to explain 
 electoral processes, timelines, voter rights, and civic procedures 
@@ -114,7 +123,8 @@ app.post('/api/chat', async (req, res) => {
   }
 
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    const aiInstance = getGenAI();
+    const model = aiInstance.getGenerativeModel({ model: "gemini-2.0-flash" });
 
     let checklistText = 'No checklist data provided.';
     if (context?.checklist) {
@@ -165,7 +175,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
