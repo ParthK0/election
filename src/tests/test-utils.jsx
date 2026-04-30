@@ -1,18 +1,11 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import { ElectionProvider } from '../context/ElectionContext';
-import { ChatProvider } from '../context/ChatContext';
-import { HelmetProvider } from 'react-helmet-async';
-import { BrowserRouter } from 'react-router-dom';
+import { render } from "@testing-library/react";
 
 const AllTheProviders = ({ children }) => {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <ElectionProvider>
-          <ChatProvider>
-            {children}
-          </ChatProvider>
+          <ChatProvider>{children}</ChatProvider>
         </ElectionProvider>
       </BrowserRouter>
     </HelmetProvider>
@@ -22,5 +15,5 @@ const AllTheProviders = ({ children }) => {
 const customRender = (ui, options) =>
   render(ui, { wrapper: AllTheProviders, ...options });
 
-export * from '@testing-library/react';
+export * from "@testing-library/react";
 export { customRender as render };

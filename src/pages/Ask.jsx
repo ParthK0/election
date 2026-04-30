@@ -1,12 +1,8 @@
-import { useElection } from '../context/ElectionContext';
-import { useChat } from '../context/ChatContext';
-import ChatAssistant from '../components/ChatAssistant';
-import QuickPrompts from '../components/QuickPrompts';
-import { checklistData } from '../components/VoterChecklist';
-import { askGemini } from '../api/gemini';
-import { useState } from 'react';
-import { Sparkles, ShieldCheck, MapPin } from 'lucide-react';
-import { Helmet } from 'react-helmet-async';
+import { useElection } from "../context/ElectionContext";
+import { useChat } from "../context/ChatContext";
+import { checklistData } from "../components/VoterChecklist";
+import { askGemini } from "../api/gemini";
+import { useState } from "react";
 
 const Ask = () => {
   const { country, currentPhase, role, checklist } = useElection();
@@ -15,19 +11,25 @@ const Ask = () => {
 
   const handleQuickPrompt = async (prompt) => {
     if (isProcessing) return;
-    setChatHistory(prev => [...prev, { role: 'user', content: prompt }]);
+    setChatHistory((prev) => [...prev, { role: "user", content: prompt }]);
     setIsProcessing(true);
     try {
       const items = checklistData[country] || [];
-      const completedItems = items.filter(i => checklist[i.id]).map(i => i.text);
-      const remainingItems = items.filter(i => !checklist[i.id]).map(i => i.text);
-      
-      const contextData = { 
-        country, currentPhase, role, 
-        checklist: { completed: completedItems, remaining: remainingItems } 
+      const completedItems = items
+        .filter((i) => checklist[i.id])
+        .map((i) => i.text);
+      const remainingItems = items
+        .filter((i) => !checklist[i.id])
+        .map((i) => i.text);
+
+      const contextData = {
+        country,
+        currentPhase,
+        role,
+        checklist: { completed: completedItems, remaining: remainingItems },
       };
       const response = await askGemini(prompt, contextData);
-      setChatHistory(prev => [...prev, { role: 'bot', content: response }]);
+      setChatHistory((prev) => [...prev, { role: "bot", content: response }]);
     } catch (error) {
       console.error(error);
     } finally {
@@ -39,11 +41,17 @@ const Ask = () => {
     <main className="max-w-6xl mx-auto px-6 py-12">
       <Helmet>
         <title>Ask AI | ElectIQ</title>
-        <meta name="description" content={`Consult our AI assistant for specific questions regarding the ${country} election rules, candidates, and procedures.`} />
+        <meta
+          name="description"
+          content={`Consult our AI assistant for specific questions regarding the ${country} election rules, candidates, and procedures.`}
+        />
       </Helmet>
       <div className="grid lg:grid-cols-4 gap-10">
         {/* Sidebar */}
-        <aside className="lg:col-span-1 space-y-8 hidden lg:block" aria-label="Election Context">
+        <aside
+          className="lg:col-span-1 space-y-8 hidden lg:block"
+          aria-label="Election Context"
+        >
           <div>
             <div className="flex items-center gap-2 text-purple text-sm font-semibold mb-3">
               <Sparkles className="w-4 h-4" />
@@ -53,7 +61,9 @@ const Ask = () => {
               Election Assistant
             </h1>
             <p className="text-sm text-text-muted leading-relaxed">
-              Get instant answers about {country.charAt(0).toUpperCase() + country.slice(1)}'s electoral processes. Powered by Gemini AI.
+              Get instant answers about{" "}
+              {country.charAt(0).toUpperCase() + country.slice(1)}'s electoral
+              processes. Powered by Gemini AI.
             </p>
           </div>
 
@@ -61,8 +71,12 @@ const Ask = () => {
             <div className="flex items-center gap-2.5">
               <MapPin className="w-4 h-4 text-purple" />
               <div>
-                <p className="text-[10px] font-semibold text-text-muted uppercase tracking-wider">Region</p>
-                <p className="text-sm font-medium text-dark capitalize">{country}</p>
+                <p className="text-[10px] font-semibold text-text-muted uppercase tracking-wider">
+                  Region
+                </p>
+                <p className="text-sm font-medium text-dark capitalize">
+                  {country}
+                </p>
               </div>
             </div>
             <div className="h-px bg-border" />
@@ -71,8 +85,12 @@ const Ask = () => {
                 <div className="w-1.5 h-1.5 bg-white rounded-full" />
               </div>
               <div>
-                <p className="text-[10px] font-semibold text-text-muted uppercase tracking-wider">Phase</p>
-                <p className="text-sm font-medium text-dark capitalize">{currentPhase}</p>
+                <p className="text-[10px] font-semibold text-text-muted uppercase tracking-wider">
+                  Phase
+                </p>
+                <p className="text-sm font-medium text-dark capitalize">
+                  {currentPhase}
+                </p>
               </div>
             </div>
           </div>
@@ -85,7 +103,8 @@ const Ask = () => {
               Neutrality Guaranteed
             </h4>
             <p className="text-[11px] text-text-muted leading-relaxed">
-              Strictly educational. No political opinions or candidate recommendations.
+              Strictly educational. No political opinions or candidate
+              recommendations.
             </p>
           </div>
         </aside>

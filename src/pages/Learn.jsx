@@ -1,16 +1,14 @@
-import { useElection } from '../context/ElectionContext';
-import ElectionTimeline from '../components/ElectionTimeline';
-import PhaseCard from '../components/PhaseCard';
-import { AnimatePresence } from 'framer-motion';
-import { Info, Calendar, MapPin, Sparkles, Trophy } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { PhaseCardSkeleton } from '../components/Skeleton';
-import VoterChecklist from '../components/VoterChecklist';
-import CountdownTimer from '../components/CountdownTimer';
-import { Helmet } from 'react-helmet-async';
+import { useElection } from "../context/ElectionContext";
 
 const Learn = () => {
-  const { electionData, currentPhase, setCurrentPhase, country, subCategory, setSubCategory } = useElection();
+  const {
+    electionData,
+    currentPhase,
+    setCurrentPhase,
+    country,
+    subCategory,
+    setSubCategory,
+  } = useElection();
 
   if (!electionData) {
     return (
@@ -19,7 +17,9 @@ const Learn = () => {
         <div className="h-12 w-96 bg-surface-tertiary rounded-xl animate-pulse mb-12" />
         <div className="grid lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 grid sm:grid-cols-2 gap-6">
-            {[1, 2, 3, 4].map(i => <PhaseCardSkeleton key={i} />)}
+            {[1, 2, 3, 4].map((i) => (
+              <PhaseCardSkeleton key={i} />
+            ))}
           </div>
           <div className="space-y-6">
             <div className="h-48 bg-surface-tertiary rounded-2xl animate-pulse" />
@@ -34,7 +34,10 @@ const Learn = () => {
     <div className="max-w-6xl mx-auto px-6 py-12">
       <Helmet>
         <title>{electionData.electionName} Guide | ElectIQ</title>
-        <meta name="description" content={`Complete guide to the ${electionData.electionName} electoral process. Understand phases, candidate obligations, and voter procedures.`} />
+        <meta
+          name="description"
+          content={`Complete guide to the ${electionData.electionName} electoral process. Understand phases, candidate obligations, and voter procedures.`}
+        />
       </Helmet>
       <header className="mb-12">
         <div className="flex items-center gap-2 text-accent-purple text-sm font-semibold mb-3">
@@ -45,20 +48,24 @@ const Learn = () => {
           <h1 className="text-4xl lg:text-5xl font-extrabold text-white tracking-tight font-display">
             {electionData.electionName}
           </h1>
-          {country === 'india' && (
+          {country === "india" && (
             <div className="bg-dark-card border border-dark-border p-1 rounded-xl inline-flex shadow-premium">
               <button
-                onClick={() => setSubCategory('loksabha')}
+                onClick={() => setSubCategory("loksabha")}
                 className={`px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${
-                  subCategory === 'loksabha' ? 'bg-accent-purple text-white shadow-md' : 'text-text-muted hover:text-white'
+                  subCategory === "loksabha"
+                    ? "bg-accent-purple text-white shadow-md"
+                    : "text-text-muted hover:text-white"
                 }`}
               >
                 Lok Sabha
               </button>
               <button
-                onClick={() => setSubCategory('rajyasabha')}
+                onClick={() => setSubCategory("rajyasabha")}
                 className={`px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${
-                  subCategory === 'rajyasabha' ? 'bg-accent-purple text-white shadow-md' : 'text-text-muted hover:text-white'
+                  subCategory === "rajyasabha"
+                    ? "bg-accent-purple text-white shadow-md"
+                    : "text-text-muted hover:text-white"
                 }`}
               >
                 Rajya Sabha
@@ -67,7 +74,8 @@ const Learn = () => {
           )}
         </div>
         <p className="text-text-muted text-sm max-w-2xl leading-relaxed">
-          Complete guide to the electoral process. Select a phase to see details.
+          Complete guide to the electoral process. Select a phase to see
+          details.
         </p>
       </header>
 
@@ -76,8 +84,8 @@ const Learn = () => {
 
       {/* Timeline */}
       <div className="mb-14">
-        <ElectionTimeline 
-          phases={electionData.phases} 
+        <ElectionTimeline
+          phases={electionData.phases}
           currentPhaseId={currentPhase}
           onPhaseClick={setCurrentPhase}
         />
@@ -88,9 +96,9 @@ const Learn = () => {
         <div className="grid sm:grid-cols-2 gap-5">
           <AnimatePresence mode="popLayout">
             {electionData.phases.map((phase) => (
-              <PhaseCard 
-                key={phase.id} 
-                phase={phase} 
+              <PhaseCard
+                key={phase.id}
+                phase={phase}
                 isActive={currentPhase === phase.id}
                 onClick={() => setCurrentPhase(phase.id)}
               />
@@ -112,7 +120,9 @@ const Learn = () => {
             <div className="space-y-4">
               {Object.entries(electionData.eligibility).map(([key, value]) => (
                 <div key={key}>
-                  <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider">{key}</span>
+                  <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider">
+                    {key}
+                  </span>
                   <p className="text-white font-medium text-sm">{value}</p>
                 </div>
               ))}
@@ -127,9 +137,14 @@ const Learn = () => {
             </h3>
             <div className="space-y-4">
               {electionData.keyDates.map((date, i) => (
-                <div key={i} className="flex justify-between items-center group">
+                <div
+                  key={i}
+                  className="flex justify-between items-center group"
+                >
                   <div>
-                    <p className="text-dark text-sm font-medium">{date.event}</p>
+                    <p className="text-dark text-sm font-medium">
+                      {date.event}
+                    </p>
                     <p className="text-xs text-gray-400">{date.date}</p>
                   </div>
                 </div>
@@ -140,15 +155,17 @@ const Learn = () => {
           {/* CTA */}
           <div className="p-6 rounded-2xl bg-purple text-white">
             <h3 className="text-base font-bold mb-2">Have questions?</h3>
-            <p className="text-white/70 mb-5 text-sm">Our AI can explain any part of the process.</p>
+            <p className="text-white/70 mb-5 text-sm">
+              Our AI can explain any part of the process.
+            </p>
             <div className="flex flex-col gap-2">
-              <Link 
+              <Link
                 to="/ask"
                 className="w-full py-2.5 bg-accent-purple text-white rounded-xl text-sm font-bold hover:bg-accent-purple/80 transition-all flex items-center justify-center gap-2 shadow-premium"
               >
                 <Sparkles className="w-4 h-4" /> Ask Assistant
               </Link>
-              <Link 
+              <Link
                 to="/quiz"
                 className="w-full py-2.5 bg-white/15 text-white rounded-xl text-sm font-semibold hover:bg-white/25 transition-colors flex items-center justify-center gap-2"
               >
