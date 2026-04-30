@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import { useElection } from "../context/ElectionContext";
+import EmptyState from "../components/EmptyState";
 import {
   HelpCircle,
   Trophy,

@@ -1,7 +1,11 @@
 import { useElection } from "../context/ElectionContext";
 import { useState, useMemo } from "react";
+import { Helmet } from "react-helmet-async";
+import { motion, AnimatePresence } from "framer-motion";
+import { Book, Search, Filter } from "lucide-react";
 import { logEvent } from "firebase/analytics";
 import { analytics } from "../lib/firebase";
+import GlossaryChip from "../components/GlossaryChip";
 
 const GlossaryItem = ({ item }) => {
   const [isOpen, setIsOpen] = useState(false);

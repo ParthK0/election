@@ -3,6 +3,10 @@ import { useChat } from "../context/ChatContext";
 import { checklistData } from "../components/VoterChecklist";
 import { askGemini } from "../api/gemini";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
+import { Sparkles, MapPin, ShieldCheck } from "lucide-react";
+import QuickPrompts from "../components/QuickPrompts";
+import ChatAssistant from "../components/ChatAssistant";
 
 const Ask = () => {
   const { country, currentPhase, role, checklist } = useElection();

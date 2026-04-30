@@ -1,4 +1,13 @@
 import { useElection } from "../context/ElectionContext";
+import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { AnimatePresence } from "framer-motion";
+import { MapPin, Info, Calendar, Sparkles, Trophy } from "lucide-react";
+import CountdownTimer from "../components/CountdownTimer";
+import ElectionTimeline from "../components/ElectionTimeline";
+import PhaseCard from "../components/PhaseCard";
+import { PhaseCardSkeleton } from "../components/Skeleton";
+import VoterChecklist from "../components/VoterChecklist";
 
 const Learn = () => {
   const {
