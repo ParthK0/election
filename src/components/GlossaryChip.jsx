@@ -1,6 +1,7 @@
 import { useElection } from "../context/ElectionContext";
 import { useChat } from "../context/ChatContext";
 import { useNavigate } from "react-router-dom";
+import { MessageSquare } from "lucide-react";
 import { askGemini } from "../api/gemini";
 
 const GlossaryChip = ({ term }) => {

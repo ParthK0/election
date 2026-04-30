@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Clock, Info } from "lucide-react";
 import { useElection } from "../context/ElectionContext";
 
 const CountdownTimer = () => {

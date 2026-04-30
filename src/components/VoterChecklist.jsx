@@ -1,5 +1,13 @@
 import { useElection } from "../context/ElectionContext";
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  ListChecks,
+  CheckSquare,
+  Square,
+  Check,
+  Share2,
+} from "lucide-react";
 import confetti from "canvas-confetti";
 
 export const checklistData = {

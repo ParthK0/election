@@ -1,4 +1,21 @@
 import { useState, useRef, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  AlertCircle,
+  X,
+  Sparkles,
+  Brain,
+  Trash2,
+  MessageCircle,
+  Send,
+  User,
+  Volume2,
+  Square,
+  ThumbsUp,
+  ThumbsDown,
+  BookOpen,
+} from "lucide-react";
+import ReactMarkdown from "react-markdown";
 import { useElection } from "../context/ElectionContext";
 import { useChat } from "../context/ChatContext";
 import { askGemini } from "../api/gemini";

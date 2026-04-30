@@ -1,4 +1,5 @@
-import { useMotionValue, useTransform } from "framer-motion";
+import { motion, useMotionValue, useTransform } from "framer-motion";
+import { ChevronRight, CheckCircle2, ExternalLink } from "lucide-react";
 import { useElection } from "../context/ElectionContext";
 import { logEvent } from "firebase/analytics";
 import { analytics } from "../lib/firebase";
