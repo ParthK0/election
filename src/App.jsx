@@ -48,7 +48,7 @@ const NotFound = () => (
       Page Not Found
     </h1>
     <p className="text-text-muted mb-8 max-w-md text-sm leading-relaxed">
-      The page you're looking for doesn't exist or has been moved.
+      The page you&apos;re looking for doesn&apos;t exist or has been moved.
     </p>
     <Link
       to="/"

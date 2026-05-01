@@ -16,7 +16,7 @@ const firebaseConfig = {
 };
 
 let app;
-let analytics;
+let analytics = { options: {} };
 let perf;
 let db;
 let functions;
@@ -63,4 +63,5 @@ if (firebaseConfig.projectId) {
   console.log("Firebase config not found. Skipping initialization.");
 }
 
+/** @type {import("firebase/app").FirebaseApp} */
 export { app, analytics, perf, db, functions };

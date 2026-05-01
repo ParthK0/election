@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, useMemo } from "react";
+import { createContext, useState, useEffect, useMemo } from "react";
 
 /**
  * @typedef {Object} ElectionContextType
@@ -16,13 +16,9 @@ import { createContext, useContext, useState, useEffect, useMemo } from "react";
  * @property {Object} personaTheme - The styling theme for the current role.
  */
 
-const ElectionContext = createContext();
+export const ElectionContext = createContext();
 
-/**
- * Custom hook to use the ElectionContext.
- * @returns {ElectionContextType} The election context value.
- */
-export const useElection = () => useContext(ElectionContext);
+// Hook moved to src/hooks/useElection.js
 
 /**
  * Provider component for ElectionContext.

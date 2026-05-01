@@ -1,8 +1,12 @@
 import axios from "axios";
 
 /**
- * Calls the Vercel serverless function (or local express mock) to interact with Gemini.
- * Never calls Gemini directly from the client.
+ * Calls the backend API to interact with Gemini AI.
+ *
+ * @param {string} prompt - The user's question or prompt.
+ * @param {Object} context - Metadata about current country, phase, and user role.
+ * @param {Array} [history=[]] - Recent message history for multi-turn conversation.
+ * @returns {Promise<string>} The AI-generated response text.
  */
 export const askGemini = async (prompt, context, history = []) => {
   try {

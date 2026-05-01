@@ -1,6 +1,7 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, it, expect, beforeEach } from "vitest";
-import { useElection } from "../ElectionContext";
+import { ElectionProvider } from "../ElectionContext";
+import { useElection } from "../../hooks/useElection";
 
 const TestComponent = () => {
   const {
