@@ -1,10 +1,11 @@
 import { render, screen, fireEvent } from "../../tests/test-utils";
 import { describe, it, expect, vi } from "vitest";
-import * as ElectionContextModule from "../../context/ElectionContext";
+import QuickPrompts from "../QuickPrompts";
+import * as useElectionModule from "../../hooks/useElection";
 
 describe("QuickPrompts Component", () => {
   it("does not render if no quickQuestions are provided", () => {
-    vi.spyOn(ElectionContextModule, "useElection").mockReturnValue({
+    vi.spyOn(useElectionModule, "useElection").mockReturnValue({
       electionData: null,
     });
     const { container } = render(<QuickPrompts onPromptSelect={() => {}} />);
@@ -15,7 +16,7 @@ describe("QuickPrompts Component", () => {
     const mockData = {
       quickQuestions: ["How to vote?", "Where is my polling booth?"],
     };
-    vi.spyOn(ElectionContextModule, "useElection").mockReturnValue({
+    vi.spyOn(useElectionModule, "useElection").mockReturnValue({
       electionData: mockData,
     });
 

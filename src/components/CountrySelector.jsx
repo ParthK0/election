@@ -1,4 +1,4 @@
-import { useElection } from "../context/ElectionContext";
+import { useElection } from "../hooks/useElection";
 import { useState, useRef, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";

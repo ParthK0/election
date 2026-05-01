@@ -1,5 +1,6 @@
-import { render, screen, fireEvent } from "../tests/test-utils";
+import { render, screen, fireEvent } from "../../tests/test-utils";
 import { expect, test, vi } from "vitest";
+import PhaseCard from "../PhaseCard";
 
 const mockPhase = {
   label: "Test Phase",

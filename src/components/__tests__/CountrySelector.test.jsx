@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from "../../tests/test-utils";
 import { describe, it, expect } from "vitest";
+import CountrySelector from "../CountrySelector";
 
 describe("CountrySelector Component", () => {
   it("renders the default country correctly", () => {

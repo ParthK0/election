@@ -1,5 +1,5 @@
 import { HelpCircle, ArrowRight } from "lucide-react";
-import { useElection } from "../context/ElectionContext";
+import { useElection } from "../hooks/useElection";
 
 const QuickPrompts = ({ onPromptSelect }) => {
   const { electionData } = useElection();

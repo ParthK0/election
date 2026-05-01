@@ -11,8 +11,8 @@ import {
   User,
   LogOut,
 } from "lucide-react";
-import { useElection } from "../context/ElectionContext";
-import { useAuth } from "../context/AuthContext";
+import { useElection } from "../hooks/useElection";
+import { useAuth } from "../hooks/useAuth";
 import { logEvent } from "firebase/analytics";
 import { analytics } from "../lib/firebase";
 import CountrySelector from "./CountrySelector";

@@ -1,5 +1,5 @@
-import { useElection } from "../context/ElectionContext";
-import { useChat } from "../context/ChatContext";
+import { useElection } from "../hooks/useElection";
+import { useChat } from "../hooks/useChat";
 import { useNavigate } from "react-router-dom";
 import { MessageSquare } from "lucide-react";
 import { askGemini } from "../api/gemini";

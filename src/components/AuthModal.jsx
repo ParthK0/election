@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Shield, Mail, Lock, Loader2, ArrowRight } from "lucide-react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 
 const AuthModal = () => {
   const { isAuthModalOpen, closeAuthModal, login } = useAuth();
@@ -134,14 +134,14 @@ const AuthModal = () => {
                 className="text-xs text-text-muted hover:text-white transition-colors"
               >
                 {isLogin
-                  ? "Don't have an account? Sign Up"
+                  ? "Don&apos;t have an account? Sign Up"
                   : "Already have an account? Sign In"}
               </button>
             </div>
 
             <div className="mt-8 pt-6 border-t border-dark-border text-center">
               <p className="text-[10px] text-text-muted/60 leading-relaxed max-w-[250px] mx-auto">
-                By continuing, you agree to ElectIQ's Terms of Service and
+                By continuing, you agree to ElectIQ&apos;s Terms of Service and
                 Privacy Policy.
               </p>
             </div>

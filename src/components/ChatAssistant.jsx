@@ -16,12 +16,12 @@ import {
   BookOpen,
 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
-import { useElection } from "../context/ElectionContext";
-import { useChat } from "../context/ChatContext";
+import { useElection } from "../hooks/useElection";
+import { useChat } from "../hooks/useChat";
 import { askGemini } from "../api/gemini";
 import { logEvent } from "firebase/analytics";
 import { analytics, perf } from "../lib/firebase";
-import { checklistData } from "./VoterChecklist";
+import { checklistData } from "../data/checklists";
 
 
 import DOMPurify from "dompurify";
@@ -121,7 +121,7 @@ const ChatAssistant = () => {
       const trace = perf ? perf.trace("ai_response_time") : null;
       if (trace) trace.start();
 
-      if (analytics) {
+      if (analytics && analytics.options && typeof window !== 'undefined' && !window.__vitest_worker__) {
         logEvent(analytics, "ai_question_asked", {
           question_length: finalInput.length,
           country,

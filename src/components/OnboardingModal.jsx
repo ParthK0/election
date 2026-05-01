@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Shield, Globe, Check, User } from "lucide-react";
-import { useElection } from "../context/ElectionContext";
+import { useElection } from "../hooks/useElection";
 import { logEvent } from "firebase/analytics";
 import { analytics } from "../lib/firebase";
 
@@ -81,7 +81,7 @@ const OnboardingModal = () => {
                 </h2>
                 <p className="text-text-muted mb-8 text-sm leading-relaxed">
                   Your personalized AI guide to elections worldwide. Before we
-                  start, let's tailor your experience.
+                  start, let&apos;s tailor your experience.
                 </p>
 
                 <div className="space-y-3">
@@ -89,7 +89,7 @@ const OnboardingModal = () => {
                     onClick={() => setStep(2)}
                     className="w-full py-4 bg-accent-purple text-white rounded-xl font-bold hover:bg-accent-purple/80 transition-all shadow-premium"
                   >
-                    Personalize Experience
+                   Let&apos;s personalize your ElectIQ experience.
                   </button>
                   <button
                     onClick={handleComplete}
@@ -115,7 +115,7 @@ const OnboardingModal = () => {
                       Select Region
                     </h2>
                     <p className="text-xs text-text-muted">
-                      Choose the election you're tracking.
+                      Choose the election you&apos;re tracking.
                     </p>
                   </div>
                 </div>

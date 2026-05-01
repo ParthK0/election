@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Clock, Info } from "lucide-react";
-import { useElection } from "../context/ElectionContext";
+import { useElection } from "../hooks/useElection";
 
 const CountdownTimer = () => {
   const { electionData } = useElection();
-  const targetDate = electionData?.targetDate;
+  const targetDate = electionData?.config?.pollingDate ?? electionData?.phases?.at(-1)?.date;
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,

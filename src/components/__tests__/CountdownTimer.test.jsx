@@ -1,6 +1,7 @@
 import { render, screen } from "../../tests/test-utils";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import * as ElectionContextModule from "../../context/ElectionContext";
+import CountdownTimer from "../CountdownTimer";
+import * as useElectionModule from "../../hooks/useElection";
 
 describe("CountdownTimer Component", () => {
   beforeEach(() => {
@@ -13,7 +14,7 @@ describe("CountdownTimer Component", () => {
   });
 
   it("does not render if no targetDate is provided", () => {
-    vi.spyOn(ElectionContextModule, "useElection").mockReturnValue({
+    vi.spyOn(useElectionModule, "useElection").mockReturnValue({
       electionData: {},
     });
     const { container } = render(<CountdownTimer />);
@@ -24,9 +25,9 @@ describe("CountdownTimer Component", () => {
     const futureDate = new Date();
     futureDate.setDate(futureDate.getDate() + 2); // 2 days in future
 
-    vi.spyOn(ElectionContextModule, "useElection").mockReturnValue({
+    vi.spyOn(useElectionModule, "useElection").mockReturnValue({
       electionData: {
-        targetDate: futureDate.toISOString(),
+        config: { pollingDate: futureDate.toISOString() },
         electionName: "Mock Election",
       },
     });
@@ -42,9 +43,9 @@ describe("CountdownTimer Component", () => {
     const pastDate = new Date();
     pastDate.setDate(pastDate.getDate() - 1); // 1 day in past
 
-    vi.spyOn(ElectionContextModule, "useElection").mockReturnValue({
+    vi.spyOn(useElectionModule, "useElection").mockReturnValue({
       electionData: {
-        targetDate: pastDate.toISOString(),
+        config: { pollingDate: pastDate.toISOString() },
         electionName: "Past Election",
       },
     });

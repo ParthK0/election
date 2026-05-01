@@ -1,4 +1,6 @@
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, ArrowLeft } from "lucide-react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const EmptyState = ({
   icon: Icon = AlertCircle,

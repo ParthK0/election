@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from "../../tests/test-utils";
 import { describe, it, expect, vi } from "vitest";
+import ElectionTimeline from "../ElectionTimeline";
 
 describe("ElectionTimeline Component", () => {
   const mockPhases = [
