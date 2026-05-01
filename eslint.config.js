@@ -4,9 +4,11 @@ import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 import unusedImports from 'eslint-plugin-unused-imports'
+import react from 'eslint-plugin-react'
 
 export default [
-  { ignores: ['dist'] },
+  { ignores: ['dist', 'node_modules', 'coverage', 'generate_data.cjs'] },
+  js.configs.recommended,
   {
     files: ['**/*.{js,jsx}'],
     languageOptions: {
@@ -22,12 +24,17 @@ export default [
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
       'jsx-a11y': jsxA11y,
-      'unused-imports': unusedImports
+      'unused-imports': unusedImports,
+      'react': react
+    },
+    settings: {
+      react: { version: '19.0' }
     },
     rules: {
-      ...js.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
       ...jsxA11y.configs.recommended.rules,
+      ...react.configs.recommended.rules,
+      ...react.configs['jsx-runtime'].rules,
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
@@ -37,6 +44,7 @@ export default [
       'jsx-a11y/label-has-associated-control': 'warn',
       'jsx-a11y/click-events-have-key-events': 'warn',
       'jsx-a11y/no-static-element-interactions': 'warn',
+      'unused-imports/no-unused-imports': 'error',
     },
   },
 ]

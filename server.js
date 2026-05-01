@@ -141,25 +141,26 @@ Current context:
 - User role: ${context?.role || 'Voter'}
 - Checklist Progress: ${checklistText}`;
 
-    const contents = [
-      { role: 'user', parts: [{ text: SYSTEM_PROMPT + contextBlock }] },
-      { role: 'model', parts: [{ text: 'Understood. I am your election education assistant. How can I help you today?' }] }
-    ];
-
+    const historyPayload = [];
     if (Array.isArray(history)) {
-      const recentHistory = history.slice(-10);
-      for (const msg of recentHistory) {
-        if (msg.role === 'user') {
-          contents.push({ role: 'user', parts: [{ text: msg.content }] });
-        } else if (msg.role === 'bot' || msg.role === 'model') {
-          contents.push({ role: 'model', parts: [{ text: msg.content || msg.text }] });
+      history.slice(-10).forEach(msg => {
+        const role = (msg.role === 'user') ? 'user' : 'model';
+        const text = msg.content || msg.text || '';
+        if (text) {
+          historyPayload.push({ role, parts: [{ text }] });
         }
-      }
+      });
     }
 
-    contents.push({ role: 'user', parts: [{ text: prompt }] });
+    const chat = model.startChat({
+      history: [
+        { role: 'user', parts: [{ text: SYSTEM_PROMPT + contextBlock }] },
+        { role: 'model', parts: [{ text: 'Understood. I am your election education assistant. How can I help you today?' }] },
+        ...historyPayload
+      ]
+    });
 
-    const result = await model.generateContent({ contents });
+    const result = await chat.sendMessage(prompt);
     const response = await result.response;
     const text = response.text();
 
