@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from "../../tests/test-utils";
 import { describe, it, expect, vi } from "vitest";
-import * as ElectionContextModule from "../../context/ElectionContext";
+import Glossary from "../Glossary";
+import * as useElectionModule from "../../hooks/useElection";
 
 describe("Glossary Page", () => {
   const mockData = {
@@ -26,7 +27,7 @@ describe("Glossary Page", () => {
   };
 
   it("renders glossary terms", () => {
-    vi.spyOn(ElectionContextModule, "useElection").mockReturnValue({
+    vi.spyOn(useElectionModule, "useElection").mockReturnValue({
       electionData: mockData,
       country: "india",
     });
@@ -38,7 +39,7 @@ describe("Glossary Page", () => {
   });
 
   it("filters by search term", () => {
-    vi.spyOn(ElectionContextModule, "useElection").mockReturnValue({
+    vi.spyOn(useElectionModule, "useElection").mockReturnValue({
       electionData: mockData,
       country: "india",
     });
@@ -53,7 +54,7 @@ describe("Glossary Page", () => {
   });
 
   it("filters by category", () => {
-    vi.spyOn(ElectionContextModule, "useElection").mockReturnValue({
+    vi.spyOn(useElectionModule, "useElection").mockReturnValue({
       electionData: mockData,
       country: "india",
     });

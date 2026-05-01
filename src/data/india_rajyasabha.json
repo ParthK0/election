@@ -1,52 +1,89 @@
 {
   "country": "India",
-  "electionName": "Rajya Sabha Elections",
-  "targetDate": "2028-01-01T08:00:00",
+  "electionName": "Rajya Sabha Elections (Council of States)",
+  "targetDate": "2026-04-10T08:00:00",
   "phases": [
     {
-      "id": "registration",
-      "label": "Registration",
-      "icon": "📋",
-      "duration": "Ongoing",
-      "description": "Voter registration phase.",
+      "id": "nomination",
+      "label": "Candidate Nomination",
+      "icon": "🖋️",
+      "duration": "T-15 Days",
+      "description": "Candidates are nominated by members of State Legislative Assemblies.",
       "steps": [
-        "Register to vote"
+        "Filing of nomination papers",
+        "Verification by Returning Officer",
+        "Withdrawal period"
       ],
       "voterActions": [
-        "Check registration status"
+        "Citizens do not vote directly; follow your MLAs' choices",
+        "Understand the party strength in your State Assembly"
       ],
-      "keyLinks": []
+      "keyLinks": [
+        { "label": "Rajya Sabha Official Site", "url": "https://rajyasabha.nic.in" }
+      ]
     },
     {
       "id": "voting",
-      "label": "Voting Day",
+      "label": "Indirect Polling",
       "icon": "🗳️",
-      "duration": "One Day",
-      "description": "Cast your vote.",
+      "duration": "One Day (9am - 4pm)",
+      "description": "MLAs vote using the Single Transferable Vote (STV) system.",
       "steps": [
-        "Go to polling station",
-        "Vote"
+        "Polling at State Legislative Assembly",
+        "Open ballot system (MLAs show vote to party agent)",
+        "Counting using the quota system"
       ],
       "voterActions": [
-        "Bring ID"
+        "Monitor the results as they represent your state's interests",
+        "Follow the 'Open Ballot' rules for transparency"
       ],
-      "keyLinks": []
+      "keyLinks": [
+        { "label": "About STV System", "url": "https://eci.gov.in/files/file/11384-handbook-for-returning-officer-for-elections-to-the-council-of-states-and-state-legislative-councils/" }
+      ]
     }
   ],
   "keyDates": [
-    {
-      "event": "Election Day",
-      "date": "TBD"
-    }
+    { "event": "Biennial Retirements", "date": "Every 2 years" },
+    { "event": "Notification", "date": "Issued by President" },
+    { "event": "Polling & Counting", "date": "Same day usually" }
   ],
   "eligibility": {
-    "age": "18 years and above",
-    "citizenship": "Citizen of India",
-    "residence": "Resident in constituency"
+    "age": "30 years and above (for candidates)",
+    "citizenship": "Indian Citizen",
+    "residence": "Voter in any parliamentary constituency"
   },
-  "glossary": [],
-  "quickQuestions": [
-    "How to vote?"
+  "glossary": [
+    { "term": "Rajya Sabha", "definition": "The 'Council of States' or Upper House of the Indian Parliament. It is a permanent body and not subject to dissolution.", "category": "Structure" },
+    { "term": "Indirect Election", "definition": "An election where voters do not cast ballots directly but elect representatives (MLAs) who then vote for the candidates.", "category": "Process" },
+    { "term": "STV (Single Transferable Vote)", "definition": "A proportional representation system where voters rank candidates and votes are transferred based on surplus or elimination.", "category": "Process" },
+    { "term": "Biennial Election", "definition": "Elections held every two years to fill the seats of one-third of the members who retire.", "category": "Process" },
+    { "term": "Nominated Members", "definition": "12 members nominated by the President of India for their contributions to art, literature, science, or social service.", "category": "Structure" },
+    { "term": "Ex-officio Chairman", "definition": "The Vice-President of India, who presides over the Rajya Sabha sessions.", "category": "Institutions" },
+    { "term": "Open Ballot", "definition": "A system where MLAs must show their marked ballot paper to their party's authorized agent before dropping it in the box.", "category": "Rules" },
+    { "term": "Quota", "definition": "The minimum number of votes required for a candidate to be declared elected in the STV system.", "category": "Rules" },
+    { "term": "Retirement", "definition": "Members of Rajya Sabha are elected for a term of 6 years, with one-third retiring every second year.", "category": "Process" },
+    { "term": "State Legislative Assembly (Vidhan Sabha)", "definition": "The body whose members (MLAs) elect the representatives for the Rajya Sabha.", "category": "Structure" },
+    { "term": "Allocation of Seats", "definition": "Seats are allocated to each state/territory based on population. Fourth Schedule of the Constitution deals with this.", "category": "Structure" },
+    { "term": "Cross Voting", "definition": "When an MLA votes against their party's candidate. In Rajya Sabha, this usually leads to disqualification under the Anti-Defection Law.", "category": "Rules" },
+    { "term": "Money Bill", "definition": "A bill that can only be introduced in Lok Sabha. Rajya Sabha has limited powers — it can only suggest changes within 14 days.", "category": "Rules" },
+    { "term": "Joint Sitting", "definition": "A meeting of both houses to resolve deadlocks on ordinary bills. Does not apply to Money Bills or Constitutional Amendments.", "category": "Process" },
+    { "term": "Leader of the House", "definition": "A cabinet minister (often the PM if they are a member of RS) who leads the government's business in the Rajya Sabha.", "category": "Institutions" },
+    { "term": "Zero Hour", "definition": "The time following Question Hour where members can raise matters of urgent public importance without prior notice.", "category": "Process" },
+    { "term": "Standing Committee", "definition": "Permanent committees that scrutinize government spending and legislation in detail.", "category": "Structure" },
+    { "term": "Parliamentary Privilege", "definition": "Legal immunities granted to members to ensure they can perform their duties without fear of prosecution for things said in the House.", "category": "Rules" }
   ],
-  "quiz": []
+  "quickQuestions": [
+    "Can I vote in Rajya Sabha elections?",
+    "How long is a Rajya Sabha term?",
+    "Who is the Chairman of Rajya Sabha?",
+    "What is the STV system?"
+  ],
+  "quiz": [
+    { "id": "rs_b1", "difficulty": "Beginner", "question": "What is the term length of a Member of the Rajya Sabha?", "options": ["4 years", "5 years", "6 years", "Permanent"], "answer": 2, "explanation": "While the Rajya Sabha itself is a permanent body, individual members are elected for a 6-year term.", "funFact": "One-third of the members retire every two years, ensuring continuity." },
+    { "id": "rs_b2", "difficulty": "Beginner", "question": "Who is the ex-officio Chairman of the Rajya Sabha?", "options": ["President of India", "Prime Minister of India", "Vice-President of India", "Speaker of Lok Sabha"], "answer": 2, "explanation": "The Vice-President of India automatically becomes the Chairman of the Rajya Sabha.", "funFact": "If the Vice-President acts as President, they do not perform the duties of the RS Chairman." },
+    { "id": "rs_b3", "difficulty": "Beginner", "question": "How many members are nominated by the President to the Rajya Sabha?", "options": ["2", "10", "12", "20"], "answer": 2, "explanation": "The President nominates 12 members with special knowledge or practical experience in fields like Science, Art, and Literature.", "funFact": "Famous nominees have included Sachin Tendulkar, Rekha, and Mary Kom." },
+    { "id": "rs_i1", "difficulty": "Intermediate", "question": "Which system is used for electing members to the Rajya Sabha?", "options": ["First-Past-The-Post", "Single Transferable Vote (STV)", "Direct Popular Vote", "Appointment by Governors"], "answer": 1, "explanation": "Rajya Sabha members are elected by the elected members of State Legislative Assemblies using STV with proportional representation.", "funFact": "This ensures that parties are represented in the Rajya Sabha in proportion to their strength in the state assemblies." },
+    { "id": "rs_i2", "difficulty": "Intermediate", "question": "What is the minimum age to be a member of the Rajya Sabha?", "options": ["21 years", "25 years", "30 years", "35 years"], "answer": 2, "explanation": "A candidate must be at least 30 years old. For Lok Sabha, the minimum is 25.", "funFact": "The Rajya Sabha is often called the 'House of Elders' because of this higher age requirement." },
+    { "id": "rs_e1", "difficulty": "Expert", "question": "Within how many days must the Rajya Sabha return a Money Bill to the Lok Sabha?", "options": ["7 days", "14 days", "30 days", "No limit"], "answer": 1, "explanation": "The Rajya Sabha can only delay a Money Bill for 14 days. If it doesn't return it, the bill is deemed passed by both houses.", "funFact": "The Rajya Sabha cannot reject or amend a Money Bill; it can only make recommendations that the Lok Sabha may or may not accept." }
+  ]
 }

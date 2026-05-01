@@ -1,6 +1,6 @@
-import { useElection } from "../context/ElectionContext";
-import { useChat } from "../context/ChatContext";
-import { checklistData } from "../components/VoterChecklist";
+import { useElection } from "../hooks/useElection";
+import { useChat } from "../hooks/useChat";
+import { checklistData } from "../data/checklists";
 import { askGemini } from "../api/gemini";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
@@ -66,7 +66,7 @@ const Ask = () => {
             </h1>
             <p className="text-sm text-text-muted leading-relaxed">
               Get instant answers about{" "}
-              {country.charAt(0).toUpperCase() + country.slice(1)}'s electoral
+              {country.charAt(0).toUpperCase() + country.slice(1)}&apos;s electoral
               processes. Powered by Gemini AI.
             </p>
           </div>

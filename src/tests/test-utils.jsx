@@ -1,4 +1,8 @@
 import { render } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
+import { ElectionProvider } from "../context/ElectionContext";
+import { ChatProvider } from "../context/ChatContext";
 
 const AllTheProviders = ({ children }) => {
   return (

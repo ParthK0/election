@@ -1,52 +1,108 @@
 {
   "country": "Canada",
   "electionName": "Federal Election",
-  "targetDate": "2028-01-01T08:00:00",
+  "targetDate": "2029-10-15T08:00:00",
   "phases": [
     {
       "id": "registration",
-      "label": "Registration",
+      "label": "Voter Registration",
       "icon": "📋",
       "duration": "Ongoing",
-      "description": "Voter registration phase.",
+      "description": "Ensure you are on the National Register of Electors.",
       "steps": [
-        "Register to vote"
+        "Check registration at Elections Canada",
+        "Register online or by mail",
+        "Update address if you have moved"
       ],
       "voterActions": [
-        "Check registration status"
+        "Register at least 6 days before polling day",
+        "Check if you are registered at your current address"
       ],
-      "keyLinks": []
+      "keyLinks": [
+        { "label": "Elections Canada", "url": "https://www.elections.ca" }
+      ]
+    },
+    {
+      "id": "nomination",
+      "label": "Candidate Nomination",
+      "icon": "🖋️",
+      "duration": "Until 21 days before poll",
+      "description": "Candidates file their nomination papers to run for office.",
+      "steps": [
+        "Collect required signatures",
+        "Submit nomination form to Returning Officer",
+        "Appoint an official agent"
+      ],
+      "voterActions": [
+        "Review candidate profiles in your riding",
+        "Attend local all-candidates meetings"
+      ],
+      "keyLinks": [
+        { "label": "Running as a Candidate", "url": "https://www.elections.ca/content.aspx?section=pol&dir=can&document=index&lang=e" }
+      ]
     },
     {
       "id": "voting",
-      "label": "Voting Day",
+      "label": "Election Day",
       "icon": "🗳️",
-      "duration": "One Day",
-      "description": "Cast your vote.",
+      "duration": "One Day (12 hours)",
+      "description": "The final day to cast your ballot in person.",
       "steps": [
-        "Go to polling station",
-        "Vote"
+        "Go to your assigned polling station",
+        "Bring proof of identity and address",
+        "Mark your ballot behind the screen"
       ],
       "voterActions": [
-        "Bring ID"
+        "Check your voter information card for location",
+        "Ensure you have accepted forms of ID"
       ],
-      "keyLinks": []
+      "keyLinks": [
+        { "label": "Ways to Vote", "url": "https://www.elections.ca/content.aspx?section=vot&dir=way&document=index&lang=e" }
+      ]
     }
   ],
   "keyDates": [
-    {
-      "event": "Election Day",
-      "date": "TBD"
-    }
+    { "event": "Writ Issued", "date": "T-36 to T-50 Days" },
+    { "event": "Advanced Polling", "date": "10, 9, 8, 7 days before" },
+    { "event": "Election Day", "date": "Usually a Monday" }
   ],
   "eligibility": {
     "age": "18 years and above",
-    "citizenship": "Citizen of Canada",
-    "residence": "Resident in constituency"
+    "citizenship": "Canadian Citizen",
+    "residence": "Resident in the electoral district (riding)"
   },
-  "glossary": [],
-  "quickQuestions": [
-    "How to vote?"
+  "glossary": [
+    { "term": "MP (Member of Parliament)", "definition": "An individual elected to represent one of the 338 electoral districts in the House of Commons.", "category": "Structure" },
+    { "term": "Riding", "definition": "Informal term for an electoral district or constituency in Canada.", "category": "Structure" },
+    { "term": "House of Commons", "definition": "The elected lower house of Canada's Parliament, consisting of 338 members.", "category": "Structure" },
+    { "term": "Senate", "definition": "The appointed upper house of Parliament. Senators are appointed by the Governor General on the advice of the Prime Minister.", "category": "Structure" },
+    { "term": "First-Past-The-Post", "definition": "The electoral system where the candidate with the most votes in a riding wins the seat.", "category": "Process" },
+    { "term": "Governor General", "definition": "The representative of the Monarch in Canada, who performs formal constitutional duties like dissolving Parliament.", "category": "Institutions" },
+    { "term": "Writ of Election", "definition": "A formal document issued to a Returning Officer ordering that an election be held.", "category": "Process" },
+    { "term": "Official Agent", "definition": "The person responsible for managing a candidate's campaign finances.", "category": "Rules" },
+    { "term": "Elections Canada", "definition": "The independent agency responsible for conducting federal elections and referendums.", "category": "Institutions" },
+    { "term": "Chief Electoral Officer", "definition": "The individual who heads Elections Canada and reports directly to Parliament.", "category": "Institutions" },
+    { "term": "Majority Government", "definition": "When the governing party holds more than half of the 338 seats in the House of Commons.", "category": "Structure" },
+    { "term": "Minority Government", "definition": "When the governing party has the most seats but fewer than 170, requiring support from other parties to pass laws.", "category": "Structure" },
+    { "term": "Confidence Motion", "definition": "A vote that tests whether the government still has the support of the House of Commons.", "category": "Rules" },
+    { "term": "Advanced Polls", "definition": "The opportunity to vote in person before Election Day at designated locations.", "category": "Process" },
+    { "term": "Special Ballot", "definition": "A method of voting by mail or at an Elections Canada office, available to any eligible voter.", "category": "Process" },
+    { "term": "Voter Information Card", "definition": "A card sent to registered voters telling them when and where to vote.", "category": "Rules" },
+    { "term": "Scrutineer", "definition": "A person appointed by a candidate to observe the voting and counting of ballots.", "category": "Process" },
+    { "term": "Electoral Roll", "definition": "The list of all registered voters in a riding.", "category": "Rules" }
   ],
-  "quiz": []
+  "quickQuestions": [
+    "What is a 'riding'?",
+    "How many MPs are in Canada?",
+    "Do I need ID to vote in Canada?",
+    "What is a minority government?"
+  ],
+  "quiz": [
+    { "id": "ca_b1", "difficulty": "Beginner", "question": "How many seats are currently in the Canadian House of Commons?", "options": ["100", "250", "338", "441"], "answer": 2, "explanation": "There are currently 338 electoral districts, each electing one MP.", "funFact": "The number of seats is adjusted after each decennial census to reflect population changes." },
+    { "id": "ca_b2", "difficulty": "Beginner", "question": "What is the common term for an electoral district in Canada?", "options": ["County", "Riding", "Ward", "Province"], "answer": 1, "explanation": "'Riding' is a traditional term for a federal or provincial electoral district.", "funFact": "The term 'riding' comes from an Old English word 'thriding', meaning a third part." },
+    { "id": "ca_b3", "difficulty": "Beginner", "question": "Who is eligible to vote in a Canadian federal election?", "options": ["Any resident of Canada", "Permanent residents only", "Canadian citizens aged 18 or older", "Only property owners"], "answer": 2, "explanation": "To vote federally, you must be a Canadian citizen and at least 18 years old on election day.", "funFact": "Since 2019, Canadian citizens living abroad can also vote, regardless of how long they've been away." },
+    { "id": "ca_i1", "difficulty": "Intermediate", "question": "What happens if the government loses a 'vote of confidence'?", "options": ["The PM is fired but the party stays", "The government usually falls, leading to an election", "Nothing, it's just a warning", "The Senate takes over"], "answer": 1, "explanation": "Under the principle of responsible government, a government that loses a confidence vote must either resign or ask for an election.", "funFact": "Budget votes are always considered matters of confidence." },
+    { "id": "ca_i2", "difficulty": "Intermediate", "question": "How is the Prime Minister of Canada chosen?", "options": ["Directly elected by the people", "Appointed by the Senate", "The leader of the party with the most seats in the House", "Chosen by the Governor General randomly"], "answer": 2, "explanation": "The Governor General invites the leader of the party most likely to hold the 'confidence' of the House (usually the party with the most seats) to become PM.", "funFact": "Technically, the PM is appointed by the Governor General, but by constitutional convention, it's always the party leader." },
+    { "id": "ca_e1", "difficulty": "Expert", "question": "What is the maximum duration of a federal election campaign in Canada?", "options": ["36 days", "50 days", "75 days", "No limit"], "answer": 1, "explanation": "The Canada Elections Act sets the maximum campaign length at 50 days.", "funFact": "The minimum campaign length is 36 days. The 2015 election was one of the longest in history at 78 days, before the 50-day limit was introduced." }
+  ]
 }

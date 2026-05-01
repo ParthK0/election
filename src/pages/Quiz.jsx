@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import { useElection } from "../context/ElectionContext";
+import { useElection } from "../hooks/useElection";
 import EmptyState from "../components/EmptyState";
 import {
   HelpCircle,
@@ -169,7 +169,7 @@ const Quiz = () => {
               Election Intelligence Quiz
             </h1>
             <p className="text-text-muted mb-10 max-w-sm mx-auto text-sm leading-relaxed">
-              Test your knowledge of {country}'s electoral process. Choose a
+              Test your knowledge of {country}&apos;s electoral process. Choose a
               difficulty level to begin.
             </p>
             <div className="grid gap-4">
@@ -393,7 +393,7 @@ const Quiz = () => {
                 </ul>
               ) : (
                 <p className="text-text-muted text-sm">
-                  No scores yet. You're the first!
+                  No scores yet. You&apos;re the first!
                 </p>
               )}
             </div>

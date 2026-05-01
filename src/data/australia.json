@@ -1,52 +1,89 @@
 {
   "country": "Australia",
   "electionName": "Federal Election",
-  "targetDate": "2028-01-01T08:00:00",
+  "targetDate": "2028-05-20T08:00:00",
   "phases": [
     {
-      "id": "registration",
-      "label": "Registration",
+      "id": "enrolment",
+      "label": "Voter Enrolment",
       "icon": "📋",
       "duration": "Ongoing",
-      "description": "Voter registration phase.",
+      "description": "Enrolment is compulsory for all eligible Australian citizens.",
       "steps": [
-        "Register to vote"
+        "Check enrolment on AEC website",
+        "Enrol or update details online",
+        "Deadline: 7 days after the election writ is issued"
       ],
       "voterActions": [
-        "Check registration status"
+        "Ensure you are enrolled to avoid a fine",
+        "Update your address if you have moved"
       ],
-      "keyLinks": []
+      "keyLinks": [
+        { "label": "AEC Enrolment", "url": "https://www.aec.gov.au/enrol/" }
+      ]
     },
     {
       "id": "voting",
-      "label": "Voting Day",
+      "label": "Polling Day",
       "icon": "🗳️",
-      "duration": "One Day",
-      "description": "Cast your vote.",
+      "duration": "One Day (8am - 6pm)",
+      "description": "Compulsory voting for all enrolled citizens.",
       "steps": [
-        "Go to polling station",
-        "Vote"
+        "Visit a polling place (usually schools or community halls)",
+        "Receive two ballot papers (Green for House, White for Senate)",
+        "Numbered preferences for all candidates"
       ],
       "voterActions": [
-        "Bring ID"
+        "Vote at any polling place in your state/territory",
+        "Enjoy a 'Democracy Sausage' after voting"
       ],
-      "keyLinks": []
+      "keyLinks": [
+        { "label": "AEC Voting", "url": "https://www.aec.gov.au/voting/" }
+      ]
     }
   ],
   "keyDates": [
-    {
-      "event": "Election Day",
-      "date": "TBD"
-    }
+    { "event": "Issue of Writs", "date": "T-33 to T-58 Days" },
+    { "event": "Close of Enrolment", "date": "7 days after Writs" },
+    { "event": "Polling Day", "date": "Usually a Saturday" }
   ],
   "eligibility": {
     "age": "18 years and above",
-    "citizenship": "Citizen of Australia",
-    "residence": "Resident in constituency"
+    "citizenship": "Australian Citizen",
+    "residence": "Lived at your address for at least one month"
   },
-  "glossary": [],
-  "quickQuestions": [
-    "How to vote?"
+  "glossary": [
+    { "term": "Compulsory Voting", "definition": "The legal requirement for all eligible Australian citizens to enrol and vote. Failure to vote without a valid reason results in a fine.", "category": "Rules" },
+    { "term": "Preferential Voting", "definition": "The system where voters rank candidates in order of preference (1, 2, 3...). Used for the House of Representatives.", "category": "Process" },
+    { "term": "House of Representatives", "definition": "The lower house of Parliament, consisting of 151 members, each representing one electoral division.", "category": "Structure" },
+    { "term": "Senate", "definition": "The upper house of Parliament, with 76 senators (12 from each state, 2 from each territory).", "category": "Structure" },
+    { "term": "AEC (Australian Electoral Commission)", "definition": "The independent federal agency responsible for conducting elections and maintaining the electoral roll.", "category": "Institutions" },
+    { "term": "Democracy Sausage", "definition": "A popular Australian tradition of buying a sausage in bread from a fundraising sizzle at a polling place on election day.", "category": "Process" },
+    { "term": "Electoral Division", "definition": "A geographical area represented by a member of the House of Representatives. Also known as a 'seat'.", "category": "Structure" },
+    { "term": "Informal Vote", "definition": "A ballot paper that has not been filled out correctly (e.g., missing numbers or symbols) and cannot be counted.", "category": "Process" },
+    { "term": "Donkey Vote", "definition": "A vote where a voter simply numbers the candidates in the order they appear on the ballot paper (1, 2, 3...). It is a valid vote.", "category": "Process" },
+    { "term": "How-to-Vote Card", "definition": "Leaflets handed out by political party volunteers outside polling places suggesting how voters should rank their preferences.", "category": "Rules" },
+    { "term": "Absolute Majority", "definition": "More than 50% of the total formal votes. A candidate must reach this to be elected in the House of Representatives.", "category": "Rules" },
+    { "term": "Two-Party Preferred (TPP)", "definition": "The result of an election after preferences are distributed between the two leading candidates (usually Labor and Coalition).", "category": "Process" },
+    { "term": "Double Dissolution", "definition": "A constitutional procedure where both the House and the Senate are dissolved simultaneously to resolve a deadlock between the two houses.", "category": "Process" },
+    { "term": "Caretaker Period", "definition": "The period from the issue of writs until the election result is clear, during which the government avoids making major policy decisions.", "category": "Rules" },
+    { "term": "Divisional Returning Officer (DRO)", "definition": "The AEC official responsible for the conduct of an election in a specific electoral division.", "category": "Institutions" },
+    { "term": "Postal Vote", "definition": "A vote cast by mail by a person who cannot attend a polling place on election day.", "category": "Process" },
+    { "term": "Pre-poll Voting", "definition": "The option to vote in person before election day at designated early voting centres.", "category": "Process" },
+    { "term": "Ballot Paper", "definition": "The paper on which a voter records their vote. Australians get two: Green (House) and White (Senate).", "category": "Process" }
   ],
-  "quiz": []
+  "quickQuestions": [
+    "Is voting compulsory in Australia?",
+    "What is a 'Democracy Sausage'?",
+    "How does preferential voting work?",
+    "What are the Green and White ballots for?"
+  ],
+  "quiz": [
+    { "id": "au_b1", "difficulty": "Beginner", "question": "What happens if you are eligible but do not vote in an Australian federal election?", "options": ["Nothing", "You get a fine", "You are banned from the next election", "You lose your citizenship"], "answer": 1, "explanation": "Voting is compulsory in Australia. If you don't vote and don't have a valid reason, you may be issued a fine (currently $20).", "funFact": "Australia was one of the first countries in the world to introduce compulsory voting (in 1924)." },
+    { "id": "au_b2", "difficulty": "Beginner", "question": "How many members are in the Australian House of Representatives?", "options": ["76", "100", "151", "226"], "answer": 2, "explanation": "There are currently 151 members, each representing one electoral division.", "funFact": "The size of the House is approximately double the size of the Senate." },
+    { "id": "au_b3", "difficulty": "Beginner", "question": "What is a 'Democracy Sausage'?", "options": ["A type of ballot paper", "A nickname for a politician", "A sausage sizzle at a polling place", "A formal election oath"], "answer": 2, "explanation": "It's a cultural tradition in Australia where community groups hold sausage sizzles at polling places to raise funds.", "funFact": "In 2016, 'Democracy Sausage' was named the Australian Word of the Year." },
+    { "id": "au_i1", "difficulty": "Intermediate", "question": "What is 'Preferential Voting'?", "options": ["Voters pick only their favorite candidate", "Voters rank candidates in order of preference", "Parties choose the winners", "The candidate with the most '1' votes wins automatically"], "answer": 1, "explanation": "Voters must number candidates 1, 2, 3... to show their order of preference. If no one gets 50%+, lower candidates are eliminated and votes redistributed.", "funFact": "Preferential voting ensures that the elected member is supported by a majority of voters in their division." },
+    { "id": "au_i2", "difficulty": "Intermediate", "question": "How many Senators does each state have in Australia?", "options": ["2", "6", "12", "Variable by population"], "answer": 2, "explanation": "Each of the six states has 12 senators. The two territories (ACT and NT) have 2 each.", "funFact": "Senators serve 6-year terms, but elections are usually held for half of the Senate every 3 years." },
+    { "id": "au_e1", "difficulty": "Expert", "question": "What is a 'Double Dissolution' election?", "options": ["When two parties merge before an election", "When both the House and the Senate are dissolved to resolve a deadlock", "When a voter casts two ballots by mistake", "When an election is held twice in one year"], "answer": 1, "explanation": "Triggered under Section 57 of the Constitution when the Senate twice rejects a bill passed by the House. All seats in both houses are contested.", "funFact": "There have been only seven double dissolution elections in Australian history, the most recent in 2016." }
+  ]
 }

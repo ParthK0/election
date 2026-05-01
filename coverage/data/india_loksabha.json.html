@@ -1,0 +1,685 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Code coverage report for data/india_loksabha.json</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">data</a> india_loksabha.json</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>0/0</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>0/0</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>0/0</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>0/0</span>
+            </div>
+        
+            
+        </div>
+        <p class="quiet">
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+        </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input type="search" id="fileSearch">
+            </div>
+        </template>
+    </div>
+    <div class='status-line low'></div>
+    <pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
+<a name='L2'></a><a href='#L2'>2</a>
+<a name='L3'></a><a href='#L3'>3</a>
+<a name='L4'></a><a href='#L4'>4</a>
+<a name='L5'></a><a href='#L5'>5</a>
+<a name='L6'></a><a href='#L6'>6</a>
+<a name='L7'></a><a href='#L7'>7</a>
+<a name='L8'></a><a href='#L8'>8</a>
+<a name='L9'></a><a href='#L9'>9</a>
+<a name='L10'></a><a href='#L10'>10</a>
+<a name='L11'></a><a href='#L11'>11</a>
+<a name='L12'></a><a href='#L12'>12</a>
+<a name='L13'></a><a href='#L13'>13</a>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a>
+<a name='L105'></a><a href='#L105'>105</a>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a>
+<a name='L147'></a><a href='#L147'>147</a>
+<a name='L148'></a><a href='#L148'>148</a>
+<a name='L149'></a><a href='#L149'>149</a>
+<a name='L150'></a><a href='#L150'>150</a>
+<a name='L151'></a><a href='#L151'>151</a>
+<a name='L152'></a><a href='#L152'>152</a>
+<a name='L153'></a><a href='#L153'>153</a>
+<a name='L154'></a><a href='#L154'>154</a>
+<a name='L155'></a><a href='#L155'>155</a>
+<a name='L156'></a><a href='#L156'>156</a>
+<a name='L157'></a><a href='#L157'>157</a>
+<a name='L158'></a><a href='#L158'>158</a>
+<a name='L159'></a><a href='#L159'>159</a>
+<a name='L160'></a><a href='#L160'>160</a>
+<a name='L161'></a><a href='#L161'>161</a>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a>
+<a name='L164'></a><a href='#L164'>164</a>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a>
+<a name='L173'></a><a href='#L173'>173</a>
+<a name='L174'></a><a href='#L174'>174</a>
+<a name='L175'></a><a href='#L175'>175</a>
+<a name='L176'></a><a href='#L176'>176</a>
+<a name='L177'></a><a href='#L177'>177</a>
+<a name='L178'></a><a href='#L178'>178</a>
+<a name='L179'></a><a href='#L179'>179</a>
+<a name='L180'></a><a href='#L180'>180</a>
+<a name='L181'></a><a href='#L181'>181</a>
+<a name='L182'></a><a href='#L182'>182</a>
+<a name='L183'></a><a href='#L183'>183</a>
+<a name='L184'></a><a href='#L184'>184</a>
+<a name='L185'></a><a href='#L185'>185</a>
+<a name='L186'></a><a href='#L186'>186</a>
+<a name='L187'></a><a href='#L187'>187</a>
+<a name='L188'></a><a href='#L188'>188</a>
+<a name='L189'></a><a href='#L189'>189</a>
+<a name='L190'></a><a href='#L190'>190</a>
+<a name='L191'></a><a href='#L191'>191</a>
+<a name='L192'></a><a href='#L192'>192</a>
+<a name='L193'></a><a href='#L193'>193</a>
+<a name='L194'></a><a href='#L194'>194</a>
+<a name='L195'></a><a href='#L195'>195</a>
+<a name='L196'></a><a href='#L196'>196</a>
+<a name='L197'></a><a href='#L197'>197</a>
+<a name='L198'></a><a href='#L198'>198</a>
+<a name='L199'></a><a href='#L199'>199</a>
+<a name='L200'></a><a href='#L200'>200</a>
+<a name='L201'></a><a href='#L201'>201</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">{
+  "country": "India",
+  "electionName": "General Election (Lok Sabha)",
+  "targetDate": "2029-05-15T08:00:00",
+  "phases": [
+    {
+      "id": "registration",
+      "label": "Voter Registration",
+      "icon": "📋",
+      "duration": "Ongoing until ~6 weeks before poll",
+      "description": "The first step to participating in democracy. Ensure your name is on the electoral roll.",
+      "steps": [
+        "Check name in Voter List via Voter Service Portal",
+        "Fill Form 6 if not registered",
+        "Verification by Booth Level Officer (BLO)",
+        "Issuance of Voter ID (EPIC)"
+      ],
+      "voterActions": [
+        "Visit voterportal.eci.gov.in",
+        "Keep Aadhaar/Address proof ready",
+        "Download e-EPIC card"
+      ],
+      "candidateDetails": {
+        "requirements": [
+          "Must be a registered voter in any constituency",
+          "Minimum age: 25 years",
+          "Must not be a 'Proclaimed Offender'"
+        ],
+        "forms": ["Form 26 (Affidavit)"]
+      },
+      "keyLinks": [
+        { "label": "Voter Service Portal", "url": "https://voters.eci.gov.in" }
+      ]
+    },
+    {
+      "id": "nomination",
+      "label": "Candidate Nomination",
+      "icon": "🖋️",
+      "duration": "7 days after Notification",
+      "description": "Candidates file their papers to contest the election.",
+      "steps": [
+        "Filing of nomination papers with Returning Officer",
+        "Submission of security deposit",
+        "Affidavit submission (Assets, Criminal Record)",
+        "Scrutiny of nominations"
+      ],
+      "voterActions": [
+        "Check candidate affidavits on ECI site",
+        "Know your candidate's background"
+      ],
+      "candidateDetails": {
+        "deposit": "₹25,000 (General) / ₹12,500 (SC/ST)",
+        "proposers": "10 proposers required for independent candidates",
+        "disqualification": "Failure to lodge account of election expenses",
+        "documents": [
+          "Certified copy of electoral roll entry",
+          "Security deposit receipt",
+          "Form 26 Affidavit"
+        ]
+      },
+      "keyLinks": [
+        { "label": "Know Your Candidate", "url": "https://affidavit.eci.gov.in" }
+      ]
+    },
+    {
+      "id": "campaign",
+      "label": "Campaigning",
+      "icon": "📢",
+      "duration": "Until 48 hours before polling",
+      "description": "Political parties and candidates reach out to voters with their manifestos.",
+      "steps": [
+        "Public rallies and manifestos",
+        "Door-to-door campaigning",
+        "Media advertisements",
+        "Model Code of Conduct (MCC) enforcement"
+      ],
+      "voterActions": [
+        "Attend local debates",
+        "Read manifestos carefully",
+        "Report MCC violations via cVIGIL app"
+      ],
+      "candidateDetails": {
+        "expenditureLimit": "₹95 Lakhs per constituency",
+        "mccRules": [
+          "No appeal to caste or communal feelings",
+          "No use of religious places for election propaganda",
+          "48-hour silence period before polling"
+        ],
+        "permits": "Required for loudspeakers, rallies, and vehicles"
+      },
+      "keyLinks": [
+        { "label": "cVIGIL App", "url": "https://cvigil.eci.gov.in" }
+      ]
+    },
+    {
+      "id": "voting",
+      "label": "Polling Day",
+      "icon": "🗳️",
+      "duration": "One Day (per phase)",
+      "description": "The day you cast your vote using EVMs and VVPATs.",
+      "steps": [
+        "Mock poll by polling agents",
+        "Identity verification at booth",
+        "Inking of finger",
+        "Casting vote on EVM",
+        "Verification of VVPAT slip"
+      ],
+      "voterActions": [
+        "Carry Voter ID or approved alternative ID",
+        "Locate your polling station",
+        "Check the blue button on EVM"
+      ],
+      "keyLinks": [
+        { "label": "Find Polling Station", "url": "https://electorallookup.in" }
+      ]
+    },
+    {
+      "id": "counting",
+      "label": "Counting &amp; Results",
+      "icon": "📊",
+      "duration": "One Day",
+      "description": "Votes are counted and results are declared.",
+      "steps": [
+        "Strong room opening",
+        "Counting of postal ballots first",
+        "EVM counting round by round",
+        "Declaration of winner per constituency"
+      ],
+      "voterActions": [
+        "Watch live results on ECI website",
+        "Follow official announcements only"
+      ],
+      "keyLinks": [
+        { "label": "ECI Results Portal", "url": "https://results.eci.gov.in" }
+      ]
+    }
+  ],
+  "keyDates": [
+    { "event": "Notification Date", "date": "T-30 Days" },
+    { "event": "Last Date for Nomination", "date": "T-23 Days" },
+    { "event": "Date of Poll", "date": "Phase dependent" },
+    { "event": "Counting Date", "date": "Fixed by ECI" }
+  ],
+  "eligibility": {
+    "age": "18 years and above",
+    "citizenship": "Indian Citizen",
+    "residence": "Ordinary resident in the constituency"
+  },
+  "glossary": [
+    { "term": "Lok Sabha", "definition": "The lower house of India's bicameral Parliament, known as the 'House of the People.' It has 543 directly elected seats. The party or coalition with a majority forms the government.", "category": "Structure" },
+    { "term": "Rajya Sabha", "definition": "The upper house of Parliament, known as the 'Council of States.' It has 245 members — 233 elected by state legislative assemblies and 12 nominated by the President.", "category": "Structure" },
+    { "term": "Election Commission of India (ECI)", "definition": "The autonomous constitutional body established under Article 324 that administers all election processes in India.", "category": "Institutions" },
+    { "term": "EVM (Electronic Voting Machine)", "definition": "A standalone electronic device used to cast and count votes in Indian elections. Each EVM consists of a Control Unit and a Ballot Unit.", "category": "Process" },
+    { "term": "VVPAT", "definition": "Voter Verified Paper Audit Trail — a printer device attached to EVMs that generates a paper slip showing the voter's choice, visible for 7 seconds.", "category": "Process" },
+    { "term": "Model Code of Conduct (MCC)", "definition": "Guidelines issued by the ECI to regulate political parties and candidates during elections. Comes into effect when election dates are announced.", "category": "Rules" },
+    { "term": "Constituency", "definition": "A geographic area whose residents elect one representative to Parliament or a state legislature. India has 543 Lok Sabha constituencies.", "category": "Structure" },
+    { "term": "Returning Officer", "definition": "An official appointed by the ECI to oversee the election process in a constituency — from receiving nominations to declaring results.", "category": "Institutions" },
+    { "term": "NOTA", "definition": "'None of the Above' — an option on the EVM ballot allowing voters to reject all candidates. Introduced in 2013 following the Supreme Court's PUCL judgment.", "category": "Process" },
+    { "term": "Delimitation", "definition": "The process of redrawing electoral constituency boundaries based on census data, carried out by the Delimitation Commission.", "category": "Structure" },
+    { "term": "Affidavit", "definition": "A sworn legal declaration every candidate must file disclosing criminal record, assets, liabilities, and educational qualifications.", "category": "Process" },
+    { "term": "Anti-Defection Law", "definition": "The 10th Schedule of the Constitution (1985) which disqualifies an MP/MLA who votes against their party whip or voluntarily gives up membership.", "category": "Rules" },
+    { "term": "President's Rule", "definition": "Direct Central Rule under Article 356, imposed when a state government cannot function constitutionally. State legislature is suspended.", "category": "Structure" },
+    { "term": "By-election", "definition": "An election held to fill a seat that has become vacant mid-term due to death, resignation, or disqualification of a sitting member.", "category": "Process" },
+    { "term": "Booth Level Officer (BLO)", "definition": "A government official assigned to a specific polling booth responsible for maintaining the electoral roll and assisting in voter registration.", "category": "Institutions" },
+    { "term": "Postal Ballot", "definition": "A facility allowing armed forces personnel, police on election duty, and voters with disabilities to vote by post without visiting a polling booth.", "category": "Process" },
+    { "term": "Rajya Sabha Biennial Elections", "definition": "One-third of Rajya Sabha members retire every two years, with elections held by state legislative assemblies using the Single Transferable Vote method.", "category": "Structure" },
+    { "term": "Recognized Political Party", "definition": "A party recognized by the ECI based on electoral performance. Classification: National (recognized in 4+ states) or State parties.", "category": "Institutions" },
+    { "term": "Election Observer", "definition": "Senior IAS/IPS officers deployed by the ECI to monitor election conduct and ensure the Model Code of Conduct is followed.", "category": "Institutions" },
+    { "term": "Silent Period", "definition": "The 48-hour period before polls close during which no political campaigning is permitted, giving voters time to reflect.", "category": "Rules" },
+    { "term": "SC/ST Reserved Constituencies", "definition": "84 Lok Sabha seats reserved for SC candidates and 47 for ST candidates. Only members of these communities can contest, though all voters vote.", "category": "Structure" },
+    { "term": "Voter ID Card (EPIC)", "definition": "The Electoral Photo Identity Card issued by the ECI. The ECI also accepts 11 alternative documents including Aadhaar and passport.", "category": "Process" },
+    { "term": "Campaign Expenditure Limit", "definition": "For Lok Sabha elections, the limit is ₹95 lakh per candidate. Violation is grounds for disqualification.", "category": "Rules" },
+    { "term": "Representation of the People Act, 1951", "definition": "The primary legislation governing elections in India — covers qualification/disqualification, election offences, corrupt practices, and dispute resolution.", "category": "Rules" },
+    { "term": "President's Role in Elections", "definition": "The President issues election notifications, invites the majority party leader to form government, and administers the oath of office to the PM.", "category": "Institutions" },
+    { "term": "Horse Trading", "definition": "Informal term for the practice of political parties attempting to poach elected members from rival parties through inducements — often money or ministerial positions. The Anti-Defection Law (10th Schedule) was introduced specifically to curb this practice.", "category": "Rules" }
+  ],
+  "quickQuestions": [
+    "What documents do I need to vote?",
+    "How to check my name in the voter list?",
+    "What is NOTA?",
+    "Can I vote if I am an NRI?"
+  ],
+  "quiz": [
+    { "id": "in_b1", "difficulty": "Beginner", "question": "What is the minimum age to vote in Indian general elections?", "options": ["16 years", "18 years", "21 years", "25 years"], "answer": 1, "explanation": "The 61st Constitutional Amendment (1988) lowered the voting age from 21 to 18 years.", "funFact": "India has more voters under the age of 25 than the entire population of the United States." },
+    { "id": "in_b2", "difficulty": "Beginner", "question": "Which body is responsible for conducting elections in India?", "options": ["Supreme Court of India", "Election Commission of India", "Parliament of India", "Ministry of Home Affairs"], "answer": 1, "explanation": "The Election Commission of India (ECI) is an autonomous constitutional authority established on January 25, 1950.", "funFact": "January 25 is celebrated as National Voters' Day in India — the anniversary of the ECI's founding." },
+    { "id": "in_b3", "difficulty": "Beginner", "question": "What does 'Lok Sabha' literally mean?", "options": ["House of Elders", "House of the People", "Council of States", "House of Ministers"], "answer": 1, "explanation": "'Lok Sabha' translates to 'House of the People' in Hindi. It is the lower house with 543 elected seats.", "funFact": "The first Lok Sabha session was held on May 13, 1952. The youngest-ever MP was Chandrani Murmu, elected at age 25." },
+    { "id": "in_b4", "difficulty": "Beginner", "question": "What is NOTA in Indian elections?", "options": ["Name of a political party", "None of the Above option on ballot", "A type of EVM", "National Officers Training Academy"], "answer": 1, "explanation": "NOTA was introduced in 2013 following a Supreme Court order, allowing voters to reject all candidates.", "funFact": "In the 2019 general election, over 6.5 million voters chose NOTA — more than the population of Singapore." },
+    { "id": "in_b5", "difficulty": "Beginner", "question": "How many seats does a party need to win a majority in the Lok Sabha?", "options": ["200", "243", "272", "300"], "answer": 2, "explanation": "The Lok Sabha has 543 elected seats. A simple majority requires 272 seats (more than half).", "funFact": "The largest-ever Lok Sabha majority was in 1984, when the INC won 414 of 543 seats after Indira Gandhi's assassination." },
+    { "id": "in_i1", "difficulty": "Intermediate", "question": "What is the security deposit amount for a Lok Sabha candidate?", "options": ["₹10,000", "₹25,000", "₹50,000", "₹1,00,000"], "answer": 1, "explanation": "A candidate must deposit ₹25,000 (₹12,500 for SC/ST). Forfeited if they fail to secure 1/6th of valid votes.", "funFact": "In the 2019 elections, over 80% of independent candidates lost their security deposits — the deposit is designed to deter frivolous candidacies." },
+    { "id": "in_i2", "difficulty": "Intermediate", "question": "What is the Model Code of Conduct (MCC)?", "options": ["A law passed by Parliament", "Guidelines issued by ECI for parties and candidates during elections", "Rules for EVM usage", "A Supreme Court judgment"], "answer": 1, "explanation": "The MCC regulates parties and candidates during elections, active from date announcement to result declaration.", "funFact": "The MCC is not a law — it's a voluntary code. But parties follow it because the ECI can postpone elections in a constituency if it's violated." },
+    { "id": "in_i3", "difficulty": "Intermediate", "question": "What is VVPAT and what is its purpose?", "options": ["A biometric voter ID system", "A paper trail that lets voters verify their EVM vote", "A postal ballot system for armed forces", "A voter registration portal"], "answer": 1, "explanation": "VVPAT prints a slip showing the candidate voted for, visible for 7 seconds, providing an audit trail.", "funFact": "In 2019, the Supreme Court ordered VVPAT verification of 5 randomly selected EVMs per constituency — requiring over 20,000 VVPAT audits." },
+    { "id": "in_i4", "difficulty": "Intermediate", "question": "Which Article of the Indian Constitution establishes the Election Commission?", "options": ["Article 148", "Article 280", "Article 324", "Article 356"], "answer": 2, "explanation": "Article 324 vests the superintendence and control of all elections in the Election Commission of India.", "funFact": "Sukumar Sen, the first Chief Election Commissioner, organized India's first-ever election in 1951-52 — covering 173 million voters, most of whom couldn't read." },
+    { "id": "in_i5", "difficulty": "Intermediate", "question": "Why does India conduct elections in multiple phases?", "options": ["To save money on printing", "To allow candidates to campaign in multiple constituencies", "To deploy adequate security forces across a vast geography", "Because the Constitution mandates it"], "answer": 2, "explanation": "Multi-phase elections (up to 7) allow adequate deployment of central security forces across 543 constituencies.", "funFact": "The 2019 general election lasted 39 days across 7 phases and cost approximately ₹60,000 crore — making it the most expensive election in the world at that time." },
+    { "id": "in_e1", "difficulty": "Expert", "question": "Under which provision can the President of India dissolve the Lok Sabha?", "options": ["Article 83(2)", "Article 85(2)(b)", "Article 74(1)", "Article 356"], "answer": 1, "explanation": "Under Article 85(2)(b), the President can dissolve the Lok Sabha on the advice of the Prime Minister.", "funFact": "The Lok Sabha has been dissolved prematurely 8 times — most recently in 1999 when the Vajpayee government lost a confidence motion by just 1 vote." },
+    { "id": "in_e2", "difficulty": "Expert", "question": "What is the Representation of the People Act, 1951 primarily concerned with?", "options": ["Defining citizen rights", "Regulating the actual conduct of elections and qualifications of representatives", "Delimitation of constituencies", "Formation of the Election Commission"], "answer": 1, "explanation": "The RPA 1951 governs conduct of elections, qualification/disqualification, corrupt practices, and election disputes.", "funFact": "Section 123 of the RPA defines 'corrupt practices' — including hiring vehicles to transport voters to polling stations, which is still illegal today." },
+    { "id": "in_e3", "difficulty": "Expert", "question": "What happens if a Lok Sabha candidate's security deposit is forfeited?", "options": ["They are banned from future elections", "The ₹25,000 deposit is retained by the government", "The result of the constituency is annulled", "The candidate must pay a penalty"], "answer": 1, "explanation": "If a candidate fails to secure 1/6th of valid votes, the deposit is forfeited to the Consolidated Fund of India.", "funFact": "In 2019, the ECI collected over ₹47 crore in forfeited deposits — mostly from independent candidates who got very few votes." },
+    { "id": "in_e4", "difficulty": "Expert", "question": "What is 'delimitation' in the context of Indian elections?", "options": ["The process of counting votes", "The fixing of boundaries and seats of electoral constituencies", "The announcement of election dates", "The verification of nomination papers"], "answer": 1, "explanation": "Delimitation redraws constituency boundaries based on census data. The current freeze is due for review after 2026.", "funFact": "The 2002 Delimitation Commission took 6 years to complete its work. The freeze on delimitation (based on 1971 population data) was meant to encourage family planning." },
+    { "id": "in_e5", "difficulty": "Expert", "question": "Under the anti-defection law (10th Schedule), when can an MP vote against their party without losing their seat?", "options": ["Never — any vote against the party results in disqualification", "Only if more than 2/3 of the party's legislature members support the dissent", "Only with written permission from the Speaker", "If the vote is on a private member's bill"], "answer": 1, "explanation": "An MP is not disqualified if at least 2/3 of the party's legislative members vote in favour of a merger.", "funFact": "The 10th Schedule was introduced in 1985 after the 'Aaya Ram Gaya Ram' era of the 1960s-70s, when one MLA in Haryana switched parties 3 times in a single day." }
+  ]
+}
+&nbsp;</pre></td></tr></table></pre>
+
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2026-05-01T18:19:09.683Z
+            </div>
+        <script src="../prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="../sorter.js"></script>
+        <script src="../block-navigation.js"></script>
+    </body>
+</html>
+    

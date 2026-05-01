@@ -1,52 +1,89 @@
 {
   "country": "United Kingdom",
   "electionName": "General Election",
-  "targetDate": "2028-01-01T08:00:00",
+  "targetDate": "2029-01-24T08:00:00",
   "phases": [
     {
       "id": "registration",
-      "label": "Registration",
+      "label": "Register to Vote",
       "icon": "📋",
       "duration": "Ongoing",
-      "description": "Voter registration phase.",
+      "description": "Ensure you are on the electoral register to have your say.",
       "steps": [
-        "Register to vote"
+        "Check eligibility (Citizen, 18+)",
+        "Register online (gov.uk/register-to-vote)",
+        "Receive poll card"
       ],
       "voterActions": [
-        "Check registration status"
+        "Register at least 12 working days before poll",
+        "Update details if you moved house"
       ],
-      "keyLinks": []
+      "keyLinks": [
+        { "label": "Register to Vote", "url": "https://www.gov.uk/register-to-vote" }
+      ]
     },
     {
       "id": "voting",
-      "label": "Voting Day",
+      "label": "Polling Day",
       "icon": "🗳️",
-      "duration": "One Day",
-      "description": "Cast your vote.",
+      "duration": "One Day (7am - 10pm)",
+      "description": "Casting your vote in person, by post, or by proxy.",
       "steps": [
-        "Go to polling station",
-        "Vote"
+        "Find your polling station",
+        "Bring valid Photo ID (mandatory since 2023)",
+        "Mark an 'X' for one candidate"
       ],
       "voterActions": [
-        "Bring ID"
+        "Check Voter ID requirements",
+        "Locate polling station on poll card"
       ],
-      "keyLinks": []
+      "keyLinks": [
+        { "label": "Electoral Commission", "url": "https://www.electoralcommission.org.uk" }
+      ]
     }
   ],
   "keyDates": [
-    {
-      "event": "Election Day",
-      "date": "TBD"
-    }
+    { "event": "Dissolution of Parliament", "date": "T-25 working days" },
+    { "event": "Registration Deadline", "date": "T-12 working days" },
+    { "event": "Polling Day", "date": "Usually a Thursday" }
   ],
   "eligibility": {
     "age": "18 years and above",
-    "citizenship": "Citizen of United Kingdom",
-    "residence": "Resident in constituency"
+    "citizenship": "British, Irish or qualifying Commonwealth citizen",
+    "residence": "Resident in the UK (or living abroad and registered as an overseas voter)"
   },
-  "glossary": [],
-  "quickQuestions": [
-    "How to vote?"
+  "glossary": [
+    { "term": "MP (Member of Parliament)", "definition": "A representative elected to the House of Commons. There are 650 MPs in total.", "category": "Structure" },
+    { "term": "Constituency", "definition": "The specific geographical area an MP represents. Voters only vote for candidates in their own constituency.", "category": "Structure" },
+    { "term": "First-Past-The-Post", "definition": "The voting system used for UK General Elections. The candidate with the most votes in a constituency wins, even without a majority.", "category": "Process" },
+    { "term": "House of Commons", "definition": "The primary chamber of the UK Parliament where MPs debate and vote on laws.", "category": "Structure" },
+    { "term": "House of Lords", "definition": "The second chamber of Parliament, consisting of peers who review and suggest changes to legislation.", "category": "Structure" },
+    { "term": "General Election", "definition": "An election to choose all 650 MPs. Must be held at least every five years.", "category": "Process" },
+    { "term": "Manifesto", "definition": "A document published by a political party outlining their policies and plans if they win the election.", "category": "Rules" },
+    { "term": "By-election", "definition": "An election held in a single constituency if an MP resigns or dies during a term.", "category": "Process" },
+    { "term": "Electoral Commission", "definition": "The independent body that oversees elections and regulates political finance in the UK.", "category": "Institutions" },
+    { "term": "Voter ID", "definition": "The requirement (since 2023) to show a valid form of photo identification when voting in person.", "category": "Rules" },
+    { "term": "Postal Vote", "definition": "A method of voting where the ballot paper is sent to the voter's address and returned by mail.", "category": "Process" },
+    { "term": "Proxy Vote", "definition": "When a voter appoints someone else to cast their vote on their behalf.", "category": "Process" },
+    { "term": "Dissolution", "definition": "The formal end of a Parliament before a General Election is held.", "category": "Process" },
+    { "term": "Hung Parliament", "definition": "When no single political party wins an absolute majority (over 325 seats) in the House of Commons.", "category": "Structure" },
+    { "term": "Coalition", "definition": "When two or more parties join together to form a government after a hung parliament.", "category": "Structure" },
+    { "term": "Electoral Register", "definition": "The list of everyone who is registered and eligible to vote.", "category": "Rules" },
+    { "term": "Tellers", "definition": "Volunteers for political parties who stand outside polling stations to ask voters for their poll card numbers.", "category": "Process" },
+    { "term": "Tactical Voting", "definition": "Voting for a candidate who is not the voter's first choice to prevent another candidate from winning.", "category": "Rules" }
   ],
-  "quiz": []
+  "quickQuestions": [
+    "Do I need ID to vote in the UK?",
+    "How do I register to vote?",
+    "What is First-Past-The-Post?",
+    "How many MPs are there?"
+  ],
+  "quiz": [
+    { "id": "uk_b1", "difficulty": "Beginner", "question": "How many MPs are elected to the House of Commons?", "options": ["450", "600", "650", "750"], "answer": 2, "explanation": "There are 650 constituencies in the UK, each electing one Member of Parliament.", "funFact": "The 650 seats are being reviewed to ensure constituencies have similar numbers of voters." },
+    { "id": "uk_b2", "difficulty": "Beginner", "question": "What voting system is used for UK General Elections?", "options": ["Proportional Representation", "First-Past-The-Post", "Ranked Choice", "Single Transferable Vote"], "answer": 1, "explanation": "The UK uses First-Past-The-Post, where the candidate with the most votes wins, regardless of whether they have a majority.", "funFact": "This system usually favors larger parties and can lead to strong single-party governments." },
+    { "id": "uk_b3", "difficulty": "Beginner", "question": "Since 2023, what MUST you bring to a polling station in person?", "options": ["Your poll card", "Proof of address", "A valid photo ID", "A pen"], "answer": 2, "explanation": "Voters in Great Britain now need to show a valid photo ID to vote in person at General Elections.", "funFact": "If you don't have an accepted ID, you can apply for a free Voter Authority Certificate." },
+    { "id": "uk_i1", "difficulty": "Intermediate", "question": "What happens in a 'Hung Parliament'?", "options": ["The election is cancelled", "The Queen/King chooses the PM", "No single party has an absolute majority", "A second election is held immediately"], "answer": 2, "explanation": "A hung parliament occurs when no party reaches the 326-seat threshold for a majority.", "funFact": "The UK had hung parliaments in 2010 and 2017." },
+    { "id": "uk_i2", "difficulty": "Intermediate", "question": "What is the maximum term for a UK Parliament?", "options": ["3 years", "4 years", "5 years", "6 years"], "answer": 2, "explanation": "Under the Dissolution and Calling of Parliament Act 2022, the maximum term is 5 years.", "funFact": "Parliament is automatically dissolved five years after it first met if it hasn't been dissolved sooner." },
+    { "id": "uk_e1", "difficulty": "Expert", "question": "Which of these people is NOT eligible to vote in a UK General Election?", "options": ["A member of the House of Lords", "A Commonwealth citizen resident in the UK", "An overseas voter registered in their last UK constituency", "An Irish citizen resident in the UK"], "answer": 0, "explanation": "Members of the House of Lords are excluded from voting in General Elections.", "funFact": "Convicted prisoners serving a sentence are also legally barred from voting in the UK." }
+  ]
 }

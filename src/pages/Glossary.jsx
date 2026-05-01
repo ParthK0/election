@@ -1,4 +1,4 @@
-import { useElection } from "../context/ElectionContext";
+import { useElection } from "../hooks/useElection";
 import { useState, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion, AnimatePresence } from "framer-motion";
@@ -107,7 +107,7 @@ const Glossary = () => {
           </h1>
           <p className="text-text-muted max-w-xl text-sm leading-relaxed">
             Electoral terminology for{" "}
-            {country.charAt(0).toUpperCase() + country.slice(1)}. Click "Ask AI"
+            {country.charAt(0).toUpperCase() + country.slice(1)}. Click &quot;Ask AI&quot;
             on any term for a detailed explanation.
           </p>
         </header>
@@ -184,8 +184,8 @@ const Glossary = () => {
           </AnimatePresence>
           {filteredGlossary.length === 0 && (
             <div className="py-16 text-center">
-              <p className="text-text-muted text-sm mb-2">
-                No terms found matching "{search}"
+              <p className="text-text-muted text-sm max-w-md mx-auto">
+                We couldn&apos;t find any terms matching &quot;{search}&quot; in the {activeCategory} category.
               </p>
               <button
                 onClick={() => {

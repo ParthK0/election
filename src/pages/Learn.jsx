@@ -1,4 +1,4 @@
-import { useElection } from "../context/ElectionContext";
+import { useElection } from "../hooks/useElection";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { AnimatePresence } from "framer-motion";

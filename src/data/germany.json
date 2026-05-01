@@ -1,52 +1,89 @@
 {
   "country": "Germany",
-  "electionName": "Bundestag Election",
-  "targetDate": "2028-01-01T08:00:00",
+  "electionName": "Federal Election (Bundestagswahl)",
+  "targetDate": "2025-09-28T08:00:00",
   "phases": [
     {
       "id": "registration",
-      "label": "Registration",
+      "label": "Voter Notification",
       "icon": "📋",
       "duration": "Ongoing",
-      "description": "Voter registration phase.",
+      "description": "Registration is automatic for residents, but you should receive your notification.",
       "steps": [
-        "Register to vote"
+        "Ensure you are registered at your current residence (Meldeadresse)",
+        "Receive 'Wahlbenachrichtigung' (Voter Notification) in the mail",
+        "Apply for mail-in ballot if needed"
       ],
       "voterActions": [
-        "Check registration status"
+        "Check that your address is correct in the 'Melderegister'",
+        "Look for your notification card ~3 weeks before the poll"
       ],
-      "keyLinks": []
+      "keyLinks": [
+        { "label": "Federal Returning Officer", "url": "https://www.bundeswahlleiter.de/en/" }
+      ]
     },
     {
       "id": "voting",
-      "label": "Voting Day",
+      "label": "Polling Day",
       "icon": "🗳️",
-      "duration": "One Day",
-      "description": "Cast your vote.",
+      "duration": "One Day (8am - 6pm)",
+      "description": "Casting your two votes in the Bundestag election.",
       "steps": [
-        "Go to polling station",
-        "Vote"
+        "Bring your 'Wahlbenachrichtigung' and ID to the booth",
+        "First Vote (Erststimme) for a local candidate",
+        "Second Vote (Zweitstimme) for a party list"
       ],
       "voterActions": [
-        "Bring ID"
+        "Ensure you mark both votes correctly",
+        "Locate your 'Wahllokal' (polling place) on your notification"
       ],
-      "keyLinks": []
+      "keyLinks": [
+        { "label": "How the System Works", "url": "https://www.bundestag.de/en/parliament/elections/elections/245690" }
+      ]
     }
   ],
   "keyDates": [
-    {
-      "event": "Election Day",
-      "date": "TBD"
-    }
+    { "event": "Notification Period", "date": "T-21 to T-14 Days" },
+    { "event": "Polling Day", "date": "Sunday, Sept 28, 2025" },
+    { "event": "Inauguration", "date": "Within 30 days after election" }
   ],
   "eligibility": {
     "age": "18 years and above",
-    "citizenship": "Citizen of Germany",
-    "residence": "Resident in constituency"
+    "citizenship": "German Citizen",
+    "residence": "Resident in Germany for at least 3 months"
   },
-  "glossary": [],
-  "quickQuestions": [
-    "How to vote?"
+  "glossary": [
+    { "term": "Bundestag", "definition": "The German Federal Parliament, located in the Reichstag building in Berlin.", "category": "Structure" },
+    { "term": "Erststimme (First Vote)", "definition": "The vote for a direct candidate in one of the 299 electoral districts.", "category": "Process" },
+    { "term": "Zweitstimme (Second Vote)", "definition": "The more important vote, given to a party list. It determines the percentage of seats each party gets in the Bundestag.", "category": "Process" },
+    { "term": "MMP (Mixed-Member Proportional)", "definition": "The electoral system combining direct local representation with proportional party representation.", "category": "Structure" },
+    { "term": "5% Threshold (Fünf-Prozent-Hürde)", "definition": "A party must win at least 5% of the national 'Second Votes' (or 3 direct mandates) to enter the Bundestag.", "category": "Rules" },
+    { "term": "Überhangmandate (Overhang Seats)", "definition": "Extra seats created when a party wins more direct mandates (First Votes) than its proportional share (Second Votes).", "category": "Structure" },
+    { "term": "Ausgleichsmandate (Leveling Seats)", "definition": "Seats added to ensure other parties maintain their proportional share after overhang seats are granted.", "category": "Structure" },
+    { "term": "Wahlkreis (Electoral District)", "definition": "One of 299 geographical areas in Germany. Each district elects one member directly.", "category": "Structure" },
+    { "term": "Bundeswahlleiter", "definition": "The Federal Returning Officer, who oversees the conduct of elections and ensures they are free and fair.", "category": "Institutions" },
+    { "term": "Briefwahl (Mail-in Voting)", "definition": "The option to vote by mail, available to all eligible voters without needing a specific excuse.", "category": "Process" },
+    { "term": "Fraktion", "definition": "A parliamentary group consisting of at least 5% of the members of the Bundestag, usually from the same party.", "category": "Structure" },
+    { "term": "Koalitionsvertrag (Coalition Agreement)", "definition": "A detailed document outlining the policies and goals of the parties that have agreed to govern together.", "category": "Rules" },
+    { "term": "Bundeskanzler (Federal Chancellor)", "definition": "The head of the German government, elected by the Bundestag upon the proposal of the Federal President.", "category": "Institutions" },
+    { "term": "Bundespräsident (Federal President)", "definition": "The head of state, whose role is largely ceremonial but includes formally proposing the Chancellor.", "category": "Institutions" },
+    { "term": "Wahlbenachrichtigung", "definition": "The official voter notification card sent to every registered voter before an election.", "category": "Rules" },
+    { "term": "Personalized Proportional Representation", "definition": "Another name for Germany's electoral system, emphasizing that it is proportional but with local candidates.", "category": "Structure" },
+    { "term": "Landesliste", "definition": "A list of candidates nominated by a party in a specific federal state (Land) for the second vote.", "category": "Process" },
+    { "term": "Constructive Vote of No Confidence", "definition": "A constitutional mechanism where the Bundestag can only remove a Chancellor if they elect a successor at the same time.", "category": "Rules" }
   ],
-  "quiz": []
+  "quickQuestions": [
+    "What are the 'First' and 'Second' votes?",
+    "What is the 5% threshold?",
+    "How do I vote by mail in Germany?",
+    "What are overhang seats?"
+  ],
+  "quiz": [
+    { "id": "de_b1", "difficulty": "Beginner", "question": "In Germany, which vote is more important for determining the total number of seats a party gets?", "options": ["First Vote (Erststimme)", "Second Vote (Zweitstimme)", "Third Vote", "None of them"], "answer": 1, "explanation": "The Second Vote (Zweitstimme) is given to a party list and determines the proportional share of seats in the Bundestag.", "funFact": "Voters often 'split' their tickets, voting for a local candidate from one party and a list from another." },
+    { "id": "de_b2", "difficulty": "Beginner", "question": "What is the minimum percentage of votes a party usually needs to enter the Bundestag?", "options": ["1%", "3%", "5%", "10%"], "answer": 2, "explanation": "The '5% hurdle' was introduced to prevent the fragmentation of parliament and ensure stable governments.", "funFact": "A party can also enter if they win at least 3 direct mandates (First Votes) across the country." },
+    { "id": "de_b3", "difficulty": "Beginner", "question": "How often are federal elections (Bundestagswahlen) usually held in Germany?", "options": ["Every 2 years", "Every 4 years", "Every 5 years", "Every 6 years"], "answer": 1, "explanation": "Elections for the Bundestag are held every four years.", "funFact": "The exact date is chosen by the Federal President, usually falling on a Sunday in September." },
+    { "id": "de_i1", "difficulty": "Intermediate", "question": "What are 'Überhangmandate' (Overhang Seats)?", "options": ["Seats for candidates who lost", "Extra seats when a party wins more direct mandates than its proportional share", "Seats reserved for minor parties", "Seats given to the winners of the Second Vote"], "answer": 1, "explanation": "If a party wins more local districts (First Vote) than its share of the Second Vote allows, it keeps those extra seats as overhang seats.", "funFact": "To keep the parliament proportional, 'Leveling Seats' are then given to other parties, which has caused the Bundestag to grow significantly in size (reaching 736 members in 2021)." },
+    { "id": "de_i2", "difficulty": "Intermediate", "question": "Who elects the Federal Chancellor (Bundeskanzler) in Germany?", "options": ["The people directly", "The Federal President", "The Bundestag members", "The State Governments"], "answer": 2, "explanation": "The Chancellor is elected by a majority of the members of the Bundestag in a secret ballot.", "funFact": "Angela Merkel was the first woman to serve as Chancellor, holding the office for 16 years (2005-2021)." },
+    { "id": "de_e1", "difficulty": "Expert", "question": "What is a 'Constructive Vote of No Confidence'?", "options": ["A vote to approve the budget", "A mechanism to remove the Chancellor only if a successor is elected", "A public protest against a law", "A vote held in the Senate"], "answer": 1, "explanation": "Article 67 of the Basic Law ensures stability by requiring that the Bundestag must elect a new Chancellor before removing the current one.", "funFact": "This has only been successful once in German history, in 1982, when Helmut Kohl replaced Helmut Schmidt." }
+  ]
 }

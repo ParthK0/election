@@ -1,9 +1,18 @@
 import { render, screen, fireEvent } from "../../tests/test-utils";
 import { describe, it, expect, vi } from "vitest";
-import * as ElectionContextModule from "../../context/ElectionContext";
+import Home from "../Home";
+import * as useElectionModule from "../../hooks/useElection";
 
 describe("Home Page", () => {
   it("renders correctly", () => {
+    vi.spyOn(useElectionModule, "useElection").mockReturnValue({
+      setRole: vi.fn(),
+      role: "voter",
+      country: "india",
+      electionData: { phases: [], targetDate: "2028-01-01" },
+      currentPhase: "registration"
+    });
+
     render(<Home />);
     expect(screen.getByText(/Empowering/i)).toBeInTheDocument();
     expect(screen.getByText(/Democracy with/i)).toBeInTheDocument();
@@ -13,12 +22,12 @@ describe("Home Page", () => {
 
   it("allows toggling between Voter and Candidate roles", () => {
     const setRoleMock = vi.fn();
-    vi.spyOn(ElectionContextModule, "useElection").mockReturnValue({
-      role: "voter",
+    vi.spyOn(useElectionModule, "useElection").mockReturnValue({
       setRole: setRoleMock,
+      role: "voter",
       country: "india",
-      electionData: { phases: [{ id: "p1" }] },
-      currentPhase: "p1",
+      electionData: { phases: [{ id: "registration", label: "Registration" }], targetDate: "2028-01-01" },
+      currentPhase: "registration"
     });
 
     render(<Home />);
