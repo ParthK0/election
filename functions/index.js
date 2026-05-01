@@ -18,11 +18,22 @@ exports.getQuizLeaderboard = onCall(async (request) => {
   }
 });
 
-exports.onQuizScoreCreated = onDocumentCreated('quizScores/{id}', (event) => {
+exports.onQuizScoreCreated = onDocumentCreated('quizScores/{id}', async (event) => {
   const snapshot = event.data;
   if (!snapshot) return;
 
   const data = snapshot.data();
   console.log(`New quiz score: ${data.score} for country ${data.country} by difficulty ${data.difficulty}`);
+  
+  try {
+    await admin.firestore().doc('stats/global').set({
+      totalQuizzes: admin.firestore.FieldValue.increment(1),
+      lastScore: data.score,
+      lastCountry: data.country,
+      updatedAt: admin.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+  } catch (error) {
+    console.error("Error updating global stats:", error);
+  }
   return null;
 });
