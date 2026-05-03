@@ -50,10 +50,11 @@ const Home = () => {
           >
             <div className="px-3 py-1 bg-accent-purple/10 backdrop-blur-md border border-accent-purple/20 rounded-full flex items-center gap-2">
               <div className="w-2 h-2 bg-accent-green rounded-full animate-pulse"></div>
-              <span className="text-[10px] font-bold text-accent-purple uppercase tracking-widest">
+              <span className="text-[10px] font-bold text-accent-purple-light uppercase tracking-widest">
                 {country.charAt(0).toUpperCase() + country.slice(1)} Election
                 Intelligence Active
               </span>
+
             </div>
           </motion.div>
 
@@ -65,7 +66,7 @@ const Home = () => {
           >
             Empowering <br />
             Democracy with <br />
-            <span className="text-accent-purple">AI.</span>
+            <span className="text-accent-purple-light">AI.</span>
           </motion.h1>
 
           <motion.p
@@ -95,7 +96,7 @@ const Home = () => {
               className="text-white/80 hover:text-white font-bold flex items-center gap-2 group transition-colors"
             >
               Consult AI{" "}
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform text-accent-purple" />
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform text-accent-purple-light" />
             </Link>
           </motion.div>
 
@@ -126,7 +127,7 @@ const Home = () => {
       <div className="relative w-full lg:w-[50%] bg-dark-surface min-h-screen p-8 lg:p-20 flex flex-col justify-center gap-12 overflow-visible">
         {/* Role Selector */}
         <div className="space-y-4 w-full max-w-xl mx-auto z-50">
-          <p className="text-[10px] font-bold text-accent-purple uppercase tracking-[0.2em]">
+          <p className="text-[10px] font-bold text-accent-purple-light uppercase tracking-[0.2em]">
             Choose Your Perspective
           </p>
           <div className="flex gap-3">
@@ -154,11 +155,12 @@ const Home = () => {
                 }`}
               >
                 <p.icon
-                  className={`w-6 h-6 mb-3 ${role === p.id ? "text-accent-purple" : "text-text-muted"}`}
+                  className={`w-6 h-6 mb-3 ${role === p.id ? "text-accent-purple-light" : "text-text-muted"}`}
                 />
-                <h4 className="text-sm font-bold text-white mb-0.5">
+                <h2 className="text-sm font-bold text-white mb-0.5">
                   {p.label}
-                </h4>
+                </h2>
+
                 <p className="text-[10px] text-text-muted leading-tight">
                   {p.sub}
                 </p>
@@ -183,7 +185,7 @@ const Home = () => {
                   ? "Campaign Progress"
                   : "Election Progress"}
               </h3>
-              <Clock className="w-4 h-4 text-accent-purple" />
+              <Clock className="w-4 h-4 text-accent-purple-light" />
             </div>
 
             <div className="flex items-center justify-between mb-6">
@@ -196,7 +198,7 @@ const Home = () => {
                 </span>
               </div>
               <div className="text-right">
-                <span className="text-[10px] font-bold text-accent-purple uppercase tracking-[0.2em] block">
+                <span className="text-[10px] font-bold text-accent-purple-light uppercase tracking-[0.2em] block">
                   Next Election
                 </span>
                 <span className="text-xl font-bold text-white">
@@ -213,7 +215,7 @@ const Home = () => {
                   {electionData?.phases?.find((p) => p.id === currentPhase)
                     ?.label || "Current Phase"}
                 </span>
-                <span className="text-accent-purple">
+                <span className="text-accent-purple-light">
                   {electionData?.phases
                     ? `${Math.round(((electionData.phases.findIndex((p) => p.id === currentPhase) + 1) / electionData.phases.length) * 100)}%`
                     : "—"}
@@ -243,12 +245,13 @@ const Home = () => {
           >
             <div className="flex gap-4 items-start">
               <div className="w-9 h-9 rounded-full bg-accent-purple/20 border border-accent-purple/40 flex items-center justify-center shrink-0">
-                <Sparkles className="w-4 h-4 text-accent-purple" />
+                <Sparkles className="w-4 h-4 text-accent-purple-light" />
               </div>
               <div className="space-y-1">
-                <p className="text-[10px] font-bold text-accent-purple uppercase tracking-widest">
+                <p className="text-[10px] font-bold text-accent-purple-light uppercase tracking-widest">
                   Assistant
                 </p>
+
                 <p className="text-xs text-text-primary leading-relaxed opacity-90">
                   {role === "candidate"
                     ? '"Your nomination package requires 10 proposers from your specific assembly constituency."'

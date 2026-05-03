@@ -17,7 +17,8 @@
   --color-surface-tertiary: #161625;
 
   /* Accents */
-  --color-accent-purple: #8b5cf6;
+  --color-accent-purple: #7c3aed;
+  --color-accent-purple-light: #a78bfa;
   --color-accent-gold: #f59e0b;
   --color-accent-green: #10b981;
   --color-accent-warning: #f59e0b;
@@ -31,7 +32,7 @@
   /* Text */
   --color-text-hero: #ffffff;
   --color-text-primary: #f1f0ff;
-  --color-text-muted: #6b7280;
+  --color-text-muted: #9ca3af;
   --color-dark: #ffffff;  /* text-dark maps to white on dark theme */
 
   /* Borders */

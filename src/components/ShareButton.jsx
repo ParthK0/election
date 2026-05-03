@@ -16,7 +16,7 @@ const ShareButton = ({ text, title = "ElectIQ — Election Info" }) => {
       try {
         await navigator.share(shareData);
         return;
-      } catch (err) {
+      } catch {
         // User cancelled or not supported, fall through to clipboard
       }
     }

@@ -3,18 +3,22 @@ import { BrowserRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { ElectionProvider } from "../context/ElectionContext";
 import { ChatProvider } from "../context/ChatContext";
+import { AuthProvider } from "../context/AuthContext";
 
 const AllTheProviders = ({ children }) => {
   return (
     <HelmetProvider>
       <BrowserRouter>
-        <ElectionProvider>
-          <ChatProvider>{children}</ChatProvider>
-        </ElectionProvider>
+        <AuthProvider>
+          <ElectionProvider>
+            <ChatProvider>{children}</ChatProvider>
+          </ElectionProvider>
+        </AuthProvider>
       </BrowserRouter>
     </HelmetProvider>
   );
 };
+
 
 const customRender = (ui, options) =>
   render(ui, { wrapper: AllTheProviders, ...options });

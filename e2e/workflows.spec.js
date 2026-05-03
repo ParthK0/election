@@ -1,92 +1,104 @@
-const { test, expect } = require('@playwright/test');
-const { injectAxe, checkA11y } = require('@axe-core/playwright');
+import { test, expect } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
 
 test.describe('ElectIQ Core Workflows', () => {
-  test('Accessibility audit on Home page', async ({ page }) => {
-    await page.goto('/');
-    const closeBtn = page.locator('button', { hasText: 'Skip & Use Defaults' });
-    if (await closeBtn.isVisible()) await closeBtn.click();
-    await injectAxe(page);
-    await checkA11y(page, null, {
-      detailedReport: true,
-      detailedReportOptions: { html: true }
+  const bypassOnboarding = async (page) => {
+    await page.addInitScript(() => {
+      window.localStorage.setItem('electiq_onboarded', 'true');
     });
-  });
-  test('can switch country and see updated content', async ({ page }) => {
+  };
+
+
+
+  test('Accessibility audit on Home page', async ({ page }) => {
+    await bypassOnboarding(page);
     await page.goto('/');
+    await expect(page.locator('h1')).toBeVisible();
+
+
     
-    // Close onboarding if present
-    const closeBtn = page.locator('button', { hasText: 'Skip & Use Defaults' });
-    if (await closeBtn.isVisible()) {
-      await closeBtn.click();
-    }
+    const results = await new AxeBuilder({ page }).analyze();
+    expect(results.violations).toEqual([]);
+  });
+
+
+
+  test('can switch country and see updated content', async ({ page }) => {
+    await bypassOnboarding(page);
+    await page.goto('/');
+
+
 
     // Check default country (India)
-    await expect(page.locator('text=India LIVE')).toBeVisible();
+    await expect(page.locator('text=India Election Intelligence Active')).toBeVisible();
 
     // Open country selector
-    await page.locator('button', { hasText: 'IN' }).click();
+    await page.locator('button', { hasText: '🇮🇳' }).click();
     await page.locator('button', { hasText: 'USA' }).click();
 
     // Check updated country
-    await expect(page.locator('text=USA LIVE')).toBeVisible();
+    await expect(page.locator('text=USA Election Intelligence Active')).toBeVisible();
   });
 
+
   test('can complete a quiz flow', async ({ page }) => {
+    await bypassOnboarding(page);
     await page.goto('/quiz');
-    
-    const closeBtn = page.locator('button', { hasText: 'Skip & Use Defaults' });
-    if (await closeBtn.isVisible()) {
-      await closeBtn.click();
-    }
+
+
 
     // Start quiz
     await page.locator('button', { hasText: 'Beginner' }).click();
 
-    // Answer first question
-    const firstOption = page.locator('button').nth(0); // This might need refinement based on actual DOM
-    await firstOption.click();
+    // Answer first question - looking for the first option button in the list
+    const firstOption = page.locator('button').filter({ hasText: /.+/ }).nth(3); // Skip the difficulty buttons if any are still in DOM, or use a more specific parent
+    // Wait, let's be more specific
+    const optionBtn = page.locator('.grid.gap-3 button').first();
+    await optionBtn.click();
+
 
     // Continue
     await page.locator('button', { hasText: /Continue|See Final Score/ }).click();
 
     // See results (since quiz length varies, we just check if we move forward)
-    // Here we'll just check that either next question or results show
     await expect(page.locator('text=Question 2').or(page.locator('text=Analysis Complete'))).toBeVisible();
   });
 
   test('can ask AI a question', async ({ page }) => {
+    await bypassOnboarding(page);
     await page.goto('/ask');
 
-    const closeBtn = page.locator('button', { hasText: 'Skip & Use Defaults' });
-    if (await closeBtn.isVisible()) {
-      await closeBtn.click();
-    }
+
 
     // Type question
-    const input = page.locator('input[type="text"]');
+    const input = page.locator('input[placeholder*="message"]');
     await input.fill('What is a polling booth?');
     
     // Send
-    await page.locator('button[type="submit"]').click();
+    await page.locator('button[aria-label="Send message"]').click();
 
     // Check that typing indicator or bot response appears
-    await expect(page.locator('.animate-pulse').or(page.locator('text=polling booth'))).toBeVisible();
+    // Check that typing indicator or bot response appears in the chat area
+    await expect(page.locator('article').filter({ hasText: 'polling' }).or(page.locator('.p-4 .animate-pulse'))).toBeVisible();
+
   });
 
   test('can search glossary terms', async ({ page }) => {
+    await bypassOnboarding(page);
     await page.goto('/glossary');
 
-    const closeBtn = page.locator('button', { hasText: 'Skip & Use Defaults' });
-    if (await closeBtn.isVisible()) {
-      await closeBtn.click();
-    }
 
-    // Search for a term
-    const input = page.locator('input[type="text"]');
+
+    // Search for a term - case insensitive placeholder
+    const input = page.locator('input[placeholder*="search" i]');
     await input.fill('voter');
 
-    // Check that filtered results appear
-    await expect(page.locator('text=terms')).toBeVisible();
+
+    // Check that results appear
+    // Check that results appear (e.g. "X terms")
+    // Check that results appear (e.g. "X terms") - using specific class to avoid strictness issues
+    await expect(page.locator('.font-mono').filter({ hasText: /terms?/ })).toBeVisible();
+
+
   });
 });

@@ -1,16 +1,7 @@
-import { renderHook } from "@testing-library/react";
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect } from "vitest";
 import { useAuth } from "../useAuth";
 import { useElection } from "../useElection";
 import { useChat } from "../useChat";
-import React from "react";
-
-// Mock providers
-const wrapper = ({ children }) => (
-  <div id="providers">
-    {children}
-  </div>
-);
 
 describe("Custom Hooks", () => {
   it("useAuth should be a function", () => {

@@ -40,7 +40,7 @@ describe("ElectionTimeline Component", () => {
   });
 
   it("highlights current phase appropriately", () => {
-    const { container } = render(
+    render(
       <ElectionTimeline
         phases={mockPhases}
         currentPhaseId="campaigning"

@@ -69,21 +69,32 @@
     { "term": "Hung Parliament", "definition": "When no single political party wins an absolute majority (over 325 seats) in the House of Commons.", "category": "Structure" },
     { "term": "Coalition", "definition": "When two or more parties join together to form a government after a hung parliament.", "category": "Structure" },
     { "term": "Electoral Register", "definition": "The list of everyone who is registered and eligible to vote.", "category": "Rules" },
-    { "term": "Tellers", "definition": "Volunteers for political parties who stand outside polling stations to ask voters for their poll card numbers.", "category": "Process" },
-    { "term": "Tactical Voting", "definition": "Voting for a candidate who is not the voter's first choice to prevent another candidate from winning.", "category": "Rules" }
+    { "term": "Prorogation", "definition": "The formal name for the end of a parliamentary session, which suspends all business until the next State Opening.", "category": "Structure" },
+    { "term": "Whip", "definition": "An MP appointed by their party to maintain discipline and ensure colleagues vote according to the party line.", "category": "Structure" },
+    { "term": "Speaker of the House", "definition": "The impartial MP who presides over debates in the House of Commons and maintains order.", "category": "Institutions" },
+    { "term": "Backbencher", "definition": "An MP who does not hold a government or opposition shadow ministerial post.", "category": "Structure" },
+    { "term": "Crossbencher", "definition": "An independent member of the House of Lords who does not belong to any political party.", "category": "Structure" },
+    { "term": "Official Opposition", "definition": "The second-largest party in the House of Commons, which challenges the government's policies.", "category": "Institutions" },
+    { "term": "Shadow Cabinet", "definition": "Senior members of the opposition party who mirror the roles of government ministers.", "category": "Structure" },
+    { "term": "PMQs", "definition": "Prime Minister's Questions — a weekly session where the PM answers questions from MPs of all parties.", "category": "Process" }
   ],
   "quickQuestions": [
     "Do I need ID to vote in the UK?",
     "How do I register to vote?",
     "What is First-Past-The-Post?",
-    "How many MPs are there?"
+    "How many MPs are there?",
+    "What is a Hung Parliament?",
+    "Can I vote if I am living abroad?"
   ],
   "quiz": [
     { "id": "uk_b1", "difficulty": "Beginner", "question": "How many MPs are elected to the House of Commons?", "options": ["450", "600", "650", "750"], "answer": 2, "explanation": "There are 650 constituencies in the UK, each electing one Member of Parliament.", "funFact": "The 650 seats are being reviewed to ensure constituencies have similar numbers of voters." },
     { "id": "uk_b2", "difficulty": "Beginner", "question": "What voting system is used for UK General Elections?", "options": ["Proportional Representation", "First-Past-The-Post", "Ranked Choice", "Single Transferable Vote"], "answer": 1, "explanation": "The UK uses First-Past-The-Post, where the candidate with the most votes wins, regardless of whether they have a majority.", "funFact": "This system usually favors larger parties and can lead to strong single-party governments." },
     { "id": "uk_b3", "difficulty": "Beginner", "question": "Since 2023, what MUST you bring to a polling station in person?", "options": ["Your poll card", "Proof of address", "A valid photo ID", "A pen"], "answer": 2, "explanation": "Voters in Great Britain now need to show a valid photo ID to vote in person at General Elections.", "funFact": "If you don't have an accepted ID, you can apply for a free Voter Authority Certificate." },
+    { "id": "uk_b4", "difficulty": "Beginner", "question": "On which day of the week are UK General Elections usually held?", "options": ["Tuesday", "Thursday", "Saturday", "Sunday"], "answer": 1, "explanation": "General Elections in the UK are by tradition held on a Thursday.", "funFact": "The last time a general election was not held on a Thursday was in 1931." },
     { "id": "uk_i1", "difficulty": "Intermediate", "question": "What happens in a 'Hung Parliament'?", "options": ["The election is cancelled", "The Queen/King chooses the PM", "No single party has an absolute majority", "A second election is held immediately"], "answer": 2, "explanation": "A hung parliament occurs when no party reaches the 326-seat threshold for a majority.", "funFact": "The UK had hung parliaments in 2010 and 2017." },
     { "id": "uk_i2", "difficulty": "Intermediate", "question": "What is the maximum term for a UK Parliament?", "options": ["3 years", "4 years", "5 years", "6 years"], "answer": 2, "explanation": "Under the Dissolution and Calling of Parliament Act 2022, the maximum term is 5 years.", "funFact": "Parliament is automatically dissolved five years after it first met if it hasn't been dissolved sooner." },
-    { "id": "uk_e1", "difficulty": "Expert", "question": "Which of these people is NOT eligible to vote in a UK General Election?", "options": ["A member of the House of Lords", "A Commonwealth citizen resident in the UK", "An overseas voter registered in their last UK constituency", "An Irish citizen resident in the UK"], "answer": 0, "explanation": "Members of the House of Lords are excluded from voting in General Elections.", "funFact": "Convicted prisoners serving a sentence are also legally barred from voting in the UK." }
+    { "id": "uk_i3", "difficulty": "Intermediate", "question": "Who is the impartial official who maintains order in the House of Commons?", "options": ["The Prime Minister", "The Lord Chancellor", "The Speaker", "The Chief Whip"], "answer": 2, "explanation": "The Speaker of the House of Commons is an MP who must resign from their party to remain neutral.", "funFact": "When a new Speaker is elected, they are traditionally 'dragged' to the Speaker's chair." },
+    { "id": "uk_e1", "difficulty": "Expert", "question": "Which of these people is NOT eligible to vote in a UK General Election?", "options": ["A member of the House of Lords", "A Commonwealth citizen resident in the UK", "An overseas voter registered in their last UK constituency", "An Irish citizen resident in the UK"], "answer": 0, "explanation": "Members of the House of Lords are excluded from voting in General Elections.", "funFact": "Convicted prisoners serving a sentence are also legally barred from voting in the UK." },
+    { "id": "uk_e2", "difficulty": "Expert", "question": "What is the name for the formal suspension of a parliamentary session?", "options": ["Dissolution", "Prorogation", "Recess", "Adjournment"], "answer": 1, "explanation": "Prorogation ends a session but not the Parliament itself; dissolution ends the Parliament entirely.", "funFact": "Prorogation became a major news topic in 2019 during the Brexit debates." }
   ]
 }

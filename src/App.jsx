@@ -27,6 +27,8 @@ const Ask = lazy(() => import("./pages/Ask"));
 const Glossary = lazy(() => import("./pages/Glossary"));
 const Quiz = lazy(() => import("./pages/Quiz"));
 const Sources = lazy(() => import("./pages/Sources"));
+const Privacy = lazy(() => import("./pages/Privacy"));
+const Terms = lazy(() => import("./pages/Terms"));
 
 const PageWrapper = ({ children }) => (
   <motion.div
@@ -130,6 +132,22 @@ const AnimatedRoutes = () => {
             }
           />
           <Route
+            path="/privacy"
+            element={
+              <PageWrapper>
+                <Privacy />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/terms"
+            element={
+              <PageWrapper>
+                <Terms />
+              </PageWrapper>
+            }
+          />
+          <Route
             path="*"
             element={
               <PageWrapper>
@@ -176,9 +194,10 @@ export default function App() {
                     ElectIQ
                   </span>
                 </div>
-                <p className="text-xs text-accent-purple font-medium tracking-wide">
+                <p className="text-xs text-accent-purple-light font-medium tracking-wide">
                   Your Civic Intelligence Partner
                 </p>
+
               </div>
 
               {/* Nav Links */}
@@ -191,8 +210,8 @@ export default function App() {
                     { label: "Sources", to: "/sources" },
                     { label: "Learn", to: "/learn" },
                     { label: "Ask AI", to: "/ask" },
-                    { label: "Glossary", to: "/glossary" },
-                    { label: "Quiz", to: "/quiz" },
+                    { label: "Privacy", to: "/privacy" },
+                    { label: "Terms", to: "/terms" },
                   ].map((link) => (
                     <Link
                       key={link.label}
@@ -222,15 +241,17 @@ export default function App() {
 
             {/* Bottom bar */}
             <div className="mt-10 pt-6 border-t border-dark-border flex flex-col sm:flex-row justify-between items-center gap-4">
-              <p className="text-[10px] text-text-muted/50 font-mono">
+              <p className="text-[10px] text-text-muted font-mono">
                 © 2026 ElectIQ — Open Civic Intelligence
               </p>
+
               <div className="flex items-center gap-2">
                 <div className="w-1 h-1 rounded-full bg-accent-purple/40" />
-                <span className="text-[10px] text-text-muted/40 font-mono">
+                <span className="text-[10px] text-text-muted font-mono">
                   v1.0
                 </span>
               </div>
+
             </div>
           </div>
         </footer>

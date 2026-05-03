@@ -44,12 +44,18 @@ const OnboardingModal = () => {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
+      <div 
+        className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="onboarding-title"
+      >
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="absolute inset-0 bg-black/80 backdrop-blur-md"
+          className="absolute inset-0 bg-black/80 backdrop-blur-md z-0"
           onClick={handleComplete}
         />
 
@@ -57,14 +63,17 @@ const OnboardingModal = () => {
           initial={{ scale: 0.95, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.95, opacity: 0, y: 20 }}
-          className="relative w-full max-w-lg bg-dark-surface border border-dark-border rounded-3xl p-8 shadow-2xl overflow-hidden"
+          className="relative w-full max-w-lg bg-dark-surface border border-dark-border rounded-3xl p-8 shadow-2xl overflow-hidden z-10"
         >
+
           <button
             onClick={handleComplete}
+            aria-label="Close onboarding"
             className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center rounded-full bg-dark-card border border-dark-border text-text-muted hover:text-white transition-colors z-10"
           >
             <X className="w-4 h-4" />
           </button>
+
 
           {/* Step content */}
           <div className="relative z-0">
@@ -76,9 +85,10 @@ const OnboardingModal = () => {
                 <div className="w-12 h-12 bg-accent-purple/20 rounded-2xl flex items-center justify-center mb-6 border border-accent-purple/30">
                   <Shield className="w-6 h-6 text-accent-purple" />
                 </div>
-                <h2 className="text-3xl font-extrabold text-white mb-3 font-display">
+                <h2 id="onboarding-title" className="text-3xl font-extrabold text-white mb-3 font-display">
                   Welcome to ElectIQ
                 </h2>
+
                 <p className="text-text-muted mb-8 text-sm leading-relaxed">
                   Your personalized AI guide to elections worldwide. Before we
                   start, let&apos;s tailor your experience.

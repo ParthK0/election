@@ -19,6 +19,7 @@ const CursorGlow = () => {
 
   return (
     <motion.div
+      data-testid="cursor-glow"
       className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300 opacity-0 lg:opacity-100"
       style={{
         background: `radial-gradient(600px circle at ${springX}px ${springY}px, rgba(139, 92, 246, 0.07), transparent 80%)`,

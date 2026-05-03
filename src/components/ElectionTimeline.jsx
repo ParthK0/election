@@ -12,10 +12,12 @@ const ElectionTimeline = ({ phases, currentPhaseId, onPhaseClick }) => {
 
           return (
             <div key={phase.id} className="flex items-center">
-              <div
-                className="flex flex-col items-center gap-2 cursor-pointer group"
+              <button
+                type="button"
+                className="flex flex-col items-center gap-2 cursor-pointer group bg-transparent border-0 p-0"
                 onClick={() => onPhaseClick(phase.id)}
                 aria-current={isActive ? "step" : undefined}
+                aria-label={`Go to ${phase.label} phase`}
               >
                 <div className="relative">
                   {isActive && (
@@ -51,7 +53,7 @@ const ElectionTimeline = ({ phases, currentPhaseId, onPhaseClick }) => {
                 >
                   {phase.label}
                 </span>
-              </div>
+              </button>
 
               {index < phases.length - 1 && (
                 <div className="w-12 lg:w-20 h-0.5 mx-2 bg-dark-border relative mt-[-18px]">

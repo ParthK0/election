@@ -4,7 +4,7 @@ import { X, Shield, Mail, Lock, Loader2, ArrowRight } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 
 const AuthModal = () => {
-  const { isAuthModalOpen, closeAuthModal, login } = useAuth();
+  const { isAuthModalOpen, closeAuthModal, login, signup } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,12 +24,24 @@ const AuthModal = () => {
     setError("");
 
     try {
-      await login(email, password);
+      if (isLogin) {
+        await login(email, password);
+      } else {
+        await signup(email, password);
+      }
       closeAuthModal();
       setEmail("");
       setPassword("");
     } catch (err) {
-      setError("Authentication failed. Please try again.");
+      if (err.code === "auth/user-not-found" || err.code === "auth/wrong-password") {
+        setError("Invalid email or password.");
+      } else if (err.code === "auth/email-already-in-use") {
+        setError("This email is already registered.");
+      } else if (err.code === "auth/weak-password") {
+        setError("Password should be at least 6 characters.");
+      } else {
+        setError("Authentication failed. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -54,10 +66,12 @@ const AuthModal = () => {
         >
           <button
             onClick={closeAuthModal}
+            aria-label="Close authentication modal"
             className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center rounded-full bg-dark-card border border-dark-border text-text-muted hover:text-white transition-colors z-10"
           >
             <X className="w-4 h-4" />
           </button>
+
 
           <div className="relative z-10">
             <div className="w-12 h-12 bg-accent-purple/20 rounded-2xl flex items-center justify-center mb-6 border border-accent-purple/30">
@@ -81,12 +95,13 @@ const AuthModal = () => {
               )}
 
               <div className="space-y-1.5">
-                <label className="text-[10px] font-bold text-text-muted uppercase tracking-widest pl-1">
+                <label htmlFor="auth-email" className="text-[10px] font-bold text-text-muted uppercase tracking-widest pl-1">
                   Email
                 </label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-muted" />
                   <input
+                    id="auth-email"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -97,12 +112,13 @@ const AuthModal = () => {
               </div>
 
               <div className="space-y-1.5 pb-2">
-                <label className="text-[10px] font-bold text-text-muted uppercase tracking-widest pl-1">
+                <label htmlFor="auth-password" className="text-[10px] font-bold text-text-muted uppercase tracking-widest pl-1">
                   Password
                 </label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-muted" />
                   <input
+                    id="auth-password"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -131,6 +147,7 @@ const AuthModal = () => {
             <div className="mt-6 text-center">
               <button
                 onClick={() => setIsLogin(!isLogin)}
+                data-testid="auth-toggle"
                 className="text-xs text-text-muted hover:text-white transition-colors"
               >
                 {isLogin

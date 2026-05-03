@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">90% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>15/20</span>
+                <span class='fraction'>18/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60% </span>
+                <span class="strong">55% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>12/20</span>
+                <span class='fraction'>11/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">87.5% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>6/8</span>
+                <span class='fraction'>7/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">76.47% </span>
+                <span class="strong">94.11% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/17</span>
+                <span class='fraction'>16/17</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -168,28 +168,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -205,12 +202,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -250,11 +250,11 @@ import { motion, AnimatePresence } from "framer-motion";
 &nbsp;
 const countries = [
   { id: "india", name: "India", flag: "🇮🇳" },
-  { id: "usa", name: "USA", flag: "🇺🇸", disabled: true },
-  { id: "uk", name: "UK", flag: "🇬🇧", disabled: true },
-  { id: "canada", name: "Canada", flag: "🇨🇦", disabled: true },
-  { id: "australia", name: "Australia", flag: "🇦🇺", disabled: true },
-  { id: "germany", name: "Germany", flag: "🇩🇪", disabled: true },
+  { id: "usa", name: "USA", flag: "🇺🇸" },
+  { id: "uk", name: "UK", flag: "🇬🇧" },
+  { id: "canada", name: "Canada", flag: "🇨🇦" },
+  { id: "australia", name: "Australia", flag: "🇦🇺" },
+  { id: "germany", name: "Germany", flag: "🇩🇪" },
 ];
 &nbsp;
 const CountrySelector = () =&gt; {
@@ -297,10 +297,10 @@ const CountrySelector = () =&gt; {
             {countries.map((c) =&gt; (
               &lt;button
                 key={c.id}
-                onClick={<span class="fstat-no" title="function not covered" >() =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >                  if (!c.disabled) {</span>
-<span class="cstat-no" title="statement not covered" >                    setCountry(c.id);</span>
-<span class="cstat-no" title="statement not covered" >                    setIsOpen(false);</span>
+                onClick={() =&gt; {
+                  <span class="missing-if-branch" title="else path not taken" >E</span>if (!c.disabled) {
+                    setCountry(c.id);
+                    setIsOpen(false);
                   }
                 }}
                 disabled={c.disabled}
@@ -308,18 +308,18 @@ const CountrySelector = () =&gt; {
                   country === c.id
                     ? "bg-accent-purple/10 text-accent-purple font-bold border-l-2 border-accent-purple"
                     : c.disabled
-                      ? "text-text-muted/40 cursor-not-allowed"
-                      : <span class="branch-1 cbranch-no" title="branch not covered" >"text-text-primary hover:bg-dark-card-2 border-l-2 border-transparent"</span>
+                      ? <span class="branch-0 cbranch-no" title="branch not covered" >"text-text-muted/40 cursor-not-allowed"</span>
+                      : "text-text-primary hover:bg-dark-card-2 border-l-2 border-transparent"
                 }`}
               &gt;
                 &lt;div className="flex items-center gap-3"&gt;
-                  &lt;span className={c.disabled ? "opacity-40 grayscale" : ""}&gt;
+                  &lt;span className={c.disabled ? <span class="branch-0 cbranch-no" title="branch not covered" >"opacity-40 grayscale" : "</span>"}&gt;
                     {c.flag}
                   &lt;/span&gt;
                   &lt;span&gt;{c.name}&lt;/span&gt;
                 &lt;/div&gt;
                 {c.disabled &amp;&amp; (
-                  &lt;span className="text-[8px] font-bold uppercase tracking-widest text-text-muted/50 border border-dark-border px-1.5 py-0.5 rounded"&gt;
+<span class="branch-1 cbranch-no" title="branch not covered" >                  &lt;span className="text-[8px] font-bold uppercase tracking-widest text-text-muted/50 border border-dark-border px-1.5 py-0.5 rounded"&gt;</span>
                     Soon
                   &lt;/span&gt;
                 )}
@@ -340,7 +340,7 @@ export default CountrySelector;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-05-01T18:19:09.683Z
+                at 2026-05-03T02:52:55.856Z
             </div>
         <script src="../prettify.js"></script>
         <script>

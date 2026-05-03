@@ -1,4 +1,4 @@
-import { render, screen } from "../../tests/test-utils";
+import { render, screen, fireEvent } from "../../tests/test-utils";
 import { describe, it, expect } from "vitest";
 import EmptyState from "../EmptyState";
 import Skeleton from "../Skeleton";
@@ -16,8 +16,11 @@ describe("Simple UI Components", () => {
     expect(container.firstChild).toHaveClass("animate-pulse");
   });
 
-  it("renders CursorGlow correctly", () => {
-    const { container } = render(<CursorGlow />);
-    expect(container.firstChild).toHaveClass("pointer-events-none");
+  it("renders CursorGlow and responds to mouse move", () => {
+    render(<CursorGlow />);
+    fireEvent.mouseMove(window, { clientX: 100, clientY: 200 });
+    // CursorGlow uses framer-motion, testing exact position in JSDOM is hard,
+    // but we can at least ensure it doesn't crash and is present.
+    expect(screen.getByTestId("cursor-glow")).toBeInTheDocument();
   });
 });

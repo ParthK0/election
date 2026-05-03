@@ -17,13 +17,20 @@ describe("CountrySelector Component", () => {
     expect(screen.getByText("UK")).toBeInTheDocument();
   });
 
-  it("shows disabled states for upcoming countries", () => {
+  it("shows all countries as enabled", () => {
     render(<CountrySelector />);
     fireEvent.click(screen.getByRole("button", { name: /India/i }));
 
-    // USA should be disabled
+    // USA should now be enabled
     const usaButton = screen.getByRole("button", { name: /USA/i });
-    expect(usaButton).toBeDisabled();
-    expect(screen.getAllByText("Soon").length).toBeGreaterThan(0);
+    expect(usaButton).not.toBeDisabled();
+    expect(screen.queryByText("Soon")).not.toBeInTheDocument();
+  });
+
+  it("calls setCountry when a country is selected", () => {
+    render(<CountrySelector />);
+    fireEvent.click(screen.getByRole("button"));
+    fireEvent.click(screen.getByText("USA"));
+    expect(screen.queryByText("UK")).not.toBeInTheDocument();
   });
 });

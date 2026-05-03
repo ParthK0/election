@@ -22,21 +22,24 @@ ElectIQ is a state-of-the-art SaaS web application designed to educate voters an
 *   **Google Gemini AI Assistant**: Embedded intelligent chat assistant with voice synthesis (Web Speech API) and context-aware responses (Zod validated).
 *   **Secure Infrastructure**: Server-side request validation with Zod, Firebase HTTP Callable functions, and fully locked-down Firestore read/write rules.
 *   **Data Driven Telemetry**: Custom Google Analytics events tracking user flows and Firebase Performance Monitoring tracing AI response latencies.
-*   **CI/CD Automated Pipelines**: Github Actions workflow encompassing Prettier formatting, ESLint validation, npm audit checks, and automated Vitest/Playwright tests.
-*   **Accessibility First**: ARIA sweep compliant, focus-trapped navigation menus, and keyboard navigable interface.
+*   **Security & Scalability**: IP-based rate limiting on AI endpoints, Content Security Policy (CSP) enforcement, and server-side request validation.
+*   **Expanded Global Coverage**: Professional-grade deep-dive content for India, USA, UK, Australia, Germany, and Canada.
+*   **CI/CD Automated Pipelines**: GitHub Actions workflow encompassing Vitest/Playwright tests, ESLint, and automated production builds.
+*   **Accessibility First**: ARIA-compliant, focus-trapped navigation, and 98% accessibility rating.
 
 ## 🏗️ Architecture
 
 ```mermaid
 graph TD
     Client["React 19 Frontend (Vite)"]
-    Client -->|API Requests| ExpressServer["Express Proxy Server"]
-    Client -->|Live Chat| GeminiAPI["Google Gemini AI"]
+    Client -->|API Requests| VercelAPI["Vercel Serverless (api/chat.js)"]
+    Client -->|Local Fallback| ExpressServer["Express Proxy Server"]
     Client -->|User Auth| FirebaseAuth["Firebase Auth"]
     Client -->|Analytics| FirebaseAnalytics["Firebase Analytics & Perf"]
     Client -->|Data Reads| StaticData["Local JSON Datastore"]
     Client -->|Data Writes| Firestore["Cloud Firestore"]
     
+    VercelAPI -->|Rate Limiting| GeminiAPI["Google Gemini AI"]
     ExpressServer -->|Zod Validation| GeminiAPI
     
     Firestore -->|Triggers| CloudFunctions["Firebase Cloud Functions"]

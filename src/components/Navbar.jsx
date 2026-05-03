@@ -27,6 +27,13 @@ const Navbar = () => {
 
   const roleDropdownRef = useRef(null);
 
+  // Track scroll position for navbar background
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   // Close role dropdown on click outside
   useEffect(() => {
     const handleClick = (e) => {
@@ -208,7 +215,7 @@ const Navbar = () => {
                       <User className="w-3 h-3 text-accent-purple" />
                     </div>
                     <span className="text-[10px] font-bold text-white capitalize">
-                      {user.name}
+                      {user.displayName || user.name}
                     </span>
                   </div>
                   <button
@@ -337,12 +344,62 @@ const Navbar = () => {
 
                 {/* Drawer Footer */}
                 <div className="p-6 border-t border-dark-border space-y-4">
-                  <div className="flex items-center gap-2 px-4 py-2.5 bg-dark-card rounded-xl border border-dark-border">
-                    <div className="w-1.5 h-1.5 rounded-full bg-accent-green shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
-                    <span className="text-[10px] font-bold text-white/80 uppercase tracking-widest">
-                      {country} LIVE
-                    </span>
+                  <div className="space-y-3 px-1">
+                    <div className="flex items-center justify-between p-3 bg-dark-card rounded-xl border border-dark-border">
+                      <span className="text-[10px] font-bold text-white/60 uppercase tracking-widest">Region</span>
+                      <CountrySelector />
+                    </div>
+                    
+                    <div className="flex items-center justify-between p-3 bg-dark-card rounded-xl border border-dark-border">
+                      <span className="text-[10px] font-bold text-white/60 uppercase tracking-widest">Role</span>
+                      <div className="flex gap-1">
+                        <button 
+                          onClick={() => handleRoleSwitch("voter")}
+                          className={`px-3 py-1 rounded-lg text-[9px] font-bold uppercase tracking-wider transition-all ${role === "voter" ? "bg-accent-purple text-white" : "bg-dark-card-2 text-text-muted border border-dark-border"}`}
+                        >
+                          Voter
+                        </button>
+                        <button 
+                          onClick={() => handleRoleSwitch("candidate")}
+                          className={`px-3 py-1 rounded-lg text-[9px] font-bold uppercase tracking-wider transition-all ${role === "candidate" ? "bg-accent-purple text-white" : "bg-dark-card-2 text-text-muted border border-dark-border"}`}
+                        >
+                          Candidate
+                        </button>
+                      </div>
+                    </div>
                   </div>
+
+                  {user ? (
+                    <div className="flex items-center justify-between px-2">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-accent-purple/20 flex items-center justify-center border border-accent-purple/40">
+                          <User className="w-4 h-4 text-accent-purple" />
+                        </div>
+                        <span className="text-xs font-bold text-white capitalize">
+                          {user.displayName || user.name}
+                        </span>
+                      </div>
+                      <button
+                        onClick={() => {
+                          logout();
+                          setIsMenuOpen(false);
+                        }}
+                        className="p-2 text-text-muted hover:text-red-400 transition-colors"
+                      >
+                        <LogOut className="w-4 h-4" />
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        openAuthModal();
+                        setIsMenuOpen(false);
+                      }}
+                      className="w-full py-3 bg-accent-purple text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-accent-purple/80 transition-all shadow-premium"
+                    >
+                      Sign In
+                    </button>
+                  )}
                 </div>
               </motion.div>
             </FocusTrap>

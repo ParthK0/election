@@ -5,11 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const countries = [
   { id: "india", name: "India", flag: "🇮🇳" },
-  { id: "usa", name: "USA", flag: "🇺🇸", disabled: true },
-  { id: "uk", name: "UK", flag: "🇬🇧", disabled: true },
-  { id: "canada", name: "Canada", flag: "🇨🇦", disabled: true },
-  { id: "australia", name: "Australia", flag: "🇦🇺", disabled: true },
-  { id: "germany", name: "Germany", flag: "🇩🇪", disabled: true },
+  { id: "usa", name: "USA", flag: "🇺🇸" },
+  { id: "uk", name: "UK", flag: "🇬🇧" },
+  { id: "canada", name: "Canada", flag: "🇨🇦" },
+  { id: "australia", name: "Australia", flag: "🇦🇺" },
+  { id: "germany", name: "Germany", flag: "🇩🇪" },
 ];
 
 const CountrySelector = () => {
