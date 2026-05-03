@@ -28,8 +28,12 @@ jobs:
       - name: Audit
         run: npm run audit:check
 
-      - name: Run Unit Tests
-        run: npm run test
+      - name: Secrets Check
+        run: npm run secrets:check
+
+      - name: Run Unit Tests with Coverage
+        run: npm run coverage
 
       - name: Build
         run: npm run build
+

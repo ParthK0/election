@@ -20,13 +20,18 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://apis.google.com", "https://www.googletagmanager.com"],
-      connectSrc: ["'self'", "https://generativelanguage.googleapis.com", "https://*.firebaseio.com", "wss://*.firebaseio.com", "https://www.google-analytics.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://apis.google.com", "https://www.googletagmanager.com", "https://www.gstatic.com"],
+      connectSrc: ["'self'", "https://generativelanguage.googleapis.com", "https://*.firebaseio.com", "wss://*.firebaseio.com", "https://www.google-analytics.com", "https://firestore.googleapis.com", "https://identitytoolkit.googleapis.com"],
       imgSrc: ["'self'", "data:", "https://*"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      frameSrc: ["'none'"],
     },
   },
+  frameguard: { action: 'deny' },
+  noSniff: true,
+  referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
+  xssFilter: true,
 }));
 
 // Rate limiting for API routes
@@ -167,7 +172,8 @@ Current context:
     return res.json({ text });
   } catch (error) {
     console.error('Gemini API Error:', error);
-    return res.status(500).json({ error: 'Internal server error', details: error.message });
+    return res.status(500).json({ error: 'Internal server error', message: 'The AI assistant is currently unavailable. Please try again later.' });
+
   }
 });
 
@@ -181,7 +187,9 @@ app.listen(PORT, '0.0.0.0', () => {
 });
 
 // Error handling middleware
+// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({ error: 'Something broke!', details: err.message });
+  res.status(500).json({ error: 'Internal Server Error', message: 'An unexpected error occurred. Our team has been notified.' });
+
 });

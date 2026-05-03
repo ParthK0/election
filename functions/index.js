@@ -1,10 +1,10 @@
-const { onRequest, onCall } = require('firebase-functions/v2/https');
+const { onCall } = require('firebase-functions/v2/https');
 const { onDocumentCreated } = require('firebase-functions/v2/firestore');
 const admin = require('firebase-admin');
 
 admin.initializeApp();
 
-exports.getQuizLeaderboard = onCall(async (request) => {
+exports.getQuizLeaderboard = onCall(async () => {
   try {
     const snapshot = await admin.firestore().collection('quizScores')
       .orderBy('score', 'desc')

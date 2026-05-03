@@ -2,7 +2,30 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
+const rateLimitMap = new Map();
+
 export default async function handler(req, res) {
+  // Simple Rate Limiting
+  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  const now = Date.now();
+  const limit = 10; // 10 requests
+  const windowMs = 60 * 1000; // 1 minute
+
+  if (!rateLimitMap.has(ip)) {
+    rateLimitMap.set(ip, { count: 1, lastReset: now });
+  } else {
+    const data = rateLimitMap.get(ip);
+    if (now - data.lastReset > windowMs) {
+      data.count = 1;
+      data.lastReset = now;
+    } else {
+      data.count++;
+    }
+    
+    if (data.count > limit) {
+      return res.status(429).json({ error: 'Too many requests', details: 'Rate limit exceeded. Please try again in a minute.' });
+    }
+  }
   // CORS origin check
   const allowedOrigins = [
     process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null,
