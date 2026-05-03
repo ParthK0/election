@@ -89,7 +89,6 @@ const Quiz = () => {
           country,
         });
       }
-      console.log("Quiz score securely saved to Firestore.");
     } catch (error) {
       console.error("Failed to save quiz score to Firestore:", error);
     }
@@ -193,6 +192,7 @@ const Quiz = () => {
                 <button
                   key={tier.id}
                   onClick={() => setDifficulty(tier.id)}
+                  aria-label={`Start ${tier.id} level quiz: ${tier.desc}`}
                   className="group relative p-5 bg-dark-card-2 border border-dark-border rounded-2xl text-left hover:border-accent-purple/50 transition-all active:scale-[0.98]"
                 >
                   <div className="flex justify-between items-center mb-1">
@@ -263,6 +263,8 @@ const Quiz = () => {
                       key={index}
                       onClick={() => handleOptionClick(index)}
                       disabled={selectedOption !== null}
+                      aria-label={`Option ${index + 1}: ${option}`}
+                      aria-pressed={isSelected}
                       className={`w-full text-left p-4 rounded-xl border transition-all flex items-center justify-between text-sm font-bold ${style}`}
                     >
                       <span>{option}</span>
@@ -328,7 +330,7 @@ const Quiz = () => {
             </h2>
             <p className="text-text-muted mb-8 font-medium">
               You scored{" "}
-              <span className="text-accent-purple font-black text-xl">
+              <span data-testid="quiz-score" className="text-accent-purple font-black text-xl">
                 {score}
               </span>{" "}
               out of{" "}
