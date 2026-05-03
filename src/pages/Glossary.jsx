@@ -75,7 +75,6 @@ const Glossary = () => {
     }, {});
   }, [filteredGlossary]);
 
-  if (!electionData?.glossary) return null;
 
   const sortedLetters = Object.keys(groupedGlossary).sort();
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");

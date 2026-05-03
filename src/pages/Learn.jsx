@@ -21,7 +21,7 @@ const Learn = () => {
 
   if (!electionData) {
     return (
-      <div className="max-w-6xl mx-auto px-6 py-12">
+      <div className="max-w-6xl mx-auto px-6 py-12" data-testid="loading-skeleton">
         <div className="h-8 w-48 bg-surface-tertiary rounded-lg animate-pulse mb-4" />
         <div className="h-12 w-96 bg-surface-tertiary rounded-xl animate-pulse mb-12" />
         <div className="grid lg:grid-cols-3 gap-10">
